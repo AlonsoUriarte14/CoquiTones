@@ -1,4 +1,4 @@
-# Proyecto Coqui Toolbox (Temporary Name) 
+# CoquiTones
 Full Stack Application for Bio-Acoustic Montoring of Amphibian Species
 ## Features 
 
