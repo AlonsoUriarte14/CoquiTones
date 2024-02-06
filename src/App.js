@@ -6,15 +6,10 @@ function App() {
     <div>
     <h1>Bienvenido, Guajon.</h1>
 
-    <iframe width="560" 
-    height="315"
-    src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=vWZGSEBX_qQSUZNu"
-    title="YouTube video player" 
-    frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-    allowfullscreen>
+    <a href="https://www.youtube.com/embed/dQw4w9WgXcQ?si=vWZGSEBX_qQSUZNu" >
+      Enlace sospechoso...
+    </a>
 
-    </iframe>
     </div>
   );
 }
