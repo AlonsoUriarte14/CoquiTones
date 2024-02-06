@@ -1,70 +1,26 @@
-# Getting Started with Create React App
+# CoquiTones
+Full Stack Application for Bio-Acoustic Montoring of Amphibian Species
+## Features 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Sensor Network Status 
+  To increase the chances of detecting the target species (Eleutherodactylus spp.), multiple nodes will be places in areas of interest within a forest. These areas of interest must be determined by the researcher. Each of these nodes will consist of a microcontroller with microphone and meteorological sensors such as thermometer (temperature), hygrometers (humidity), Barometer (pressure) and rain sensors. From 6pm - 6am, the nodes will have a schedule of recording for 5 minutes every 30 minutes for a total of 120 minutes of audio per node every 24 hours.  After this recording, both the audio and sensor data will be transmitted and relayed to neighboring nodes until it is uploaded to the remote server. 
 
-## Available Scripts
+By having multiple of these nodes, Data is collected simultaneously from various points of interest, thus increasing the probability of detecting the target species. The data collected by the entire network will be uploaded to a remote server to allow remote data access and reduce the amount of time in the field for researchers.   
 
-In the project directory, you can run:
+This Web Application includes an interface for keeping tabs on the network nodes. 
 
-### `npm start`
+### Machine Learning Model
+  To automate the detection of a target species (Eleutherodactylus spp.) from the acoustic data, a machine learning model will be created. This machine learning model can be trained on 
+the previously gathered data that is already made readily available by the researchers at Proyecto Coqui. The goal is to provide researchers with a tool that can automate the work that is currently being done manually using sound analysis tools such as raven pro [insert reference] which require expensive licenses. This model will take in the raw acoustic data as input and output (if present) in what timestamp of the audio file the target species is detected. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Sound Analysis Tool
+In order to offer a manual solution for finding the target species from audio, a Sound Analysis Tool is proposed. This Sound Analysis Tool (SAT) will offer the following features:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Convert the raw audio files into spectrograms which provide meaningful information needed in order to detect target species. 
+- SAT will be able to perform data manipulation such as Fourier Transforms to further analyze the data.
+- SAT will also provide meaningful descriptive data from the audio file such as pitch, sample rate, threshold, amplitude, signal strength etc.
 
-### `npm test`
+### Database Management
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Allows Authenticated users full Access to Database containing both Acoustic and Meta-Data. 
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
