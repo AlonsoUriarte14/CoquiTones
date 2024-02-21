@@ -28,7 +28,7 @@ export const mainListItems = (
 			<ListItemIcon>
 				<PeopleIcon />
 			</ListItemIcon>
-			<ListItemText primary="Machine Learning Model Analysis" />
+			<ListItemText primary="ML Analysis" />
 		</ListItemButton>
 		<ListItemButton>
 			<ListItemIcon>

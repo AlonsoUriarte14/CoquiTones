@@ -12,10 +12,10 @@ export default function Deposits() {
 		<React.Fragment>
 			<Title>Recent Heartbeats</Title>
 			<Typography component="p" variant="h4">
-				Node Type
+				From Node ID
 			</Typography>
 			<Typography color="text.secondary" sx={{ flex: 1 }}>
-				on 15 March, 2019
+				on Date
 			</Typography>
 			<div>
 				<Link color="primary" href="#" onClick={preventDefault}>
