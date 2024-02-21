@@ -22,51 +22,37 @@ export const mainListItems = (
 			<ListItemIcon>
 				<ShoppingCartIcon />
 			</ListItemIcon>
-			<ListItemText primary="Orders" />
+			<ListItemText primary="Cluster Duck Network" />
 		</ListItemButton>
 		<ListItemButton>
 			<ListItemIcon>
 				<PeopleIcon />
 			</ListItemIcon>
-			<ListItemText primary="Customers" />
+			<ListItemText primary="Machine Learning Model Analysis" />
 		</ListItemButton>
 		<ListItemButton>
 			<ListItemIcon>
 				<BarChartIcon />
 			</ListItemIcon>
-			<ListItemText primary="Reports" />
-		</ListItemButton>
-		<ListItemButton>
-			<ListItemIcon>
-				<LayersIcon />
-			</ListItemIcon>
-			<ListItemText primary="Integrations" />
+			<ListItemText primary="Spectral Analysis " />
 		</ListItemButton>
 	</React.Fragment>
 );
 
 export const secondaryListItems = (
 	<React.Fragment>
-		<ListSubheader component="div" inset>
-			Saved reports
-		</ListSubheader>
+
 		<ListItemButton>
 			<ListItemIcon>
 				<AssignmentIcon />
 			</ListItemIcon>
-			<ListItemText primary="Current month" />
+			<ListItemText primary="About" />
 		</ListItemButton>
 		<ListItemButton>
 			<ListItemIcon>
 				<AssignmentIcon />
 			</ListItemIcon>
-			<ListItemText primary="Last quarter" />
-		</ListItemButton>
-		<ListItemButton>
-			<ListItemIcon>
-				<AssignmentIcon />
-			</ListItemIcon>
-			<ListItemText primary="Year-end sale" />
+			<ListItemText primary="Source Code" />
 		</ListItemButton>
 	</React.Fragment>
 );

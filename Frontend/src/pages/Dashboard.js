@@ -19,10 +19,10 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 
 
-import { mainListItems, secondaryListItems } from './listItems';
-import Chart from './Chart';
-import Deposits from './Deposits';
-import Orders from './Orders';
+import { mainListItems, secondaryListItems } from '../components/dashboard/listItems';
+import Chart from '../components/dashboard/Chart';
+import Deposits from '../components/dashboard/Deposits';
+import Orders from '../components/dashboard/Orders';
 
 function Copyright(props) {
 	return (
@@ -121,7 +121,7 @@ export default function Dashboard() {
 							noWrap
 							sx={{ flexGrow: 1 }}
 						>
-							Dashboard
+							CoquiTones Dashboard
 						</Typography>
 						<IconButton color="inherit">
 							<Badge badgeContent={4} color="secondary">
