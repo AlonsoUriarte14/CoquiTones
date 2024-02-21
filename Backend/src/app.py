@@ -1,8 +1,12 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, staticfiles
+from fastapi.responses import HTMLResponse
 
 app = FastAPI()
 
+app.mount("/static", staticfiles.StaticFiles(directory="../../Frontend/build/static"), name="static")
 
-@app.get("/")
+@app.get("/", response_class=HTMLResponse)
 async def root():
-    return {"message": "Hello World"}
+    with open("../../Frontend/build/index.html", "r") as f:
+        return f.read()
+    
