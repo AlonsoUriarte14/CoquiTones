@@ -68,3 +68,16 @@ class ClassifierReport(DAO):
     crno_hit: int
 
     table = "classifierreport"
+
+
+@dataclass
+class WeatherData(DAO):
+    """Weather Data DAO"""
+    wdid: int
+    tid: int
+    wdtemperature: float
+    wdhumidity: float
+    wdpressure: float
+    wddid_rain: bool
+
+    table = "weatherdata"

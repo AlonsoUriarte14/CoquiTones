@@ -28,3 +28,8 @@ async def timestamp_all(db=Depends(get_db_connection)):
 @app.get("/api/report/all")
 async def report_all(db=Depends(get_db_connection)):
     return dao.ClassifierReport.get_all(db)
+
+
+@app.get("/api/weather/all")
+async def weather_all(db=Depends(get_db_connection)):
+    return dao.WeatherData.get_all(db)
