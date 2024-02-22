@@ -34,7 +34,7 @@ export default function Chart() {
 						top: 16,
 						right: 20,
 						left: 70,
-						bottom: 30,
+						bottom: 50,
 					}}
 					xAxis={[
 						{
