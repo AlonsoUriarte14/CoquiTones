@@ -37,7 +37,7 @@ function Copyright(props) {
 	);
 }
 
-const drawerWidth = 240;
+const drawerWidth = 280;
 
 const AppBar = styled(MuiAppBar, {
 	shouldForwardProp: (prop) => prop !== 'open',
@@ -117,10 +117,11 @@ export default function Dashboard() {
 						<Typography
 							component="h1"
 							align="center"
-							variant="h6"
+							variant="h4"
 							color="inherit"
 							noWrap
 							sx={{ flexGrow: 1 }}
+							
 						>
 							CoquiTones Dashboard
 						</Typography>
@@ -140,6 +141,10 @@ export default function Dashboard() {
 							px: [1],
 						}}
 					>
+						<Typography component="h1" variant = 'h5' align='center' color = 'primary'sx={{ flexGrow: 1 }}> 
+							Applications 
+						</Typography>
+						
 						<IconButton onClick={toggleDrawer}>
 							<ChevronLeftIcon />
 						</IconButton>
