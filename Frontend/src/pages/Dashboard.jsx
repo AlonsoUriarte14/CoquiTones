@@ -116,6 +116,7 @@ export default function Dashboard() {
 						</IconButton>
 						<Typography
 							component="h1"
+							align="center"
 							variant="h6"
 							color="inherit"
 							noWrap
