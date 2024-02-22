@@ -10,7 +10,7 @@ function preventDefault(event) {
 export default function Deposits() {
 	return (
 		<React.Fragment>
-			<Title>Recent Heartbeats</Title>
+			<Title>Latest Heartbeats</Title>
 			<Typography component="p" variant="h4">
 				From Node ID
 			</Typography>
@@ -19,7 +19,7 @@ export default function Deposits() {
 			</Typography>
 			<div>
 				<Link color="primary" href="#" onClick={preventDefault}>
-					View balance
+					View Heartbeat
 				</Link>
 			</div>
 		</React.Fragment>

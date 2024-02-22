@@ -9,6 +9,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import Link from '@mui/material/Link';
 
 export const mainListItems = (
 	<React.Fragment>
@@ -46,13 +47,15 @@ export const secondaryListItems = (
 			<ListItemIcon>
 				<AssignmentIcon />
 			</ListItemIcon>
-			<ListItemText primary="About" />
+			<Link color="inherit" href="https://github.com/AlonsoUriarte14/CoquiTones.git">
+				<ListItemText primary="Source Code" />
+			</Link>
 		</ListItemButton>
 		<ListItemButton>
 			<ListItemIcon>
 				<AssignmentIcon />
 			</ListItemIcon>
-			<ListItemText primary="Source Code" />
+			<ListItemText primary="About" />
 		</ListItemButton>
 	</React.Fragment>
 );
