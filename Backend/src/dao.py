@@ -47,3 +47,24 @@ class TimestampIndex(DAO):
     ttime: datetime
 
     table = "timestampindex"
+
+
+@dataclass
+class ClassifierReport(DAO):
+    """Classifier report DAO"""
+    crid: int
+    tid: int
+    crsamples: int
+    crcoqui: int
+    crantillensis: int
+    crcochranae: int
+    cre_monensis: int
+    crgryllus: int
+    crhedricki: int
+    crlocustus: int
+    crportoricensis: int
+    crrichmondi: int
+    crwightmanae: int
+    crno_hit: int
+
+    table = "classifierreport"

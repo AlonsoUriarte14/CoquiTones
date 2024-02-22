@@ -23,3 +23,8 @@ async def node_all(db=Depends(get_db_connection)):
 @app.get("/api/timestamp/all")
 async def timestamp_all(db=Depends(get_db_connection)):
     return dao.TimestampIndex.get_all(db)
+
+
+@app.get("/api/report/all")
+async def report_all(db=Depends(get_db_connection)):
+    return dao.ClassifierReport.get_all(db)
