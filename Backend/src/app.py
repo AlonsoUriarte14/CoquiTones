@@ -20,6 +20,11 @@ async def node_all(db=Depends(get_db_connection)):
     return dao.Node.get_all(db)
 
 
+@app.get("/api/node/{nid}")
+async def node_get(nid: int, db=Depends(get_db_connection)):
+    return dao.Node.get(nid, db)
+
+
 @app.get("/api/timestamp/all")
 async def timestamp_all(db=Depends(get_db_connection)):
     return dao.TimestampIndex.get_all(db)
