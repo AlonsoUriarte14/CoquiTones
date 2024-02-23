@@ -1,6 +1,6 @@
 from fastapi import FastAPI, staticfiles, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, Response
 from dbutil import get_db_connection
 import psycopg2
 import dao
@@ -29,5 +29,53 @@ async def root():
 
 
 @app.get("/api/node/all")
-async def node(db=Depends(get_db_connection)):
+async def node_all(db=Depends(get_db_connection)):
     return dao.Node.get_all(db)
+
+
+@app.get("/api/node/{nid}")
+async def node_get(nid: int, db=Depends(get_db_connection)):
+    return dao.Node.get(nid, db)
+
+
+@app.get("/api/timestamp/all")
+async def timestamp_all(db=Depends(get_db_connection)):
+    return dao.TimestampIndex.get_all(db)
+
+
+@app.get("/api/timestamp/{tid}")
+async def timestamp_get(tid: int, db=Depends(get_db_connection)):
+    return dao.TimestampIndex.get(tid, db)
+
+
+@app.get("/api/report/all")
+async def report_all(db=Depends(get_db_connection)):
+    return dao.ClassifierReport.get_all(db)
+
+
+@app.get("/api/report/{crid}")
+async def report_get(crid: int, db=Depends(get_db_connection)):
+    return dao.ClassifierReport.get(crid, db)
+
+
+@app.get("/api/weather/all")
+async def weather_all(db=Depends(get_db_connection)):
+    return dao.WeatherData.get_all(db)
+
+
+@app.get("/api/report/{wdid}")
+async def report_get(wdid: int, db=Depends(get_db_connection)):
+    return dao.WeatherData.get(wdid, db)
+
+
+@app.get("/api/audio/all")
+async def audio_all(db=Depends(get_db_connection)):
+    return dao.AudioFile.get_all(db)
+
+
+@app.get(path="/api/audio/{afid}", response_class=Response)
+async def audio_get(afid: int, db=Depends(get_db_connection)):
+    audio_file = dao.AudioFile.get(afid, db)
+    data = audio_file.data
+
+    return Response(content=data, media_type="audio/mpeg")
