@@ -17,7 +17,7 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-
+import { green, purple } from '@mui/material/colors';
 
 import { mainListItems, secondaryListItems } from '../components/dashboard/listItems';
 import Chart from '../components/dashboard/Chart';
@@ -84,7 +84,16 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 // TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
+const defaultTheme = createTheme({
+  palette: {
+    primary: {
+    	main: green[500]
+    },
+    secondary: {
+    	main:  purple[300]
+    },
+  },
+});
 
 export default function Dashboard() {
 	const [open, setOpen] = React.useState(true);
