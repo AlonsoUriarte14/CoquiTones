@@ -27,7 +27,7 @@ class DAO:
             return [cls(*row) for row in curs.fetchall()]
 
     @classmethod
-    def get(cls, id: int, db: connection) -> list:
+    def get(cls, id: int, db: connection):
         """Get one entity by its ID."""
         with db.cursor() as curs:
             try:

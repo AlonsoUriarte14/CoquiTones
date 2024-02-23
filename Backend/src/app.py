@@ -1,5 +1,6 @@
 from fastapi import FastAPI, staticfiles, Depends, HTTPException
-from fastapi.responses import HTMLResponse
+
+from fastapi.responses import HTMLResponse, Response
 from dbutil import get_db_connection
 import psycopg2
 import dao
@@ -53,3 +54,19 @@ async def weather_all(db=Depends(get_db_connection)):
 @app.get("/api/report/{wdid}")
 async def report_get(wdid: int, db=Depends(get_db_connection)):
     return dao.WeatherData.get(wdid, db)
+
+
+@app.get("/api/audio/all")
+async def audio_all(db=Depends(get_db_connection)):
+    return dao.AudioFile.get_all(db)
+
+
+@app.get(
+    path="/api/audio/{afid}",
+    response_class=Response
+)
+async def audio_get(afid: int, db=Depends(get_db_connection)):
+    audio_file = dao.AudioFile.get(afid, db)
+    data = audio_file.data
+
+    return Response(content=data, media_type="audio/mpeg")
