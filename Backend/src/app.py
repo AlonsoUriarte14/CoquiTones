@@ -64,7 +64,7 @@ async def weather_all(db=Depends(get_db_connection)):
 
 
 @app.get("/api/report/{wdid}")
-async def report_get(wdid: int, db=Depends(get_db_connection)):
+async def weather_get(wdid: int, db=Depends(get_db_connection)):
     return dao.WeatherData.get(wdid, db)
 
 

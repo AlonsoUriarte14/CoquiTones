@@ -17,7 +17,6 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { green, purple } from '@mui/material/colors';
 
 import { mainListItems, secondaryListItems } from '../components/dashboard/listItems';
 import Chart from '../components/dashboard/Chart';
@@ -87,10 +86,10 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const defaultTheme = createTheme({
   palette: {
     primary: {
-    	main: green[500]
+		main:  "#FE855D"
     },
     secondary: {
-    	main:  purple[300]
+		main: "#FE855D"
     },
   },
 });
