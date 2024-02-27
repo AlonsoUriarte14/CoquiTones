@@ -16,4 +16,7 @@ Open PlatformIO project and choose this directory as a platformIO based project
 
 Move MamaDuck or PapaDuc .ino files from lib to src directory
 
-### Step 4: Build and Upload
+### Step 4: Modifying Platformio.ini file
+
+Change the upload port variable to the port where your device is connected
+### Step 5: Build and Upload
