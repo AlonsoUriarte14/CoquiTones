@@ -14,7 +14,7 @@ Open PlatformIO project and choose this directory as a platformIO based project
 
 ### Step 3: Preparing Files
 
-Move MamaDuck or PapaDuc .ino files from lib to src directory
+Move MamaDuck or PapaDuck .ino files from lib to src directory
 
 ### Step 4: Modifying Platformio.ini file
 
