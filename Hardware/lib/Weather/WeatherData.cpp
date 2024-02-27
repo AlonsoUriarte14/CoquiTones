@@ -62,5 +62,10 @@ void WeatherData::printAllValues()
 	Serial.println("Pressure: " + String(pressure));
 	Serial.println("is Raining: " + String(isRaining));
 
+	
+}
 
+void WeatherData::sleep()
+{
+	//TODO: close all pin connections and deep sleep
 }

@@ -22,6 +22,7 @@ public:
     float getHumidity();
     float getAltitude();
     bool isRaining();
+    void sleep();
 
 private:
     TwoWire I2CBME = TwoWire(0);
