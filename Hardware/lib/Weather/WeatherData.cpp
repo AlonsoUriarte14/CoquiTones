@@ -69,3 +69,7 @@ void WeatherData::sleep()
 {
 	//TODO: close all pin connections and deep sleep
 }
+
+WeatherData::~WeatherData(){
+	delete this;
+}

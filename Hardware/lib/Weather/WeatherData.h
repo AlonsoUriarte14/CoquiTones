@@ -8,14 +8,12 @@
 
 #define SEALEVELPRESSURE_HPA (1013.25)
 
-unsigned long delayTime;
-
 class WeatherData
 {
 
 public:
     WeatherData(int bmeSDA, int bmeSCL, int rainPin);
-
+    ~WeatherData();
     void printAllValues();
     float getTemperature();
     float getPressure();
