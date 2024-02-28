@@ -32,7 +32,7 @@ void Microphone::record()
 	WAVFileWriter *writer = new WAVFileWriter(fp, input->sample_rate());
     
 	// TODO: MODIFY THIS TO BE 5 MINUTE TIMER
-	while (gpio_get_level(GPIO_BUTTON) == 1)
+	while (gpio_get_level(GPIO_NUM_0) == 1)
 	{
 		int samples_read = input->read(samples, 1024);
 		int64_t start = esp_timer_get_time();
