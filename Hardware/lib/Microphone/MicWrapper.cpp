@@ -49,6 +49,9 @@ void Microphone::record()
 		writer->write(samples, samples_read);
 		int64_t end = esp_timer_get_time();
 		ESP_LOGI(TAG, "Wrote %d samples in %lld microseconds", samples_read, end - start);
+
+		current_time = millis();
+		elapsed_time = current_time - start_time;
 	} while (elapsed_time < recordTime);
 
 	// stop the input
