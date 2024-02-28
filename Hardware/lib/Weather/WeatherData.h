@@ -13,7 +13,6 @@ class WeatherData
 
 public:
     WeatherData(int bmeSDA, int bmeSCL, int rainPin);
-    ~WeatherData();
     void printAllValues();
     float getTemperature();
     float getPressure();
@@ -26,6 +25,9 @@ private:
     TwoWire I2CBME = TwoWire(0);
     Adafruit_BME280 bme;
     int rainPin;
+
+    
+    ~WeatherData();
 };
 
 #endif
