@@ -13,16 +13,17 @@
 #include <./lib/wav_file/src/WAVFileReader.h>
 #include <./lib/wav_file/src/WAVFileWriter.h>
 #include <config.h>
-class Microphone {
-    public:
-        Microphone();
-        void record();
-        
-    private:
-        ~Microphone();
-        void setup();
-        I2SSampler *input;
-        
+class Microphone
+{
+public:
+    Microphone();
+    void recordToFile();
+    int takeMeasurement();
+
+private:
+    ~Microphone();
+    void setup();
+    I2SSampler *input;
 };
 
 #endif
