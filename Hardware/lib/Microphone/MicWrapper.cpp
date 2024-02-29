@@ -20,10 +20,7 @@ void Microphone::setup()
 #endif
 }
 
-/**
- * Record using MAX4466 for 5 minutes to a wav file and store it in wav file
- */
-void Microphone::recordToFile()
+const char *Microphone::recordToFile()
 {
 
     int16_t *samples = (int16_t *)malloc(sizeof(int16_t) * 1024);
@@ -62,6 +59,8 @@ void Microphone::recordToFile()
     delete writer;
     free(samples);
     ESP_LOGI(TAG, "Finished recording");
+
+    return fname;
 }
 
 int Microphone::takeMeasurement()

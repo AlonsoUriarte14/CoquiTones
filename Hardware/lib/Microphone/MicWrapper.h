@@ -16,8 +16,29 @@
 class Microphone
 {
 public:
+    /**
+     * @brief Construct a new Microphone:: Microphone object
+     * This object mesures data using MAX4466 elecret microphone
+     * record function saves data directly to mounted SD CARD
+     *
+     * Make sure the config.h file is setup properly using GPIOs
+     *
+     */
     Microphone();
-    void recordToFile();
+
+    /**
+     * @brief  Using MAX4466 microphone for 5 minutes to a wav file and store it in wav file
+     *
+     * @return const char* created filename
+     */
+    const char *recordToFile();
+
+    /**
+     * @brief  Take a single measurement form the microphone which is the smallest posible sample
+     * This function is to be used if we decide to transmit the raw data between ducks
+     *
+     * @return int;
+     */
     int takeMeasurement();
 
 private:
