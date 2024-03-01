@@ -5,31 +5,30 @@ import ListItemText from '@mui/material/ListItemText';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import MemoryIcon from '@mui/icons-material/Memory';
 import InsightsIcon from '@mui/icons-material/Insights';
-import Link from '@mui/material/Link';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import InfoIcon from '@mui/icons-material/Info';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 export const mainListItems = (
 	<React.Fragment>
-		<ListItemButton>
+		<ListItemButton href='/'>
 			<ListItemIcon>
 				<DashboardIcon />
 			</ListItemIcon>
 			<ListItemText primary="Dashboard" />
 		</ListItemButton>
-		<ListItemButton >
+		<ListItemButton href='/CDN'>
 			<ListItemIcon>
 				<MemoryIcon />
 			</ListItemIcon>
 			<ListItemText primary="Cluster Duck Network" />
 		</ListItemButton>
-		<ListItemButton>
+		<ListItemButton href='/Classifier'>
 			<ListItemIcon>
 				<InsightsIcon />
 			</ListItemIcon>
 			<ListItemText primary="ML Analysis" />
 		</ListItemButton>
-		<ListItemButton>
+		<ListItemButton href='/SpectralAnalysis'>
 			<ListItemIcon>
 				<VolumeUpIcon />
 			</ListItemIcon>
@@ -41,13 +40,11 @@ export const mainListItems = (
 export const secondaryListItems = (
 	<React.Fragment>
 
-		<ListItemButton>
+		<ListItemButton href='https://github.com/AlonsoUriarte14/CoquiTones.git'>
 			<ListItemIcon>
 				<GitHubIcon />
 			</ListItemIcon>
-			<Link color="inherit" href="https://github.com/AlonsoUriarte14/CoquiTones.git">
-				<ListItemText primary="Source Code" />
-			</Link>
+			Source Code
 		</ListItemButton>
 		<ListItemButton href='/About'>
 			<ListItemIcon>
