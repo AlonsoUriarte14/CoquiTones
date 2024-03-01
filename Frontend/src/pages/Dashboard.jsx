@@ -1,14 +1,10 @@
 import * as React from 'react';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
-
 import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -17,11 +13,10 @@ import Link from '@mui/material/Link';
 import Chart from '../components/dashboard/Chart';
 import Deposits from '../components/dashboard/Deposits';
 import Orders from '../components/dashboard/Orders';
-import AppBar from '../components/shared/AppBar'
-import Drawer from '../components/shared/Drawer';
 
-import BarAndNav from '../components/shared/AppBar';
 
+import BarAndNav from '../components/shared/BarAndNav';
+import theme from '../components/shared/Theme'
 function Copyright(props) {
 	return (
 		<Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -42,22 +37,13 @@ function Copyright(props) {
 
 
 // TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme({
-	palette: {
-		primary: {
-			main: "#FE855D"
-		},
-		secondary: {
-			main: "#FE855D"
-		},
-	},
-});
+
 
 export default function Dashboard() {
 
 
 	return (
-		<ThemeProvider theme={defaultTheme}>
+		<ThemeProvider theme={theme}>
 			<Box sx={{ display: 'flex' }}>
 				<CssBaseline />
 				<BarAndNav />
