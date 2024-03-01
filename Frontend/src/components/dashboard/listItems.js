@@ -49,7 +49,7 @@ export const secondaryListItems = (
 				<ListItemText primary="Source Code" />
 			</Link>
 		</ListItemButton>
-		<ListItemButton>
+		<ListItemButton href='/About'>
 			<ListItemIcon>
 				<InfoIcon />
 			</ListItemIcon>
