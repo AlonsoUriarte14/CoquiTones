@@ -13,12 +13,12 @@ I2SMEMSSampler::I2SMEMSSampler(
 
 void I2SMEMSSampler::configureI2S()
 {
-    if (m_fixSPH0645)
-    {
-        // FIXES for SPH0645
-        REG_SET_BIT(I2S_TIMING_REG(m_i2sPort), BIT(9));
-        REG_SET_BIT(I2S_CONF_REG(m_i2sPort), I2S_RX_MSB_SHIFT);
-    }
+    // if (m_fixSPH0645)
+    // {
+    //     // FIXES for SPH0645
+    //     REG_SET_BIT(I2S_TIMING_REG(m_i2sPort), BIT(9));
+    //     REG_SET_BIT(I2S_CONF_REG(m_i2sPort), I2S_RX_MSB_SHIFT);
+    // }
 
     i2s_set_pin(m_i2sPort, &m_i2sPins);
 }

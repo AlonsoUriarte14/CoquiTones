@@ -2,8 +2,7 @@
 
 WeatherData::WeatherData(int bmeSDA, int bmeSCL, int rainPin)
 {
-	Serial.begin(9600);
-	this->I2CBME.begin(SDA, SCL, 100000);
+	this->I2CBME.begin(bmeSDA, bmeSCL, 400000);
 	// 0x77 is address for i2c for sensor dont change
 	bool status = this->bme.begin(0x77, &this->I2CBME);
 

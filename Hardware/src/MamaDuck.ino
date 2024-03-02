@@ -7,13 +7,15 @@
 #include <arduino-timer.h>
 #include <MamaDuck.h>
 #include <MemoryFree.h>
-#include <../lib/Weather/WeatherData.h>
 #include <../lib/Microphone/MicWrapper.h>
 
 #ifdef SERIAL_PORT_USBVIRTUAL
 #define Serial SERIAL_PORT_USBVIRTUAL
 #endif
 
+#define bmeSDA 41
+#define bmeSCL 42
+#define rainPin 45
 // INTEGRATE VTASKS FROM https://github.com/atomic14/esp32_sdcard_audio/tree/main MAIN
 
 // create a built-in mama duck
@@ -23,7 +25,7 @@ MamaDuck duck;
 auto timer = timer_create_default();
 
 // for sending the counter message
-const int INTERVAL_MS = 10000; // 10 seconds
+const int INTERVAL_MS = 5000; // 5 seconds
 int counter = 1;
 
 void setup()
@@ -57,8 +59,7 @@ bool runSensor(void *)
 	bool result;
 	const byte *buffer;
 
-	WeatherData *data = new WeatherData(41, 42, 10);
-	String message = String(data->getHumidity());
+	String message = "Hello ";
 	int length = message.length();
 	Serial.print("[MAMA] sensor data: ");
 	Serial.println(message);
