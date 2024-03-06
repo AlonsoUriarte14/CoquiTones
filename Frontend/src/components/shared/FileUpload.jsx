@@ -11,6 +11,7 @@ export default function FileUpload({ setData }) {
     }, [currentFile])
 
     const handleUpload = () => {
+        console.log("current file: ", currentFile)
         setData(currentFile);
 
     }

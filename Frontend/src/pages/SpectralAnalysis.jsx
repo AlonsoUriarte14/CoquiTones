@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -8,14 +8,43 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
+import Plot from 'react-plotly.js';
 
 import BarAndNav from "../components/shared/BarAndNav";
 import theme from "../components/shared/Theme"
 import FileUpload from "../components/shared/FileUpload";
 const SpectralAnalysis = () => {
-    const [rawAudio, setRawAudio] = useState(null)
-    const [specData, setSpecData] = useState(null)
+    const [rawAudioFile, setRawAudio] = useState(null)
+    const [data, setData] = useState(null)
 
+    useEffect(() => {
+        console.log("file: ", rawAudioFile)
+        readCSVToMatrix(rawAudioFile)
+    }, [rawAudioFile])
+
+
+    function readCSVToMatrix(file) {
+        const reader = new FileReader();
+
+
+        if (file) {
+            reader.readAsText(file);
+            reader.onload = function (event) {
+                const csv = event.target.result;
+                const lines = csv.split('\n');
+                const matrix = lines.map(line => line.trim().split(','));
+
+                setData(matrix);
+                console.log(data)
+            };
+
+            reader.onerror = function () {
+                console.error('Error reading file');
+            };
+
+        }
+
+    }
 
 
     return (
@@ -50,7 +79,36 @@ const SpectralAnalysis = () => {
                                 </Typography>
 
                                 <FileUpload setData={setRawAudio} />
+
+
                             </Paper >
+
+                            <Paper
+                                sx={{
+                                    p: 2,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    height: 400,
+                                }}
+                            >
+                                {data && <Plot
+                                    data={[
+                                        {
+                                            z: data,
+                                            type: 'heatmap',
+                                            colorscale: 'Vividris'
+                                        }
+                                    ]}
+
+                                    layout={{
+                                        height: 375,
+                                        width: 1100,
+                                        title: "Static Spectrogram Plot"
+                                    }}
+                                >
+
+                                </Plot>}
+                            </Paper>
                         </Grid>
                     </Container >
                 </Box>
