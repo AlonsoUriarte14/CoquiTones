@@ -96,7 +96,7 @@ const SpectralAnalysis = () => {
                                         {
                                             z: data,
                                             type: 'heatmap',
-                                            colorscale: 'Vividris'
+                                            colorscale: 'inferno'
                                         }
                                     ]}
 
