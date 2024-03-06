@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -13,6 +13,10 @@ import BarAndNav from "../components/shared/BarAndNav";
 import theme from "../components/shared/Theme"
 import FileUpload from "../components/shared/FileUpload";
 const SpectralAnalysis = () => {
+    const [rawAudio, setRawAudio] = useState(null)
+    const [specData, setSpecData] = useState(null)
+
+
 
     return (
         <ThemeProvider theme={theme}>
@@ -45,7 +49,7 @@ const SpectralAnalysis = () => {
                                     Spectral Analysis
                                 </Typography>
 
-                                <FileUpload />
+                                <FileUpload setData={setRawAudio} />
                             </Paper >
                         </Grid>
                     </Container >
