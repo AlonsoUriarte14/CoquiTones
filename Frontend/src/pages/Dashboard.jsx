@@ -11,8 +11,8 @@ import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 
 import Chart from '../components/dashboard/Chart';
-import Deposits from '../components/dashboard/Deposits';
-import Orders from '../components/dashboard/Orders';
+import Heartbeats from '../components/dashboard/Deposits';
+import RecentEntries from '../components/dashboard/Orders';
 
 
 import BarAndNav from '../components/shared/BarAndNav';
@@ -85,13 +85,13 @@ export default function Dashboard() {
 										height: 240,
 									}}
 								>
-									<Deposits />
+									<Heartbeats />
 								</Paper>
 							</Grid>
 							{/* Recent Orders */}
 							<Grid item xs={12}>
 								<Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-									<Orders />
+									<RecentEntries />
 								</Paper>
 							</Grid>
 						</Grid>

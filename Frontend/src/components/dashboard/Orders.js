@@ -29,7 +29,7 @@ const rows = [
         'Temp: 77 F, Humidity: 70 RH%, Pressure: 1000 hPa',
         '5MB',
     ),
-    createData(2, 
+    createData(2,
         '16 February, 2024',
         '3',
         'Bosque Susua, Yauco',
@@ -59,7 +59,7 @@ function preventDefault(event) {
     event.preventDefault();
 }
 
-export default function Orders() {
+export default function RecentEntries() {
     return (
         <React.Fragment>
             <Title>Recent Database Entries </Title>

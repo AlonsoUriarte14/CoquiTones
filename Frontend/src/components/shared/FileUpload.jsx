@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
-export default function FileUpload({ setData }) {
+export default function FileUpload({ setAudioFile }) {
 
     const [currentFile, setCurrentFile] = useState(null)
     useEffect(() => {
@@ -12,7 +12,7 @@ export default function FileUpload({ setData }) {
 
     const handleUpload = () => {
         console.log("current file: ", currentFile)
-        setData(currentFile);
+        setAudioFile(currentFile);
 
     }
     const VisuallyHiddenInput = styled('input')({

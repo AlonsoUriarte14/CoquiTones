@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -14,6 +14,7 @@ import theme from "../components/shared/Theme"
 import FileUpload from "../components/shared/FileUpload";
 const Classifier = () => {
 
+    const [audioFile, setAudioFile] = useState(null)
     return (
         <ThemeProvider theme={theme}>
             <Box sx={{ display: 'flex' }} >
@@ -45,6 +46,7 @@ const Classifier = () => {
                                     Machine Learning Analysis
                                 </Typography>
 
+                                <FileUpload setAudioFile={setAudioFile} />
                             </Paper >
                         </Grid>
                     </Container >

@@ -17,6 +17,24 @@ const SpectralAnalysis = () => {
     const [rawAudioFile, setRawAudio] = useState(null)
     const [data, setData] = useState(null)
 
+    const genX = () => {
+        let x = []
+
+        for (let i = 1; i < 31; i++) {
+            x.push(i);
+        }
+
+        return x
+    }
+    const genY = () => {
+        let y = []
+
+        for (let i = 1; i < 31; i++) {
+            y.push(i);
+        }
+
+        return y
+    }
     useEffect(() => {
         console.log("file: ", rawAudioFile)
         readCSVToMatrix(rawAudioFile)
@@ -78,7 +96,8 @@ const SpectralAnalysis = () => {
                                     Spectral Analysis
                                 </Typography>
 
-                                <FileUpload setData={setRawAudio} />
+
+                                <FileUpload setAudioFile={setRawAudio} />
 
 
                             </Paper >
@@ -94,20 +113,25 @@ const SpectralAnalysis = () => {
                                 {data && <Plot
                                     data={[
                                         {
+                                            x: genX(),
+                                            y: genY(),
                                             z: data,
                                             type: 'heatmap',
-                                            colorscale: 'inferno'
+                                            colorscale: 'inferno',
+
                                         }
                                     ]}
 
                                     layout={{
                                         height: 375,
                                         width: 1100,
-                                        title: "Static Spectrogram Plot"
+                                        title: "Static Spectrogram Plot",
+
                                     }}
                                 >
 
                                 </Plot>}
+
                             </Paper>
                         </Grid>
                     </Container >
