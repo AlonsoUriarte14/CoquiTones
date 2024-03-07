@@ -13,6 +13,7 @@ import Plot from 'react-plotly.js';
 import BarAndNav from "../components/shared/BarAndNav";
 import theme from "../components/shared/Theme"
 import FileUpload from "../components/shared/FileUpload";
+import SoundPlayer from "../components/SoundAnalysisTools/audioPlayer";
 const SpectralAnalysis = () => {
     const [rawAudioFile, setRawAudio] = useState(null)
     const [data, setData] = useState(null)
@@ -114,8 +115,8 @@ const SpectralAnalysis = () => {
                                 {data && <Plot
                                     data={[
                                         {
-                                            
-                                            
+
+
                                             z: data,
                                             type: 'heatmapgl',
                                             colorscale: "Electric",
@@ -125,7 +126,7 @@ const SpectralAnalysis = () => {
                                         }
                                     ]}
 
-                                    
+
 
                                     layout={{
                                         height: 375,
@@ -137,15 +138,15 @@ const SpectralAnalysis = () => {
                                         yaxis: {
                                             title: "Frequency (Hz)"
                                         },
-                                        
+
                                         "xaxis.range": [0, 30],
                                         "yaxis.range": [0, 80],
-                                        
+
                                     }}
                                 >
 
                                 </Plot>}
-
+                                <SoundPlayer />
                             </Paper>
                         </Grid>
                     </Container >
