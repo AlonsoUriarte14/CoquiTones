@@ -20,6 +20,7 @@ const SpectralAnalysis = () => {
     const genX = () => {
         let x = []
 
+
         for (let i = 1; i < 31; i++) {
             x.push(i);
         }
@@ -113,20 +114,33 @@ const SpectralAnalysis = () => {
                                 {data && <Plot
                                     data={[
                                         {
-                                            x: genX(),
-                                            y: genY(),
+                                            
+                                            
                                             z: data,
-                                            type: 'heatmap',
-                                            colorscale: 'inferno',
-
+                                            type: 'heatmapgl',
+                                            colorscale: "Electric",
+                                            ncontours: 100,
+                                            zmax: 0,
+                                            zmin: -50
                                         }
                                     ]}
+
+                                    
 
                                     layout={{
                                         height: 375,
                                         width: 1100,
                                         title: "Static Spectrogram Plot",
-
+                                        xaxis: {
+                                            title: "Time "
+                                        },
+                                        yaxis: {
+                                            title: "Frequency (Hz)"
+                                        },
+                                        
+                                        "xaxis.range": [0, 30],
+                                        "yaxis.range": [0, 80],
+                                        
                                     }}
                                 >
 

@@ -44,6 +44,8 @@ const About = () => {
                                 <Typography variant="h3" color="primary" align="center">
                                     About Page
                                 </Typography>
+                                
+                                <hr/>
 
                                 <Typography variant="h5" color="black" align="center">
                                     Mission Statement
