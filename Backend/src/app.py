@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, Response
 from dbutil import get_db_connection
 import dao
-import uvicorn
+import mqttclient
 
 app = FastAPI()
 
@@ -24,10 +24,7 @@ def main():
         name="static",
     )
 
-
-if __name__ == "__main__":
-    main()
-    uvicorn.run(app)
+    client = mqttclient.ClientWrapper()
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -87,3 +84,5 @@ async def audio_get(afid: int, db=Depends(get_db_connection)):
     data = audio_file.data
 
     return Response(content=data, media_type="audio/mpeg")
+
+main()

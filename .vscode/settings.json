@@ -4,5 +4,15 @@
     "editor.indentSize": "tabSize",
     "cSpell.words": [
         "Coqui"
-    ]
+    ],
+    "python.analysis.typeCheckingMode": "basic",
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        "./Backend/src",
+        "-p",
+        "test_*.py"
+    ],
+    "python.testing.pytestEnabled": false,
+    "python.testing.unittestEnabled": true,
 }
