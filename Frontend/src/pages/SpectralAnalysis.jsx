@@ -18,25 +18,7 @@ const SpectralAnalysis = () => {
     const [rawAudioFile, setRawAudio] = useState(null)
     const [data, setData] = useState(null)
 
-    const genX = () => {
-        let x = []
 
-
-        for (let i = 1; i < 31; i++) {
-            x.push(i);
-        }
-
-        return x
-    }
-    const genY = () => {
-        let y = []
-
-        for (let i = 1; i < 31; i++) {
-            y.push(i);
-        }
-
-        return y
-    }
     useEffect(() => {
         console.log("file: ", rawAudioFile)
         readCSVToMatrix(rawAudioFile)
@@ -112,41 +94,42 @@ const SpectralAnalysis = () => {
                                     height: 400,
                                 }}
                             >
-                                {data && <Plot
-                                    data={[
-                                        {
+                                {data &&
+                                    <div>
 
+                                        <Plot
+                                            data={[
+                                                {
+                                                    z: data,
+                                                    type: 'heatmapgl',
+                                                    colorscale: "RdBu",
+                                                    ncontours: 100,
+                                                    zmax: 0,
+                                                    zmin: -50
+                                                }
+                                            ]}
+                                            layout={{
+                                                height: 375,
+                                                width: 1100,
+                                                title: " Spectrogram Plot",
+                                                xaxis: {
+                                                    title: "Time "
+                                                },
+                                                yaxis: {
+                                                    title: "Frequency (Hz)"
+                                                },
 
-                                            z: data,
-                                            type: 'heatmapgl',
-                                            colorscale: "Electric",
-                                            ncontours: 100,
-                                            zmax: 0,
-                                            zmin: -50
-                                        }
-                                    ]}
+                                                "xaxis.range": [0, 30],
+                                                "yaxis.range": [0, 80],
 
+                                            }}
+                                        >
+                                        </Plot>
 
+                                        <SoundPlayer src={rawAudioFile} />
+                                    </div>
+                                }
 
-                                    layout={{
-                                        height: 375,
-                                        width: 1100,
-                                        title: "Static Spectrogram Plot",
-                                        xaxis: {
-                                            title: "Time "
-                                        },
-                                        yaxis: {
-                                            title: "Frequency (Hz)"
-                                        },
-
-                                        "xaxis.range": [0, 30],
-                                        "yaxis.range": [0, 80],
-
-                                    }}
-                                >
-
-                                </Plot>}
-                                <SoundPlayer />
                             </Paper>
                         </Grid>
                     </Container >
