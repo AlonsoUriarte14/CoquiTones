@@ -8,16 +8,16 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
-import ReactAudioPlayer from 'react-audio-player';
 import theme from "../shared/Theme";
 import { Button } from "@mui/material";
 
 export default function SoundPlayer({ src, }) {
     const [audioUrl, setAudioUrl] = useState(null);
     const [currentTime, setCurrentTime] = useState(null);
+    const [loaded, setLoaded] = useState(false)
+    const buttonRef = useRef(null)
     const [sampleRate, setSampleRate] = useState(null);
     const [samples, setSamples] = useState(null);
-    const [loaded, setLoaded] = useState(false)
 
 
 
@@ -38,7 +38,7 @@ export default function SoundPlayer({ src, }) {
                         console.log("Sample Rate: ", sampleRate)
                         console.log("Samples : ", samples)
                     })
-                    .catch(error => console.error('Error decoding audio data:', error));
+                    .catch(error => alert('Error decoding audio data:' + error));
             };
             reader.readAsArrayBuffer(file)
 
@@ -50,19 +50,20 @@ export default function SoundPlayer({ src, }) {
 
 
     const handleTimeUpdate = (event) => {
-        const minutes = Math.floor(event.target.currentTime / 60);
-        const seconds = Math.floor(event.target.currentTime - minutes * 60);
-        const currentTime = str_pad_left(minutes, '0', 2) + ':' + str_pad_left(seconds, '0', 2);
-        setCurrentTime(currentTime);
+        setCurrentTime(event.target.currentTime)
     }
-    const str_pad_left = (string, pad, length) => {
-        return (new Array(length + 1).join(pad) + string).slice(-length);
-    }
+
     return (
         <ThemeProvider theme={theme}>
-            <Button onClick={() => loadWavFile(src)}>
+            <Button
+                ref={buttonRef}
+                onClick={() => loadWavFile(src)}
+            >
+
                 Play Sample
+
             </Button>
+
             {audioUrl && (
                 <div>
 

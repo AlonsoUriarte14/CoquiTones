@@ -8,16 +8,21 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
-import Plot from 'react-plotly.js';
+
 
 import BarAndNav from "../components/shared/BarAndNav";
 import theme from "../components/shared/Theme"
 import FileUpload from "../components/shared/FileUpload";
 import SoundPlayer from "../components/SoundAnalysisTools/audioPlayer";
+import Spectrogram from "../components/SoundAnalysisTools/Spectrogram";
+import SpectrogramControls from "../components/SoundAnalysisTools/SpectrogramControls";
 const SpectralAnalysis = () => {
-    const [rawAudioFile, setRawAudio] = useState(null)
+    const [rawAudioFile, setRawAudioFile] = useState(null)
     const [data, setData] = useState(null)
-
+    const [type, setType] = useState("heatmapgl")
+    const [colorscale, setColorscale] = useState("Jet")
+    const [xrange, setXrange] = useState([0, 1200])
+    const [yrange, setYrange] = useState([0, 80])
 
     useEffect(() => {
         console.log("file: ", rawAudioFile)
@@ -29,7 +34,7 @@ const SpectralAnalysis = () => {
         const reader = new FileReader();
 
 
-        if (file) {
+        if (file && file["type"] === "text/csv") {
             reader.readAsText(file);
             reader.onload = function (event) {
                 const csv = event.target.result;
@@ -81,7 +86,6 @@ const SpectralAnalysis = () => {
                                 </Typography>
 
 
-                                <FileUpload setAudioFile={setRawAudio} />
 
 
                             </Paper >
@@ -97,40 +101,32 @@ const SpectralAnalysis = () => {
                                 {data &&
                                     <div>
 
-                                        <Plot
-                                            data={[
-                                                {
-                                                    z: data,
-                                                    type: 'heatmapgl',
-                                                    colorscale: "RdBu",
-                                                    ncontours: 100,
-                                                    zmax: 0,
-                                                    zmin: -50
-                                                }
-                                            ]}
-                                            layout={{
-                                                height: 375,
-                                                width: 1100,
-                                                title: " Spectrogram Plot",
-                                                xaxis: {
-                                                    title: "Time "
-                                                },
-                                                yaxis: {
-                                                    title: "Frequency (Hz)"
-                                                },
 
-                                                "xaxis.range": [0, 30],
-                                                "yaxis.range": [0, 80],
+                                        <Spectrogram
+                                            data={data}
+                                            type={type}
+                                            colorscale={colorscale}
+                                            xrange={xrange}
+                                            yrange={yrange}
+                                        // width={width}
+                                        // height={height}
 
-                                            }}
-                                        >
-                                        </Plot>
+                                        />
 
                                         <SoundPlayer src={rawAudioFile} />
                                     </div>
                                 }
 
                             </Paper>
+                        </Grid>
+                        <Grid xs={12} md={8} lg={9}>
+                            <SpectrogramControls
+                                setAudioFile={setRawAudioFile}
+                                setType={setType}
+                                setColorscale={setColorscale}
+                                setXrange={setXrange}
+                                setYrange={setYrange}
+                            />
                         </Grid>
                     </Container >
                 </Box>
