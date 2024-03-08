@@ -56,6 +56,8 @@ class ClientWrapper:
         self.client.on_unsubscribe = on_unsubscribe
         self.client.on_message = message_callback_gen(subscribe_topics)
 
+        self.client.user_data_set(list())
+
         # self.client.tls_set(tls_version=mqtt.ssl.PROTOCOL_TLS)
 
         if username == None or password == None:
