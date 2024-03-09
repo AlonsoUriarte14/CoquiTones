@@ -1,3 +1,6 @@
+import WorkerFactory from "../../services/WorkerFactory";
+import generateSpectrogramData from "../../services/generateSpectrogramData";
+import DataProcessor from "../../services/generateSpectrogramData"
 
 
 
@@ -69,9 +72,18 @@ export const handleLoad = async (file) => {
         const processed = await processWaveForm(waveform);
 
         // Remap data to a 2D matrix
-        const spectrogramData = remapDataToTwoDimensionalMatrix(processed.channels[0], processed.stride, processed.tickCount);
 
-        return spectrogramData;
+        const workerInstance = new WorkerFactory(generateSpectrogramData)
+        let parsed;
+        workerInstance.postMessage(processed)
+        let promise = new Promise((resolve, reject) => {
+            workerInstance.onmessage = (event) => {
+                parsed = event.data
+                resolve(event.data)
+            }
+        })
+
+        return await promise;
     } catch (error) {
         // Handle errors
         console.error(error)
