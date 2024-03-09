@@ -15,12 +15,12 @@
 
 #define bmeSDA 41
 #define bmeSCL 42
-#define rainPin 45
+#define rainPin 7
 // INTEGRATE VTASKS FROM https://github.com/atomic14/esp32_sdcard_audio/tree/main MAIN
 
 // create a built-in mama duck
 MamaDuck duck;
-
+Microphone* mic;
 // create a timer with default settings
 auto timer = timer_create_default();
 
@@ -43,6 +43,10 @@ void setup()
 	// and will trigger sending a counter message.
 	timer.every(INTERVAL_MS, runSensor);
 	Serial.println("[MAMA] Setup OK!");
+
+	mic = new Microphone();
+
+
 }
 
 void loop()
@@ -58,7 +62,9 @@ bool runSensor(void *)
 {
 	bool result;
 	const byte *buffer;
-
+	
+	int samplesRead = mic->takeMeasurement();
+	Serial.println("Samples from Mic: " + String(samplesRead));
 	String message = "Hello ";
 	int length = message.length();
 	Serial.print("[MAMA] sensor data: ");

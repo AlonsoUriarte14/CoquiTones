@@ -16,7 +16,7 @@ void Microphone::setup()
 #ifdef USE_I2S_MIC_INPUT
     this->input = new I2SMEMSSampler(I2S_NUM_0, i2s_mic_pins, i2s_mic_Config);
 #else
-    this->input = new ADCSampler(ADC_UNIT_1, ADC1_CHANNEL_7, i2s_adc_config);
+    this->input = new ADCSampler(ADC_UNIT_1, ADC1_CHANNEL_2, i2s_adc_config);
 #endif
 }
 
@@ -30,7 +30,7 @@ const char *Microphone::recordToFile()
     const char *fname = "TODAYS DATE AND TIMESTAMP";
     FILE *fp = fopen(fname, "wb");
     // create a new wave file writer
-    WAVFileWriter *writer = new WAVFileWriter(fp, input->sample_rate());
+    WAVFileWriter *writer = new WAVFileWriter(fp, 16000); // samplerate
 
     unsigned long start_time;
     unsigned long current_time;
@@ -68,8 +68,8 @@ int Microphone::takeMeasurement()
     int16_t *samples = (int16_t *)malloc(sizeof(int16_t) * 1024);
 
     input->start();
-    int samples_read = input->read(samples, 1024);
     int64_t start = esp_timer_get_time();
+    int samples_read = input->read(samples, 1024);
     int64_t end = esp_timer_get_time();
     ESP_LOGI(TAG, "Wrote %d samples in %lld microseconds", samples_read, end - start);
 

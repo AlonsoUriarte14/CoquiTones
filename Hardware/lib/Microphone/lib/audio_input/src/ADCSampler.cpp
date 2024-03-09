@@ -1,18 +1,21 @@
 #include "ADCSampler.h"
 
 
-ADCSampler::ADCSampler(adc_unit_t adcUnit, adc1_channel_t adcChannel, const i2s_config_t &i2s_config) : I2SSampler(I2S_NUM_0, i2s_config)
+ADCSampler::ADCSampler(adc_unit_t adcUnit, adc1_channel_t adcChannel, const adc_digi_init_config_s &adc_sampler_config) : I2SSampler(I2S_NUM_0, i2s_config)
 {
     m_adcUnit = adcUnit;
     m_adcChannel = adcChannel;
+    adc_config = adc_sampler_config;
 }
 
 void ADCSampler::configureI2S()
 {
-    //init ADC pad
-    i2s_set_adc_mode(m_adcUnit, m_adcChannel);
-    // enable the adc
-    i2s_adc_enable(m_i2sPort);
+    // //init ADC pad
+    // i2s_set_adc_mode(m_adcUnit, m_adcChannel);
+    // // enable the adc
+    // i2s_adc_enable(m_i2sPort);
+    adc_digi_initialize(&adc_config);
+    adc_digi_start();
 }
 
 void ADCSampler::unConfigureI2S()

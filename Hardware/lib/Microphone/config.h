@@ -10,10 +10,10 @@
 // sample rate for the system
 #define SAMPLE_RATE 16000
 
-// are you using an I2S microphone - comment this out if you want to use an analog mic and ADC input
-#define USE_I2S_MIC_INPUT
-// are you using an I2S amplifier - comment this out if you want to use the built in DAC
-#define USE_I2S_SPEAKER_OUTPUT
+// // are you using an I2S microphone - comment this out if you want to use an analog mic and ADC input
+// #define USE_I2S_MIC_INPUT
+// // are you using an I2S amplifier - comment this out if you want to use the built in DAC
+// #define USE_I2S_SPEAKER_OUTPUT
 
 // I2S Microphone Settings
 // Which channel is the I2S microphone on? I2S_CHANNEL_FMT_ONLY_LEFT or I2S_CHANNEL_FMT_ONLY_RIGHT
@@ -28,10 +28,10 @@
 #define ADC_MIC_CHANNEL ADC1_CHANNEL_7
 
 // sdcard
-#define PIN_NUM_MISO GPIO_NUM_13
-#define PIN_NUM_CLK GPIO_NUM_14
-#define PIN_NUM_MOSI GPIO_NUM_15
-#define PIN_NUM_CS GPIO_NUM_16
+#define PIN_NUM_MISO GPIO_NUM_19
+#define PIN_NUM_CLK GPIO_NUM_20
+#define PIN_NUM_MOSI GPIO_NUM_21
+#define PIN_NUM_CS GPIO_NUM_26
 
 // i2s config for using the internal ADC
 extern i2s_config_t i2s_adc_config;
