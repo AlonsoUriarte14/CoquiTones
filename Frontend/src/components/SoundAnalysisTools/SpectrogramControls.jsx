@@ -10,6 +10,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import FileUpload from '../shared/FileUpload';
 import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box'; // Import Box component
+
 function ValueLabelComponent(props) {
     const { children, value } = props;
 
@@ -24,7 +26,6 @@ ValueLabelComponent.propTypes = {
     children: PropTypes.element.isRequired,
     value: PropTypes.number.isRequired,
 };
-
 
 const PrettoSlider = styled(Slider)({
     color: 'primary',
@@ -65,83 +66,66 @@ const PrettoSlider = styled(Slider)({
     },
 });
 
-
-
-
-
-export default function SpectrogramControls({ setAudioFile, setType, setColorscale, setXrange, setYrange }) {
-
-
+export default function SpectrogramControls({ setAudioFile, type, setType, colorscale, setColorscale, xrange, setXrange, yrange, setYrange }) {
     return (
-        <div>
-            <Paper
-                sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: "auto",
-                }}
-            >
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+            <FileUpload setAudioFile={setAudioFile} />
 
-                <FileUpload setAudioFile={setAudioFile} />
+            <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Chart Type</InputLabel>
+                <Select
+                    defaultValue={"heatmapgl"}
+                    value={type}
+                    label="Chart Type"
+                    onChange={(event) => setType(event.target.value)}
+                >
+                    <MenuItem value={"heatmapgl"}>Heatmap</MenuItem>
+                    <MenuItem value={"contour"}>Contour</MenuItem>
+                </Select>
+            </FormControl>
 
+            <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Color Scale</InputLabel>
+                <Select
+                    defaultValue={"Jet"}
+                    value={colorscale}
+                    label="Color Scale"
+                    onChange={(event) => setColorscale(event.target.value)}
+                >
+                    <MenuItem value={"YlOrRd"}> YellowOrRed</MenuItem>
+                    <MenuItem value={"RdBu"}>RedBlue</MenuItem>
+                    <MenuItem value={"Portland"}> Portland</MenuItem>
+                    <MenuItem value={"Picnic"}>Picnic</MenuItem>
+                    <MenuItem value={"Jet"}> Jet</MenuItem>
+                    <MenuItem value={"Hot"}>Hot</MenuItem>
+                    <MenuItem value={"Greys"}> Greyscale</MenuItem>
+                    <MenuItem value={"Electric"}>Electric</MenuItem>
+                    <MenuItem value={"Bluered"}> BlueRed</MenuItem>
+                    <MenuItem value={"Blackbody"}>BlackBody</MenuItem>
+                </Select>
+            </FormControl>
 
-                <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">chartType</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={"heatmapgl"}
-                        label="ChartType"
-                        onChange={(selected) => setType(selected)}
-                    >
-                        <MenuItem value={"heatmapgl"}> Heatmap</MenuItem>
-                        <MenuItem value={"contour"}>contour</MenuItem>
+            <Typography gutterBottom >
+                X-axis Range
+            </Typography>
+            <PrettoSlider
+                defaultValue={[0, 14000]}
+                value={xrange}
+                onChange={(event) => setXrange(event.target.value)}
+                valueLabelDisplay='on'
+                min={0}
+                max={1500}
+            />
 
-                    </Select>
-                </FormControl>
-
-
-                <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">ColorScale</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={"RdBu"}
-                        label="ColorScale"
-                        onChange={(selected) => setColorscale(selected)}
-                    >
-                        <MenuItem value={"YlOrRd"}> YellowOrRed</MenuItem>
-                        <MenuItem value={"RdBu"}>RedBlue</MenuItem>
-                        <MenuItem value={"Portland"}> Portland</MenuItem>
-                        <MenuItem value={"Picnic"}>Picnic</MenuItem>
-                        <MenuItem value={"Jet"}> Jet</MenuItem>
-                        <MenuItem value={"Hot"}>Hot</MenuItem>
-                        <MenuItem value={"Greys"}> Greyscale</MenuItem>
-                        <MenuItem value={"Electric"}>Electric</MenuItem>
-                        <MenuItem value={"Bluered"}> BlueRed</MenuItem>
-                        <MenuItem value={"Blackbody"}>BlackBody</MenuItem>
-                    </Select>
-                </FormControl>
-
-                <Typography gutterBottom>
-                    X-axis Range
-                </Typography>
-                <PrettoSlider
-                    defaultValue={[0, 14000]}
-                    onChange={(range) => setXrange(range)}
-
-                />
-
-                <Typography gutterBottom>
-                    Y-axis Range
-                </Typography>
-                <PrettoSlider
-                    defaultValue={[0, 10000]}
-                    onChange={(range) => setYrange(range)}
-
-                />
-            </Paper >
-        </div>
+            <Typography gutterBottom>
+                Y-axis Range
+            </Typography>
+            <PrettoSlider
+                defaultValue={[0, 10000]}
+                value={yrange}
+                onChange={(event) => setYrange(event.target.value)}
+                valueLabelDisplay='on'
+            />
+        </Box>
     );
 }

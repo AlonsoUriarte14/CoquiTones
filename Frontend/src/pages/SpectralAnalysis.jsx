@@ -9,54 +9,73 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 
-
 import BarAndNav from "../components/shared/BarAndNav";
 import theme from "../components/shared/Theme"
-import FileUpload from "../components/shared/FileUpload";
 import SoundPlayer from "../components/SoundAnalysisTools/audioPlayer";
 import Spectrogram from "../components/SoundAnalysisTools/Spectrogram";
 import SpectrogramControls from "../components/SoundAnalysisTools/SpectrogramControls";
+import { handleLoad } from "../components/SoundAnalysisTools/DataProcessing"
 const SpectralAnalysis = () => {
     const [rawAudioFile, setRawAudioFile] = useState(null)
+    const updateRawAudioFile = (newAudioFile) => {
+        setRawAudioFile(newAudioFile)
+    }
     const [data, setData] = useState(null)
+    const updateData = (newData) => {
+        setData(newData)
+    }
     const [type, setType] = useState("heatmapgl")
+    const updateType = (newType) => {
+        setType(newType)
+    }
     const [colorscale, setColorscale] = useState("Jet")
+    const updateColorscale = (newColor) => {
+        setColorscale(newColor)
+    }
     const [xrange, setXrange] = useState([0, 1200])
+    const updateXrange = (newXrange) => {
+        setXrange(newXrange)
+    }
     const [yrange, setYrange] = useState([0, 80])
+
+    const updateYrange = (newYrange) => {
+        setYrange(newYrange)
+    }
 
     useEffect(() => {
         console.log("file: ", rawAudioFile)
-        readCSVToMatrix(rawAudioFile)
+        if (rawAudioFile) {
+
+            const data = handleLoad(rawAudioFile)
+
+            console.log(data)
+            setData(data.value)
+        }
     }, [rawAudioFile])
 
+    // function readCSVToMatrix(file) {
+    //     const reader = new FileReader();
 
-    function readCSVToMatrix(file) {
-        const reader = new FileReader();
+    //     if (file && file["type"] === "text/csv") {
+    //         reader.readAsText(file);
+    //         reader.onload = function (event) {
+    //             const csv = event.target.result;
+    //             const lines = csv.split('\n');
+    //             const matrix = lines.map(line => line.trim().split(','));
 
+    //             setData(matrix);
+    //             console.log(data)
+    //         };
 
-        if (file && file["type"] === "text/csv") {
-            reader.readAsText(file);
-            reader.onload = function (event) {
-                const csv = event.target.result;
-                const lines = csv.split('\n');
-                const matrix = lines.map(line => line.trim().split(','));
-
-                setData(matrix);
-                console.log(data)
-            };
-
-            reader.onerror = function () {
-                console.error('Error reading file');
-            };
-
-        }
-
-    }
-
+    //         reader.onerror = function () {
+    //             console.error('Error reading file');
+    //         };
+    //     }
+    // }
 
     return (
         <ThemeProvider theme={theme}>
-            <Box sx={{ display: 'flex' }} >
+            <Box sx={{ display: 'flex' }}>
                 <CssBaseline />
                 <BarAndNav />
                 <Box
@@ -72,66 +91,54 @@ const SpectralAnalysis = () => {
                     }}
                 >
                     <Container maxWidth="lg" sx={{ mt: 10, mb: 10 }}>
-                        <Grid item xs={12} md={8} lg={9}>
-                            <Paper
-                                sx={{
-                                    p: 2,
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    height: 240,
-                                }}
-                            >
-                                <Typography variant="h3" color="primary" align="center">
-                                    Spectral Analysis
-                                </Typography>
-
-
-
-
-                            </Paper >
-
-                            <Paper
-                                sx={{
-                                    p: 2,
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    height: 400,
-                                }}
-                            >
-                                {data &&
-                                    <div>
-
-
+                        <Grid container spacing={3}>
+                            <Grid item xs={12}>
+                                <Paper sx={{ p: 2 }}>
+                                    <Typography variant="h3" color="primary" align="center">
+                                        Spectral Analysis
+                                    </Typography>
+                                </Paper>
+                            </Grid>
+                            <Grid item xs={12} md={8} lg={8}>
+                                <Paper sx={{ p: 2, height: 400 }}>
+                                    {data &&
                                         <Spectrogram
                                             data={data}
                                             type={type}
                                             colorscale={colorscale}
                                             xrange={xrange}
                                             yrange={yrange}
-                                        // width={width}
-                                        // height={height}
-
                                         />
-
-                                        <SoundPlayer src={rawAudioFile} />
-                                    </div>
-                                }
-
-                            </Paper>
+                                    }
+                                </Paper>
+                            </Grid>
+                            <Grid item xs={12} md={4} lg={4}>
+                                <Paper sx={{ p: 2, height: 400 }}>
+                                    <SpectrogramControls
+                                        setAudioFile={updateRawAudioFile}
+                                        type={type}
+                                        setType={updateType}
+                                        colorscale={colorscale}
+                                        setColorscale={updateColorscale}
+                                        xrange={xrange}
+                                        setXrange={updateXrange}
+                                        yrange={yrange}
+                                        setYrange={updateYrange}
+                                    />
+                                </Paper>
+                            </Grid>
+                            <Grid item xs={12} md={8} lg={8}>
+                                <Paper
+                                    sx={{ p: 2, height: 'auto' }}
+                                >
+                                    <SoundPlayer src={rawAudioFile} />
+                                </Paper>
+                            </Grid>
                         </Grid>
-                        <Grid xs={12} md={8} lg={9}>
-                            <SpectrogramControls
-                                setAudioFile={setRawAudioFile}
-                                setType={setType}
-                                setColorscale={setColorscale}
-                                setXrange={setXrange}
-                                setYrange={setYrange}
-                            />
-                        </Grid>
-                    </Container >
+                    </Container>
                 </Box>
             </Box>
-        </ThemeProvider>
+        </ThemeProvider >
     )
 }
 

@@ -16,13 +16,14 @@ export default function Spectrogram({ data, type, colorscale, xrange, yrange }) 
                     z: data,
                     type: type,
                     colorscale: colorscale,
+                    ncontours: 10,
                     zmax: 0,
                     zmin: -50
                 }
             ]}
             layout={{
                 height: 375,
-                width: 1100,
+                width: 700,
                 title: " Spectrogram Plot",
                 xaxis: {
                     title: "Time (ms)",
