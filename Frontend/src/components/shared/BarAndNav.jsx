@@ -92,7 +92,7 @@ export default function BarAndNav() {
 					sx={{ flexGrow: 1 }}
 
 				>
-					CoquiTones Dashboard
+					CoquiTones
 				</Typography>
 			</Toolbar>
 		</AppBar>

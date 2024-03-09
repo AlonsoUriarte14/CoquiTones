@@ -11,6 +11,7 @@ import Link from '@mui/material/Link';
 
 import BarAndNav from "../components/shared/BarAndNav";
 import theme from "../components/shared/Theme"
+import FileUpload from "../components/shared/FileUpload";
 const About = () => {
 
     return (
@@ -30,8 +31,8 @@ const About = () => {
                         overflow: 'auto',
                     }}
                 >
-                    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                        <Grid container spacing={3}>
+                    <Container maxWidth="lg" sx={{ mt: 10, mb: 10 }}>
+                        <Grid item xs={12} md={8} lg={9}>
                             <Paper
                                 sx={{
                                     p: 2,
@@ -40,9 +41,10 @@ const About = () => {
                                     height: 240,
                                 }}
                             >
-                                <Typography variant="h1" color="primary" align="center">
+                                <Typography variant="h3" color="primary" align="center">
                                     About Page
                                 </Typography>
+
                             </Paper >
                         </Grid>
                     </Container >
