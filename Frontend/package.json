@@ -12,6 +12,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.7",
+    "fft-js": "^0.0.12",
     "file-loader": "^6.2.0",
     "file-url": "^4.0.0",
     "plotly.js": "^2.30.0",

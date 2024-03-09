@@ -1,6 +1,5 @@
 import WorkerFactory from "../../services/WorkerFactory";
 import generateSpectrogramData from "../../services/generateSpectrogramData";
-import DataProcessor from "../../services/generateSpectrogramData"
 
 
 
@@ -71,19 +70,20 @@ export const handleLoad = async (file) => {
         // Process waveform data
         const processed = await processWaveForm(waveform);
 
-        // Remap data to a 2D matrix
-
         const workerInstance = new WorkerFactory(generateSpectrogramData)
-        let parsed;
         workerInstance.postMessage(processed)
+        // Remap data to a 2D matrix
+        console.log("Processed: ", processed)
+        let parsed;
         let promise = new Promise((resolve, reject) => {
             workerInstance.onmessage = (event) => {
                 parsed = event.data
+                console.log("Parsed", parsed)
                 resolve(event.data)
             }
         })
 
-        return await promise;
+        return promise;
     } catch (error) {
         // Handle errors
         console.error(error)
@@ -179,25 +179,6 @@ export const processWaveForm = async (audioBuffer) => {
         duration: audioBuffer.duration,
     }
 }
-/**
- * Create data matrix for heatmap from one-dimensional array
- * @param {Uint8Array}  data          FFT Data for one channel
- * @param {number}      strideSize    Single data block width
- * @param {number}      tickCount     Data row count
- * @returns {number[][]}              Two-dimensional matrix representing the spectrogram data
- */
-export const remapDataToTwoDimensionalMatrix = (data, strideSize, tickCount) => {
-    const output = [];
 
-    // Map the one-dimensional data to a two-dimensional matrix
-    for (let col = 0; col < tickCount; col++) {
-        output[col] = [];
-        for (let row = 0; row < strideSize; row++) {
-            output[col][row] = data[col * strideSize + row];
-        }
-    }
-
-    return output;
-}
 
 

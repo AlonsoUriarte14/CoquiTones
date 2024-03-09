@@ -17,8 +17,8 @@ export default function Spectrogram({ data, type, colorscale, xrange, yrange }) 
                     type: type,
                     colorscale: colorscale,
                     ncontours: 10,
-                    zmax: 0,
-                    zmin: -50
+                    // zmax: 0,
+                    // zmin: -50
                 }
             ]}
             layout={{

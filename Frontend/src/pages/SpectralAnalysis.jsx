@@ -14,7 +14,7 @@ import theme from "../components/shared/Theme"
 import SoundPlayer from "../components/SoundAnalysisTools/audioPlayer";
 import Spectrogram from "../components/SoundAnalysisTools/Spectrogram";
 import SpectrogramControls from "../components/SoundAnalysisTools/SpectrogramControls";
-import { handleLoad } from "../components/SoundAnalysisTools/DataProcessing"
+import { handleLoad } from "../components/SoundAnalysisTools/SpectrogramDataReader"
 const SpectralAnalysis = () => {
     const [rawAudioFile, setRawAudioFile] = useState(null)
     const updateRawAudioFile = (newAudioFile) => {
@@ -42,15 +42,19 @@ const SpectralAnalysis = () => {
         setYrange(newYrange)
     }
 
+
     useEffect(() => {
-        console.log("file: ", rawAudioFile)
-        if (rawAudioFile) {
 
-            const data = handleLoad(rawAudioFile)
+        const getData = async () => {
+            if (rawAudioFile) {
 
-            console.log(data)
-            setData(data.value)
+                const data = await handleLoad(rawAudioFile)
+                console.log("Data", data)
+                setData(data)
+            }
         }
+
+        getData()
     }, [rawAudioFile])
 
     // function readCSVToMatrix(file) {
