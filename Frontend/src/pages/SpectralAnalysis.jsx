@@ -11,7 +11,7 @@ import Link from '@mui/material/Link';
 
 import BarAndNav from "../components/shared/BarAndNav";
 import theme from "../components/shared/Theme"
-import SoundPlayer from "../components/SoundAnalysisTools/audioPlayer";
+import SoundPlayer from "../components/SoundAnalysisTools/SoundPlayer";
 import Spectrogram from "../components/SoundAnalysisTools/Spectrogram";
 import SpectrogramControls from "../components/SoundAnalysisTools/SpectrogramControls";
 import { handleLoad } from "../components/SoundAnalysisTools/SpectrogramDataReader"
@@ -23,10 +23,12 @@ const SpectralAnalysis = () => {
     const [xData, setXData] = useState(null)
     const [yData, setYData] = useState(null)
     const [zData, setZData] = useState(null)
-    const updateData = (newData) => {
-        setZData(newData)
+
+    const [currentTime, setCurrentTime] = useState(0)
+    const updateTime = (newTime) => {
+        setCurrentTime(newTime)
     }
-    const [type, setType] = useState("heatmapgl")
+    const [type, setType] = useState("heatmap")
     const updateType = (newType) => {
         setType(newType)
     }
@@ -34,11 +36,11 @@ const SpectralAnalysis = () => {
     const updateColorscale = (newColor) => {
         setColorscale(newColor)
     }
-    const [xrange, setXrange] = useState([])
+    const [xrange, setXrange] = useState([0, 300])
     const updateXrange = (newXrange) => {
         setXrange(newXrange)
     }
-    const [yrange, setYrange] = useState([])
+    const [yrange, setYrange] = useState([0, 10000])
 
     const updateYrange = (newYrange) => {
         setYrange(newYrange)
@@ -51,7 +53,6 @@ const SpectralAnalysis = () => {
             if (rawAudioFile) {
 
                 const data = await handleLoad(rawAudioFile)
-                console.log("Data", data)
                 setXData(data['x'])
                 setYData(data['y'])
                 setZData(data['z'])
@@ -59,28 +60,8 @@ const SpectralAnalysis = () => {
         }
 
         getData()
-        // readCSVToMatrix(rawAudioFile)
     }, [rawAudioFile])
 
-    function readCSVToMatrix(file) {
-        const reader = new FileReader();
-
-        if (file && file["type"] === "text/csv") {
-            reader.readAsText(file);
-            reader.onload = function (event) {
-                const csv = event.target.result;
-                const lines = csv.split('\n');
-                const matrix = lines.map(line => line.trim().split(','));
-
-                setZData(matrix);
-                console.log("Data", matrix)
-            };
-
-            reader.onerror = function () {
-                console.error('Error reading file');
-            };
-        }
-    }
 
     return (
         <ThemeProvider theme={theme}>
@@ -109,7 +90,7 @@ const SpectralAnalysis = () => {
                                 </Paper>
                             </Grid>
                             <Grid item xs={12} md={8} lg={8}>
-                                <Paper sx={{ p: 2, height: 400 }}>
+                                <Paper sx={{ p: 2, height: 'auto' }}>
                                     {zData &&
                                         <Spectrogram
                                             xData={xData}
@@ -119,12 +100,13 @@ const SpectralAnalysis = () => {
                                             colorscale={colorscale}
                                             xrange={xrange}
                                             yrange={yrange}
+                                            currentTime={currentTime}
                                         />
                                     }
                                 </Paper>
                             </Grid>
                             <Grid item xs={12} md={4} lg={4}>
-                                <Paper sx={{ p: 2, height: 400 }}>
+                                <Paper sx={{ p: 2, height: 'auto' }}>
                                     <SpectrogramControls
                                         setAudioFile={updateRawAudioFile}
                                         type={type}
@@ -142,7 +124,7 @@ const SpectralAnalysis = () => {
                                 <Paper
                                     sx={{ p: 2, height: 'auto' }}
                                 >
-                                    <SoundPlayer src={rawAudioFile} />
+                                    <SoundPlayer src={rawAudioFile} setCurrentTime={updateTime} />
                                 </Paper>
                             </Grid>
                         </Grid>

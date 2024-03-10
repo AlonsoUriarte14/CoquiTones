@@ -27,6 +27,7 @@ ValueLabelComponent.propTypes = {
     value: PropTypes.number.isRequired,
 };
 
+
 const PrettoSlider = styled(Slider)({
     color: 'primary',
     height: 8,
@@ -79,7 +80,7 @@ export default function SpectrogramControls({ setAudioFile, type, setType, color
                     label="Chart Type"
                     onChange={(event) => setType(event.target.value)}
                 >
-                    <MenuItem value={"heatmapgl"}>Heatmap</MenuItem>
+                    <MenuItem value={"heatmap"}>Heatmap</MenuItem>
                     <MenuItem value={"contour"}>Contour</MenuItem>
                 </Select>
             </FormControl>
@@ -106,26 +107,36 @@ export default function SpectrogramControls({ setAudioFile, type, setType, color
             </FormControl>
 
             <Typography gutterBottom >
-                X-axis Range
+                X-axis Range {xrange}
             </Typography>
             <PrettoSlider
-
-                defaultValue={[0, 10000]}
+                sx={
+                    {
+                        marginTop: 4
+                    }
+                }
+                defaultValue={[0, 300]}
                 value={xrange}
                 onChange={(event) => setXrange(event.target.value)}
                 valueLabelDisplay='on'
                 min={0}
-                max={1500}
+                max={300}
             />
 
             <Typography gutterBottom>
                 Y-axis Range
             </Typography>
             <PrettoSlider
-                defaultValue={[0, 300]}
-                value={yrange}
+                sx={
+                    {
+                        marginTop: 4
+                    }
+                }
+                defaultValue={[0, 10000]}
                 onChange={(event) => setYrange(event.target.value)}
                 valueLabelDisplay='on'
+                min={0}
+                max={10000}
             />
         </Box>
     );

@@ -7,7 +7,12 @@ import psycopg2
 import dao
 
 app = FastAPI()
-origins = ["http://localhost:8000", "localhost:8000"]
+origins = [
+    "http://localhost:8000",
+    "localhost:8000",
+    "http://localhost:3000",
+    "localhost:3000",
+]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,

@@ -15,8 +15,8 @@ def sendSpectrogram(file):
         y=signal, sr=sampleRate, hop_length=hop_length, n_fft=n_fft, n_mels=90
     )
 
-    spectrogram = np.abs(mel_signal)
-    power_to_db = librosa.power_to_db(spectrogram, ref=np.max)
+    # spectrogram = np.abs(mel_signal)
+    power_to_db = librosa.power_to_db(mel_signal)
 
     mel = power_to_db.tolist()
     x_coords = None
