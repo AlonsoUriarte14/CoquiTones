@@ -5,7 +5,7 @@ import React from 'react';
 
 
 
-export default function Spectrogram({ data, type, colorscale, xrange, yrange }) {
+export default function Spectrogram({ xData, yData, zData, type, colorscale, xrange, yrange }) {
 
     // todo calculate zmin and zmax from data
     // 
@@ -13,21 +13,23 @@ export default function Spectrogram({ data, type, colorscale, xrange, yrange }) 
         <Plot
             data={[
                 {
-                    z: data,
+                    x: xData,
+                    y: yData,
+                    z: zData,
                     type: type,
                     colorscale: colorscale,
                     ncontours: 10,
-                    // zmax: 0,
-                    // zmin: -50
+
                 }
             ]}
+
             layout={{
                 height: 375,
                 width: 700,
-                title: " Spectrogram Plot",
                 xaxis: {
-                    title: "Time (ms)",
+                    title: "Time (s)",
                     range: xrange
+
                 },
                 yaxis: {
                     title: "Frequency (Hz)",

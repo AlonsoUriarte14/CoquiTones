@@ -109,7 +109,8 @@ export default function SpectrogramControls({ setAudioFile, type, setType, color
                 X-axis Range
             </Typography>
             <PrettoSlider
-                defaultValue={[0, 14000]}
+
+                defaultValue={[0, 10000]}
                 value={xrange}
                 onChange={(event) => setXrange(event.target.value)}
                 valueLabelDisplay='on'
@@ -121,7 +122,7 @@ export default function SpectrogramControls({ setAudioFile, type, setType, color
                 Y-axis Range
             </Typography>
             <PrettoSlider
-                defaultValue={[0, 10000]}
+                defaultValue={[0, 300]}
                 value={yrange}
                 onChange={(event) => setYrange(event.target.value)}
                 valueLabelDisplay='on'

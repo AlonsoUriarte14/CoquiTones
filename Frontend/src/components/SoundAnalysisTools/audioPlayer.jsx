@@ -18,9 +18,6 @@ export default function SoundPlayer({ src }) {
     const [play, setPlay] = useState(false)
 
 
-
-
-
     const handleTimeUpdate = (event) => {
         setCurrentTime(event.target.currentTime)
     }

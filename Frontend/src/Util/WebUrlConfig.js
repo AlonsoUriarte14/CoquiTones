@@ -1,0 +1,1 @@
+export const websiteUrl = "localhost:3000"

@@ -20,9 +20,11 @@ const SpectralAnalysis = () => {
     const updateRawAudioFile = (newAudioFile) => {
         setRawAudioFile(newAudioFile)
     }
-    const [data, setData] = useState(null)
+    const [xData, setXData] = useState(null)
+    const [yData, setYData] = useState(null)
+    const [zData, setZData] = useState(null)
     const updateData = (newData) => {
-        setData(newData)
+        setZData(newData)
     }
     const [type, setType] = useState("heatmapgl")
     const updateType = (newType) => {
@@ -32,11 +34,11 @@ const SpectralAnalysis = () => {
     const updateColorscale = (newColor) => {
         setColorscale(newColor)
     }
-    const [xrange, setXrange] = useState([0, 1200])
+    const [xrange, setXrange] = useState([])
     const updateXrange = (newXrange) => {
         setXrange(newXrange)
     }
-    const [yrange, setYrange] = useState([0, 80])
+    const [yrange, setYrange] = useState([])
 
     const updateYrange = (newYrange) => {
         setYrange(newYrange)
@@ -50,32 +52,35 @@ const SpectralAnalysis = () => {
 
                 const data = await handleLoad(rawAudioFile)
                 console.log("Data", data)
-                setData(data)
+                setXData(data['x'])
+                setYData(data['y'])
+                setZData(data['z'])
             }
         }
 
         getData()
+        // readCSVToMatrix(rawAudioFile)
     }, [rawAudioFile])
 
-    // function readCSVToMatrix(file) {
-    //     const reader = new FileReader();
+    function readCSVToMatrix(file) {
+        const reader = new FileReader();
 
-    //     if (file && file["type"] === "text/csv") {
-    //         reader.readAsText(file);
-    //         reader.onload = function (event) {
-    //             const csv = event.target.result;
-    //             const lines = csv.split('\n');
-    //             const matrix = lines.map(line => line.trim().split(','));
+        if (file && file["type"] === "text/csv") {
+            reader.readAsText(file);
+            reader.onload = function (event) {
+                const csv = event.target.result;
+                const lines = csv.split('\n');
+                const matrix = lines.map(line => line.trim().split(','));
 
-    //             setData(matrix);
-    //             console.log(data)
-    //         };
+                setZData(matrix);
+                console.log("Data", matrix)
+            };
 
-    //         reader.onerror = function () {
-    //             console.error('Error reading file');
-    //         };
-    //     }
-    // }
+            reader.onerror = function () {
+                console.error('Error reading file');
+            };
+        }
+    }
 
     return (
         <ThemeProvider theme={theme}>
@@ -105,9 +110,11 @@ const SpectralAnalysis = () => {
                             </Grid>
                             <Grid item xs={12} md={8} lg={8}>
                                 <Paper sx={{ p: 2, height: 400 }}>
-                                    {data &&
+                                    {zData &&
                                         <Spectrogram
-                                            data={data}
+                                            xData={xData}
+                                            yData={yData}
+                                            zData={zData}
                                             type={type}
                                             colorscale={colorscale}
                                             xrange={xrange}
