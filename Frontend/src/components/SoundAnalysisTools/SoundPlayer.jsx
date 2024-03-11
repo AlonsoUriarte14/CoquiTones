@@ -2,9 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { ThemeProvider } from '@mui/material/styles';
 import { Button } from "@mui/material";
 import theme from "../shared/Theme";
-export default function SoundPlayer({ src, setCurrentTime }) {
+export default function SoundPlayer({ src, setCurrentTime, xrange, yrange }) {
     const [audioUrl, setAudioUrl] = useState(null);
 
+    const filterFrequencies = () {
+
+    }
     useEffect(() => {
         if (src) {
 

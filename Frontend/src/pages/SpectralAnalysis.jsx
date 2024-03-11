@@ -124,7 +124,7 @@ const SpectralAnalysis = () => {
                                 <Paper
                                     sx={{ p: 2, height: 'auto' }}
                                 >
-                                    <SoundPlayer src={rawAudioFile} setCurrentTime={updateTime} />
+                                    <SoundPlayer src={rawAudioFile} setCurrentTime={updateTime} xrange={xrange} yrange={yrange} />
                                 </Paper>
                             </Grid>
                         </Grid>

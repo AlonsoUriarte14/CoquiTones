@@ -75,7 +75,7 @@ export default function SpectrogramControls({ setAudioFile, type, setType, color
             <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Chart Type</InputLabel>
                 <Select
-                    defaultValue={"heatmapgl"}
+                    defaultValue={"heatmap"}
                     value={type}
                     label="Chart Type"
                     onChange={(event) => setType(event.target.value)}
@@ -107,7 +107,7 @@ export default function SpectrogramControls({ setAudioFile, type, setType, color
             </FormControl>
 
             <Typography gutterBottom >
-                X-axis Range {xrange}
+                Time (s) Range
             </Typography>
             <PrettoSlider
                 sx={
@@ -116,7 +116,7 @@ export default function SpectrogramControls({ setAudioFile, type, setType, color
                     }
                 }
                 defaultValue={[0, 300]}
-                value={xrange}
+                value={xrange.map(value => value.toFixed(1))}
                 onChange={(event) => setXrange(event.target.value)}
                 valueLabelDisplay='on'
                 min={0}
@@ -124,7 +124,7 @@ export default function SpectrogramControls({ setAudioFile, type, setType, color
             />
 
             <Typography gutterBottom>
-                Y-axis Range
+                Frequency (Hz) Range
             </Typography>
             <PrettoSlider
                 sx={
@@ -133,10 +133,12 @@ export default function SpectrogramControls({ setAudioFile, type, setType, color
                     }
                 }
                 defaultValue={[0, 10000]}
+                value={yrange.map(value => value.toFixed(1))}
                 onChange={(event) => setYrange(event.target.value)}
                 valueLabelDisplay='on'
                 min={0}
                 max={10000}
+
             />
         </Box>
     );
