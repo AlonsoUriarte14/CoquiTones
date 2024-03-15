@@ -8,10 +8,17 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
-
+import DiegoPic from '../components/images/DiegoAlonsoPFP.jpeg'
+import EdwinPic from '../components/images/EdwinCamuyPFP.png'
+import RolandoPic from '../components/images/RolandoRiosPFP.jpeg'
 import BarAndNav from "../components/shared/BarAndNav";
 import theme from "../components/shared/Theme"
 import FileUpload from "../components/shared/FileUpload";
+
+const studentList = [{name: "Diego A. Santiago Uriarte", image: DiegoPic, bio: "Software Engineer Student" },
+                     {name: "Edwin J. Camuy Medina", image: EdwinPic, bio: 'Software Engineer Student' },
+                     {name: "Rolando Ríos Bonilla", image: RolandoPic, bio: 'Software Engineer Student' }];
+
 const About = () => {
 
     return (
@@ -41,7 +48,7 @@ const About = () => {
                                     height: "auto",
                                 }}
                             >
-                                <Typography variant="h3" color="primary" align="center">
+                                <Typography variant="h1" color="primary" align="center">
                                     About Page
                                 </Typography>
                                 
@@ -74,6 +81,22 @@ const About = () => {
                                     Drawing upon our collective academic journey, we are leveraging our knowledge and acquiring new skills essential for the project's success.
                                     [MORE NEEDED]
                                 </Typography>
+                                <Box sx={{
+                                    pt: 4, 
+                                    display: 'flex', 
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                    gap: 4, width: '100'}}>
+
+                                    {studentList.map((item, index) => (
+                                        <div key={index} style={{ textAlign: 'center'}}>
+                                            <img src={item.image} alt={item.name} style={{width: '100px', height: '100px', borderRadius: '50%'}}/>
+                                            <Typography>{item.name}</Typography>
+                                            <Typography gutterBottom='true'>{item.bio}</Typography>
+                                        </div>
+                                    ))}
+
+                                </Box>
 
                                 <Typography variant="h5" color="black" align="center">
 
