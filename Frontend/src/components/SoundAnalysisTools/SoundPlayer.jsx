@@ -3,44 +3,56 @@ import { ThemeProvider } from '@mui/material/styles';
 import { Button } from "@mui/material";
 import theme from "../shared/Theme";
 
-export default function SoundPlayer({ src, setCurrentTime, yrange }) {
+export default function SoundPlayer({ file, setCurrentTime, yrange }) {
     const [playing, setPlaying] = useState(false);
     const [audioUrl, setAudioUrl] = useState(null);
     const [source, setSource] = useState(null)
-    const [audioContext, setAudioContext] = useState(new (window.AudioContext || window.webkitAudioContext)())
-    const audioElementRef = useRef(null);
-    async function filterAudio() {
-
-
-
-
-        const filter = audioContext.createBiquadFilter();
-        filter.type = 'bandpass'; // Set filter type to bandpass
-        filter.frequency.value = (yrange[0] + yrange[1]) / 2; // Set center frequency
-        filter.Q.value = 10; // Set quality factor
-
-        // Connect the nodes: source -> filter -> destination
-        source.connect(filter);
-        filter.connect(audioContext.destination);
-
-
+    const updateSource = (newSource) => {
+        setSource(newSource)
     }
+    const [audioContext, setAudioContext] = useState(null)
+    const audioElementRef = useRef(null);
+
+
+
 
     useEffect(() => {
 
-        if (src) {
-            const url = URL.createObjectURL(src)
+        if (file) {
+            const url = URL.createObjectURL(file)
             setAudioUrl(url)
         }
-    }, [src])
+    }, [file])
 
     useEffect(() => {
+        function filterAudio() {
+
+            if (source) {
+                const centerFrequency = (yrange[0] + yrange[1]) / 2; // Set center frequency
+                const qualityFactor = centerFrequency / (yrange[1] - yrange[0])
+                const filter = audioContext.createBiquadFilter();
+                filter.type = 'bandpass'; // Set filter type to bandpass
+                filter.frequency.value = centerFrequency;
+                filter.Q.value = qualityFactor; // Set quality factor
+
+                // Connect the nodes: source -> filter -> destination
+                source.connect(filter);
+                filter.connect(audioContext.destination);
+
+                console.log("Filtered Audio!")
+            }
+
+        }
 
         if (audioUrl && audioElementRef.current) {
-            setSource(audioContext.createMediaElementSource(audioElementRef.current));
+
+            const audioSrc = audioContext.createMediaElementSource(audioElementRef.current);
+            updateSource(audioSrc);
+
+
             filterAudio()
         }
-    }, [yrange])
+    }, [yrange, audioUrl])
 
     const handleTimeUpdate = (event) => {
         setCurrentTime(event.target.currentTime);
@@ -49,13 +61,7 @@ export default function SoundPlayer({ src, setCurrentTime, yrange }) {
 
     const handleClick = () => {
         setPlaying(!playing);
-        if (playing) {
-            audioElementRef.current.pause();
-        } else {
-            if (source) {
-                audioElementRef.current.play();
-            }
-        }
+        setAudioContext(new (window.AudioContext || window.webkitAudioContext)())
     };
 
     return (
