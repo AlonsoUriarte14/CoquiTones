@@ -14,6 +14,7 @@ import RolandoPic from '../components/images/RolandoRiosPFP.jpeg'
 import BarAndNav from "../components/shared/BarAndNav";
 import theme from "../components/shared/Theme"
 import FileUpload from "../components/shared/FileUpload";
+import Navbar from "../components/shared/Navbar";
 
 const studentList = [{name: "Diego A. Santiago Uriarte", image: DiegoPic, bio: "Software Engineer Student" },
                      {name: "Edwin J. Camuy Medina", image: EdwinPic, bio: 'Software Engineer Student' },
@@ -23,9 +24,10 @@ const About = () => {
 
     return (
         <ThemeProvider theme={theme}>
+            <Navbar />
             <Box sx={{ display: 'flex' }} >
                 <CssBaseline />
-                <BarAndNav />
+                
                 <Box
                     component="main"
                     sx={{
