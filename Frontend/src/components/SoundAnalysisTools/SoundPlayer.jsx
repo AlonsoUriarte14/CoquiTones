@@ -7,10 +7,14 @@ export default function SoundPlayer({ file, setCurrentTime, yrange }) {
     const [playing, setPlaying] = useState(false);
     const [audioUrl, setAudioUrl] = useState(null);
     const [source, setSource] = useState(null)
+    const [filter, setFilter] = useState(null)
     const updateSource = (newSource) => {
         setSource(newSource)
     }
     const [audioContext, setAudioContext] = useState(null)
+    const updateAudioContext = (newcontext) => {
+        setSource(newcontext)
+    }
     const audioElementRef = useRef(null);
 
 
@@ -30,14 +34,13 @@ export default function SoundPlayer({ file, setCurrentTime, yrange }) {
             if (source) {
                 const centerFrequency = (yrange[0] + yrange[1]) / 2; // Set center frequency
                 const qualityFactor = centerFrequency / (yrange[1] - yrange[0])
-                const filter = audioContext.createBiquadFilter();
+
+
                 filter.type = 'bandpass'; // Set filter type to bandpass
                 filter.frequency.value = centerFrequency;
                 filter.Q.value = qualityFactor; // Set quality factor
 
                 // Connect the nodes: source -> filter -> destination
-                source.connect(filter);
-                filter.connect(audioContext.destination);
 
                 console.log("Filtered Audio!")
             }
@@ -45,11 +48,6 @@ export default function SoundPlayer({ file, setCurrentTime, yrange }) {
         }
 
         if (audioUrl && audioElementRef.current) {
-
-            const audioSrc = audioContext.createMediaElementSource(audioElementRef.current);
-            updateSource(audioSrc);
-
-
             filterAudio()
         }
     }, [yrange, audioUrl])
@@ -60,8 +58,16 @@ export default function SoundPlayer({ file, setCurrentTime, yrange }) {
 
 
     const handleClick = () => {
+        // async react bullshit 
         setPlaying(!playing);
-        setAudioContext(new (window.AudioContext || window.webkitAudioContext)())
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        updateAudioContext(audioCtx)
+        const audioSrc = audioContext.createMediaElementSource(audioElementRef.current);
+        updateSource(audioSrc);
+        const biquadFilter = audioContext.createBiquadFilter();
+        setFilter(biquadFilter);
+        source.connect(filter);
+        filter.connect(audioContext.destination);
     };
 
     return (
