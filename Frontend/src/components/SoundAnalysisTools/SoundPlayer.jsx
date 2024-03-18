@@ -6,20 +6,6 @@ import theme from "../shared/Theme";
 export default function SoundPlayer({ file, setCurrentTime, yrange }) {
     const [playing, setPlaying] = useState(false);
     const [audioUrl, setAudioUrl] = useState(null);
-    const [source, setSource] = useState(null)
-    const [filter, setFilter] = useState(null)
-    const updateSource = (newSource) => {
-        setSource(newSource)
-    }
-    const [audioContext, setAudioContext] = useState(null)
-    const updateAudioContext = (newcontext) => {
-        setSource(newcontext)
-    }
-    const audioElementRef = useRef(null);
-
-
-
-
     useEffect(() => {
 
         if (file) {
@@ -28,29 +14,37 @@ export default function SoundPlayer({ file, setCurrentTime, yrange }) {
         }
     }, [file])
 
+
+    const [source, setSource] = useState(null)
+    const [bandpassFilter, setBandPassFilter] = useState(null)
+    const [audioContext, setAudioContext] = useState(null)
+    const audioElementRef = useRef(null);
+
+
+    function filterAudio() {
+
+
+        const centerFrequency = (yrange[0] + yrange[1]) / 2; // Set center frequency
+        const qualityFactor = centerFrequency / (yrange[1] - yrange[0])
+        bandpassFilter.type = 'bandpass'; // Set filter type to bandpass
+        bandpassFilter.frequency.value = centerFrequency;
+        bandpassFilter.Q.value = qualityFactor; // Set quality factor
+        console.log(qualityFactor)
+
+        console.log("Filtered Audio!")
+
+
+    }
+
+
     useEffect(() => {
-        function filterAudio() {
-
-            if (source) {
-                const centerFrequency = (yrange[0] + yrange[1]) / 2; // Set center frequency
-                const qualityFactor = centerFrequency / (yrange[1] - yrange[0])
 
 
-                filter.type = 'bandpass'; // Set filter type to bandpass
-                filter.frequency.value = centerFrequency;
-                filter.Q.value = qualityFactor; // Set quality factor
-
-                // Connect the nodes: source -> filter -> destination
-
-                console.log("Filtered Audio!")
-            }
-
-        }
-
-        if (audioUrl && audioElementRef.current) {
+        if (audioUrl && audioElementRef.current && source) {
             filterAudio()
         }
     }, [yrange, audioUrl])
+
 
     const handleTimeUpdate = (event) => {
         setCurrentTime(event.target.currentTime);
@@ -61,14 +55,26 @@ export default function SoundPlayer({ file, setCurrentTime, yrange }) {
         // async react bullshit 
         setPlaying(!playing);
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        updateAudioContext(audioCtx)
-        const audioSrc = audioContext.createMediaElementSource(audioElementRef.current);
-        updateSource(audioSrc);
-        const biquadFilter = audioContext.createBiquadFilter();
-        setFilter(biquadFilter);
-        source.connect(filter);
-        filter.connect(audioContext.destination);
+        setAudioContext(audioCtx)
+
+
+
     };
+    useEffect(() => {
+        if (audioContext) {
+            const audioSrc = audioContext.createMediaElementSource(audioElementRef.current);
+            setSource(audioSrc);
+            const biquadFilter = audioContext.createBiquadFilter();
+            setBandPassFilter(biquadFilter);
+        }
+    }, [audioContext])
+
+    useEffect(() => {
+        if (source) {
+            source.connect(bandpassFilter);
+            bandpassFilter.connect(audioContext.destination);
+        }
+    }, [source, bandpassFilter])
 
     return (
         <ThemeProvider theme={theme}>
