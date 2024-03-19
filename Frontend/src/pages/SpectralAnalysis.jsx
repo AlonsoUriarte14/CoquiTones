@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Link from '@mui/material/Link';
 
 import BarAndNav from "../components/shared/BarAndNav";
 import theme from "../components/shared/Theme"
@@ -15,6 +13,8 @@ import SoundPlayer from "../components/SoundAnalysisTools/SoundPlayer";
 import Spectrogram from "../components/SoundAnalysisTools/Spectrogram";
 import SpectrogramControls from "../components/SoundAnalysisTools/SpectrogramControls";
 import { handleLoad } from "../components/SoundAnalysisTools/SpectrogramDataReader"
+
+
 const SpectralAnalysis = () => {
     const [rawAudioFile, setRawAudioFile] = useState(null)
     const updateRawAudioFile = (newAudioFile) => {
@@ -124,7 +124,13 @@ const SpectralAnalysis = () => {
                                 <Paper
                                     sx={{ p: 2, height: 'auto' }}
                                 >
-                                    <SoundPlayer file={rawAudioFile} setCurrentTime={updateTime} yrange={yrange} />
+                                    <SoundPlayer
+                                        file={rawAudioFile}
+                                        setCurrentTime={updateTime}
+                                        yrange={yrange}
+                                        xrange={xrange}
+                                        currentTime={currentTime}
+                                    />
                                 </Paper>
                             </Grid>
                         </Grid>

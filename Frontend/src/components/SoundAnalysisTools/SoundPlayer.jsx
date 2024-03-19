@@ -3,7 +3,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { Button } from "@mui/material";
 import theme from "../shared/Theme";
 
-export default function SoundPlayer({ file, setCurrentTime, yrange }) {
+export default function SoundPlayer({ file, setCurrentTime, yrange, xrange, currentTime }) {
     const [playing, setPlaying] = useState(false);
     const [audioUrl, setAudioUrl] = useState(null);
     useEffect(() => {
@@ -46,10 +46,21 @@ export default function SoundPlayer({ file, setCurrentTime, yrange }) {
     }, [yrange, audioUrl])
 
 
+
     const handleTimeUpdate = (event) => {
         setCurrentTime(event.target.currentTime);
     };
 
+    useEffect(() => {
+
+        if ((currentTime > xrange[1])) {
+
+            audioElementRef.current.currentTime = xrange[0]
+            console.log("changed time")
+        }
+
+
+    }, [currentTime, xrange])
 
     const handleClick = () => {
         // async react bullshit 

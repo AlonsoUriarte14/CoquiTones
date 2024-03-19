@@ -1,12 +1,14 @@
 
 
+import websiteUrl from "../Util/constant";
+
 
 export default function () {// Listen for messages from the main script
 
-    onmessage = function (event) {
+    onmessage = async function (event) {
         // Process the data received from the main script
 
-        const result = processData(event.data);
+        const result = await processData(event.data);
 
         // Send the processed data back to the main script
         postMessage(result);
@@ -19,7 +21,9 @@ export default function () {// Listen for messages from the main script
         const formData = new FormData();
         formData.append('file', file);
 
-        return fetch("http://localhost:8000/api/spectrogram/", {
+        const url = "http://localhost:8000"
+
+        return fetch(url + "/api/spectrogram/", {
             method: "POST",
             body: formData,
         })
