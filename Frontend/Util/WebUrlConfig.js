@@ -1,1 +1,0 @@
-export default websiteUrl = "localhost:3000"
