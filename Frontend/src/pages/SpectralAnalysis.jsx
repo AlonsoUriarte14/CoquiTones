@@ -2,56 +2,70 @@ import React, { useEffect, useState } from "react";
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Link from '@mui/material/Link';
-import Plot from 'react-plotly.js';
 
 import BarAndNav from "../components/shared/BarAndNav";
 import theme from "../components/shared/Theme"
-import FileUpload from "../components/shared/FileUpload";
-import SoundPlayer from "../components/SoundAnalysisTools/audioPlayer";
+import SoundPlayer from "../components/SoundAnalysisTools/SoundPlayer";
+import Spectrogram from "../components/SoundAnalysisTools/Spectrogram";
+import SpectrogramControls from "../components/SoundAnalysisTools/SpectrogramControls";
+import { handleLoad } from "../components/SoundAnalysisTools/SpectrogramDataReader"
+
+
 const SpectralAnalysis = () => {
-    const [rawAudioFile, setRawAudio] = useState(null)
-    const [data, setData] = useState(null)
+    const [rawAudioFile, setRawAudioFile] = useState(null)
+    const updateRawAudioFile = (newAudioFile) => {
+        setRawAudioFile(newAudioFile)
+    }
+    const [xData, setXData] = useState(null)
+    const [yData, setYData] = useState(null)
+    const [zData, setZData] = useState(null)
+
+    const [currentTime, setCurrentTime] = useState(0)
+    const updateTime = (newTime) => {
+        setCurrentTime(newTime)
+    }
+    const [type, setType] = useState("heatmap")
+    const updateType = (newType) => {
+        setType(newType)
+    }
+    const [colorscale, setColorscale] = useState("Jet")
+    const updateColorscale = (newColor) => {
+        setColorscale(newColor)
+    }
+    const [xrange, setXrange] = useState([0, 300])
+    const updateXrange = (newXrange) => {
+        setXrange(newXrange)
+    }
+    const [yrange, setYrange] = useState([0, 10000])
+
+    const updateYrange = (newYrange) => {
+        setYrange(newYrange)
+    }
 
 
     useEffect(() => {
-        console.log("file: ", rawAudioFile)
-        readCSVToMatrix(rawAudioFile)
-    }, [rawAudioFile])
 
+        const getData = async () => {
+            if (rawAudioFile) {
 
-    function readCSVToMatrix(file) {
-        const reader = new FileReader();
-
-
-        if (file) {
-            reader.readAsText(file);
-            reader.onload = function (event) {
-                const csv = event.target.result;
-                const lines = csv.split('\n');
-                const matrix = lines.map(line => line.trim().split(','));
-
-                setData(matrix);
-                console.log(data)
-            };
-
-            reader.onerror = function () {
-                console.error('Error reading file');
-            };
-
+                const data = await handleLoad(rawAudioFile)
+                setXData(data['x'])
+                setYData(data['y'])
+                setZData(data['z'])
+            }
         }
 
-    }
+        getData()
+    }, [rawAudioFile])
 
 
     return (
         <ThemeProvider theme={theme}>
-            <Box sx={{ display: 'flex' }} >
+            <Box sx={{ display: 'flex' }}>
                 <CssBaseline />
                 <BarAndNav />
                 <Box
@@ -67,75 +81,63 @@ const SpectralAnalysis = () => {
                     }}
                 >
                     <Container maxWidth="lg" sx={{ mt: 10, mb: 10 }}>
-                        <Grid item xs={12} md={8} lg={9}>
-                            <Paper
-                                sx={{
-                                    p: 2,
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    height: 240,
-                                }}
-                            >
-                                <Typography variant="h3" color="primary" align="center">
-                                    Spectral Analysis
-                                </Typography>
-
-
-                                <FileUpload setAudioFile={setRawAudio} />
-
-
-                            </Paper >
-
-                            <Paper
-                                sx={{
-                                    p: 2,
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    height: 400,
-                                }}
-                            >
-                                {data &&
-                                    <div>
-
-                                        <Plot
-                                            data={[
-                                                {
-                                                    z: data,
-                                                    type: 'heatmapgl',
-                                                    colorscale: "RdBu",
-                                                    ncontours: 100,
-                                                    zmax: 0,
-                                                    zmin: -50
-                                                }
-                                            ]}
-                                            layout={{
-                                                height: 375,
-                                                width: 1100,
-                                                title: " Spectrogram Plot",
-                                                xaxis: {
-                                                    title: "Time "
-                                                },
-                                                yaxis: {
-                                                    title: "Frequency (Hz)"
-                                                },
-
-                                                "xaxis.range": [0, 30],
-                                                "yaxis.range": [0, 80],
-
-                                            }}
-                                        >
-                                        </Plot>
-
-                                        <SoundPlayer src={rawAudioFile} />
-                                    </div>
-                                }
-
-                            </Paper>
+                        <Grid container spacing={3}>
+                            <Grid item xs={12}>
+                                <Paper sx={{ p: 2 }}>
+                                    <Typography variant="h3" color="primary" align="center">
+                                        Spectral Analysis
+                                    </Typography>
+                                </Paper>
+                            </Grid>
+                            <Grid item xs={12} md={8} lg={8}>
+                                <Paper sx={{ p: 2, height: 'auto' }}>
+                                    {zData &&
+                                        <Spectrogram
+                                            xData={xData}
+                                            yData={yData}
+                                            zData={zData}
+                                            type={type}
+                                            colorscale={colorscale}
+                                            xrange={xrange}
+                                            yrange={yrange}
+                                            currentTime={currentTime}
+                                        />
+                                    }
+                                </Paper>
+                            </Grid>
+                            <Grid item xs={12} md={4} lg={4}>
+                                <Paper sx={{ p: 2, height: 'auto' }}>
+                                    <SpectrogramControls
+                                        setAudioFile={updateRawAudioFile}
+                                        type={type}
+                                        setType={updateType}
+                                        colorscale={colorscale}
+                                        setColorscale={updateColorscale}
+                                        xrange={xrange}
+                                        setXrange={updateXrange}
+                                        yrange={yrange}
+                                        setYrange={updateYrange}
+                                    />
+                                </Paper>
+                            </Grid>
+                            <Grid item xs={12} md={8} lg={8}>
+                                <Paper
+                                    sx={{ p: 2, height: 'auto' }}
+                                >
+                                    <SoundPlayer
+                                        file={rawAudioFile}
+                                        setCurrentTime={updateTime}
+                                        yrange={yrange}
+                                        xrange={xrange}
+                                        currentTime={currentTime}
+                                    />
+                                </Paper>
+                            </Grid>
                         </Grid>
-                    </Container >
+                    </Container>
                 </Box>
             </Box>
-        </ThemeProvider>
+        </ThemeProvider >
     )
 }
 
