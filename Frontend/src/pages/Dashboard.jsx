@@ -13,9 +13,8 @@ import Link from '@mui/material/Link';
 import Chart from '../components/dashboard/Chart';
 import Heartbeats from '../components/dashboard/Deposits';
 import RecentEntries from '../components/dashboard/Orders';
+import Navbar from '../components/shared/Navbar';
 
-
-import BarAndNav from '../components/shared/BarAndNav';
 import theme from '../components/shared/Theme'
 function Copyright(props) {
 	return (
@@ -44,9 +43,9 @@ export default function Dashboard() {
 
 	return (
 		<ThemeProvider theme={theme}>
+			<Navbar />
 			<Box sx={{ display: 'flex' }}>
 				<CssBaseline />
-				<BarAndNav />
 				<Box
 					component="main"
 					sx={{
