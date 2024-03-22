@@ -1,12 +1,18 @@
-from fastapi import FastAPI, staticfiles, Depends, HTTPException
+from fastapi import FastAPI, File, UploadFile, staticfiles, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, Response
 from dbutil import get_db_connection
+from Spectrogram import sendSpectrogram
 import psycopg2
 import dao
 
 app = FastAPI()
-origins = ["http://localhost:3000", "localhost:3000"]
+origins = [
+    "http://localhost:8000",
+    "localhost:8000",
+    "http://localhost:3000",
+    "localhost:3000",
+]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -20,12 +26,6 @@ app.mount(
     staticfiles.StaticFiles(directory="../../Frontend/build/static"),
     name="static",
 )
-
-
-@app.get("/", response_class=HTMLResponse)
-async def root():
-    with open("../../Frontend/build/index.html", "r") as f:
-        return f.read()
 
 
 @app.get("/api/node/all")
@@ -79,3 +79,16 @@ async def audio_get(afid: int, db=Depends(get_db_connection)):
     data = audio_file.data
 
     return Response(content=data, media_type="audio/mpeg")
+
+
+@app.post(path="/api/spectrogram/", response_class=Response)
+async def spectrogram_get(file: UploadFile = File(...)):
+    specData = sendSpectrogram(file.file)
+    return specData
+
+
+@app.get("/", response_class=HTMLResponse)
+@app.get("/{path}", response_class=HTMLResponse)
+async def root():
+    with open("../../Frontend/build/index.html", "r") as f:
+        return f.read()
