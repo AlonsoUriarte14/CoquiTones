@@ -8,9 +8,16 @@ Microphone::Microphone()
 void Microphone::setup()
 {
 
-    ESP_LOGI(TAG, "Starting up");
-
-    SDCard *sd = new SDCard("/sdcard", PIN_NUM_MISO, PIN_NUM_MOSI, PIN_NUM_CLK, PIN_NUM_CS);
+    if (!SD.begin(chip_select))
+    {
+        Serial.println("SD card Initializing failed");
+        Serial.println("1. is a card inserted?");
+        Serial.println("2. is your wiring correct?");
+        Serial.println("3. did you change the chipSelect pin to match your shield or module?");
+        Serial.println("Note: press reset button on the board and reopen this Serial Monitor after fixing your issue!");
+        while (true)
+            ;
+    }
 
     ESP_LOGI(TAG, "Creating microphone");
 #ifdef USE_I2S_MIC_INPUT
@@ -20,23 +27,23 @@ void Microphone::setup()
 #endif
 }
 
-const char *Microphone::recordToFile()
+const char *Microphone::recordToFile(const char *fname)
 {
 
     int16_t *samples = (int16_t *)malloc(sizeof(int16_t) * 1024);
     ESP_LOGI(TAG, "Start recording");
     input->start();
     // open the file on the sdcard
-    const char *fname = "TODAYS DATE AND TIMESTAMP";
-    FILE *fp = fopen(fname, "wb");
+
+    File fp = SD.open(fname, FILE_WRITE);
     // create a new wave file writer
-    WAVFileWriter *writer = new WAVFileWriter(fp, input->sample_rate());
+    WAVFileWriter *writer = new WAVFileWriter(&fp, input->sample_rate());
 
     unsigned long start_time;
     unsigned long current_time;
     unsigned long elapsed_time;
 
-    int recordTime = 300000; // this is 5 minutes in ms
+    int recordTime = AUDIO_DURATION; // this is 5 minutes in ms
     start_time = millis();
     do
     {
@@ -55,10 +62,9 @@ const char *Microphone::recordToFile()
     input->stop();
     // and finish the writing
     writer->finish();
-    fclose(fp);
+    fp.close();
     delete writer;
     free(samples);
-    ESP_LOGI(TAG, "Finished recording");
 
     return fname;
 }

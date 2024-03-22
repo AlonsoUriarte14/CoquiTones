@@ -7,12 +7,13 @@
 #include <stdio.h>
 #include "SPIFFS.h"
 #include <freertos/FreeRTOS.h>
-#include <./lib/audio_input/src/ADCSampler.h>
 #include <./lib/audio_input/src/I2SMEMSSampler.h>
-#include <./lib/sd_card/src/SDCard.h>
 #include <./lib/wav_file/src/WAVFileReader.h>
 #include <./lib/wav_file/src/WAVFileWriter.h>
 #include <config.h>
+
+#define chip_select 16
+// chip select pin for sd card: might have to change
 class Microphone
 {
 public:
@@ -31,7 +32,7 @@ public:
      *
      * @return const char* created filename
      */
-    const char *recordToFile();
+    const char *recordToFile(const char *fname);
 
     /**
      * @brief  Take a single measurement form the microphone which is the smallest posible sample

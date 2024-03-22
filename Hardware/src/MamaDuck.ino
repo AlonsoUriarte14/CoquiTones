@@ -8,7 +8,7 @@
 #include <MamaDuck.h>
 #include <MemoryFree.h>
 #include <../lib/Microphone/MicWrapper.h>
-
+#include <../lib/Weather/WeatherData.h>
 #ifdef SERIAL_PORT_USBVIRTUAL
 #define Serial SERIAL_PORT_USBVIRTUAL
 #endif
@@ -20,7 +20,8 @@
 
 // create a built-in mama duck
 MamaDuck duck;
-
+Microphone *mic;
+WeatherData *sens;
 // create a timer with default settings
 auto timer = timer_create_default();
 
@@ -34,6 +35,9 @@ void setup()
 	// given during the device provisioning then converted to a byte vector to
 	// setup the duck NOTE: The Device ID must be exactly 8 bytes otherwise it
 	// will get rejected
+
+	mic = new Microphone();
+	sens = new WeatherData(bmeSDA, bmeSCL, rainPin);
 	std::string deviceId("MAMA0001");
 	std::vector<byte> devId;
 	devId.insert(devId.end(), deviceId.begin(), deviceId.end());
@@ -56,14 +60,21 @@ void loop()
 
 bool runSensor(void *)
 {
+
 	bool result;
 	const byte *buffer;
+	String temp = String(sens->getTemperature());
+	String pres = String(sens->getPressure());
+	String humid = String(sens->getHumidity());
+	String israining = sens->isRaining() ? "Yes" : "No";
 
-	String message = "Hello ";
+	String message = "Temperature: " + temp + "*C\n" + "Pressure : " + pres + "hPa\n" + "Humidity: " + humid + "RH%\n" + "Raining: " + israining + "\n";
 	int length = message.length();
+
+	buffer = (byte *)message.c_str();
+
 	Serial.print("[MAMA] sensor data: ");
 	Serial.println(message);
-	buffer = (byte *)message.c_str();
 
 	result = sendData(buffer, length);
 	if (result)
