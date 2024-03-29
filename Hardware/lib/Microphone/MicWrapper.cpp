@@ -7,7 +7,7 @@ Microphone::Microphone()
 
 void Microphone::setup()
 {
-
+    
     if (!SD.begin(PIN_NUM_CS))
     {
         Serial.println("SD card Initializing failed");

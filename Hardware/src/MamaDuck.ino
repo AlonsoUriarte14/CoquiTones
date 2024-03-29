@@ -37,6 +37,7 @@ void setup()
 	// setup the duck NOTE: The Device ID must be exactly 8 bytes otherwise it
 	// will get rejected
 
+	SPI.begin(PIN_NUM_CLK, PIN_NUM_MISO, PIN_NUM_MOSI, PIN_NUM_CS);
 	mic = new Microphone();
 	sens = new WeatherData(bmeSDA, bmeSCL, rainPin);
 	display = DuckDisplay::getInstance();

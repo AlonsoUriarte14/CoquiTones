@@ -1,9 +1,6 @@
 #include "config.h"
 #include <hal/i2s_types.h>
 
-// sample rate for the system
-#define SAMPLE_RATE 44000 // HZ
-#define AUDIO_DURATION 60 // SECONDS
 // i2s config for using the internal ADC
 i2s_config_t i2s_adc_config = {
     .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_RX),

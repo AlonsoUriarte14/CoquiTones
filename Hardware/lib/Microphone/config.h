@@ -4,6 +4,11 @@
 #include <driver/i2s.h>
 #include <hal/gpio_types.h>
 #include <hal/i2s_types.h>
+
+// sample rate for the system
+#define SAMPLE_RATE 44000 // HZ
+#define AUDIO_DURATION 60 // SECONDS
+
 // save to SPIFFS instead of SD Card?
 // #define USE_SPIFFS 1
 
@@ -27,11 +32,10 @@
 // Analog Microphone Settings - ADC1_CHANNEL_7 is GPIO35
 #define ADC_MIC_CHANNEL ADC1_CHANNEL_7
 
-// sdcard
-#define PIN_NUM_MISO GPIO_NUM_13
-#define PIN_NUM_CLK GPIO_NUM_14
-#define PIN_NUM_MOSI GPIO_NUM_15
-#define PIN_NUM_CS GPIO_NUM_16
+#define PIN_NUM_CS GPIO_NUM_36
+#define PIN_NUM_CLK GPIO_NUM_35
+#define PIN_NUM_MOSI GPIO_NUM_34
+#define PIN_NUM_MISO GPIO_NUM_33
 
 // i2s config for using the internal ADC
 extern i2s_config_t i2s_adc_config;

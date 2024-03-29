@@ -3,6 +3,7 @@
 
 #include <SPI.h>
 #include <SD.h>
+#include <FS.h>
 #include <Arduino.h>
 #include <stdio.h>
 #include "SPIFFS.h"
