@@ -8,7 +8,7 @@ Microphone::Microphone()
 void Microphone::setup()
 {
 
-    if (!SD.begin(chip_select))
+    if (!SD.begin(PIN_NUM_CS))
     {
         Serial.println("SD card Initializing failed");
         Serial.println("1. is a card inserted?");
@@ -31,7 +31,7 @@ const char *Microphone::recordToFile(const char *fname)
 {
 
     int16_t *samples = (int16_t *)malloc(sizeof(int16_t) * 1024);
-    ESP_LOGI(TAG, "Start recording");
+    ESP_LOGI(TAG, "Start talking, mf...");
     input->start();
     // open the file on the sdcard
 
@@ -43,7 +43,7 @@ const char *Microphone::recordToFile(const char *fname)
     unsigned long current_time;
     unsigned long elapsed_time;
 
-    int recordTime = AUDIO_DURATION; // this is 5 minutes in ms
+    int recordTime = AUDIO_DURATION * 1000; // this is 5 minutes in ms
     start_time = millis();
     do
     {

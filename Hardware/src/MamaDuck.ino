@@ -22,6 +22,7 @@
 MamaDuck duck;
 Microphone *mic;
 WeatherData *sens;
+DuckDisplay *display;
 // create a timer with default settings
 auto timer = timer_create_default();
 
@@ -38,7 +39,10 @@ void setup()
 
 	mic = new Microphone();
 	sens = new WeatherData(bmeSDA, bmeSCL, rainPin);
+	display = DuckDisplay::getInstance();
+
 	std::string deviceId("MAMA0001");
+	display->drawString(0, 10, "Mama Duck says wazzaaahh");
 	std::vector<byte> devId;
 	devId.insert(devId.end(), deviceId.begin(), deviceId.end());
 	duck.setupWithDefaults(devId);

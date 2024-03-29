@@ -12,7 +12,6 @@
 #include <./lib/wav_file/src/WAVFileWriter.h>
 #include <config.h>
 
-#define chip_select 16
 // chip select pin for sd card: might have to change
 class Microphone
 {

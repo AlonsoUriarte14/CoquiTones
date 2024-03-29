@@ -1,6 +1,5 @@
 #include "I2SMEMSSampler.h"
 
-
 I2SMEMSSampler::I2SMEMSSampler(
     i2s_port_t i2s_port,
     i2s_pin_config_t &i2s_pins,

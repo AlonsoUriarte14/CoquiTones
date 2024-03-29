@@ -17,8 +17,11 @@
 // Generally they will default to LEFT - but you may need to attach the L/R pin to GND
 #define I2S_MIC_CHANNEL I2S_CHANNEL_FMT_ONLY_LEFT
 // #define I2S_MIC_CHANNEL I2S_CHANNEL_FMT_ONLY_RIGHT
+// sck pin
 #define I2S_MIC_SERIAL_CLOCK GPIO_NUM_26
-#define I2S_MIC_LEFT_RIGHT_CLOCK GPIO_NUM_26
+// world select (ws pin)
+#define I2S_MIC_LEFT_RIGHT_CLOCK GPIO_NUM_20
+// sd pin
 #define I2S_MIC_SERIAL_DATA GPIO_NUM_21
 
 // Analog Microphone Settings - ADC1_CHANNEL_7 is GPIO35
