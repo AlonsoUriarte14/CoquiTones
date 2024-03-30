@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
+import LinearProgress from '@mui/material/LinearProgress';
 
 import BarAndNav from "../components/shared/BarAndNav";
 import theme from "../components/shared/Theme"
@@ -99,8 +100,8 @@ const SpectralAnalysis = () => {
                             </Grid>
                             <Grid item xs={12} md={8} lg={8}>
                                 <Paper sx={{ p: 2, height: 'auto' }}>
-                                    {zData &&
-                                        <Spectrogram
+                                    {zData ?
+                                        (<Spectrogram
                                             xData={xData}
                                             yData={yData}
                                             zData={zData}
@@ -109,7 +110,15 @@ const SpectralAnalysis = () => {
                                             yrange={yrange}
                                             currentTime={currentTime}
                                             fileName={rawAudioFile.name}
-                                        />
+                                        />) :
+                                        (
+                                            rawAudioFile ?
+                                                <LinearProgress color="secondary" /> :
+                                                <Typography variant="h4" color="primary" align="center">
+                                                    No file Added
+                                                </Typography>
+                                        )
+
                                     }
                                 </Paper>
                             </Grid>

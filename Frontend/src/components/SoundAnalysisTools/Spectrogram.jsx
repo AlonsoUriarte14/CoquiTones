@@ -64,7 +64,7 @@ export default function Spectrogram({ xData, yData, zData, colorscale, xrange, y
                     title: "Frequency (Hz)",
                     range: yrange
                 },
-
+                template: "plotly_dark",
                 annotations: [label]
             }}
 
