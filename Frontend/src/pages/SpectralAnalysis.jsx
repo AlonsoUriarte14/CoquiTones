@@ -92,14 +92,14 @@ const SpectralAnalysis = () => {
                     <Container maxWidth="lg" sx={{ mt: 10, mb: 10 }}>
                         <Grid container spacing={3}>
                             <Grid item xs={12}>
-                                <Paper sx={{ p: 2 }}>
+                                <Paper elevation={4} sx={{ p: 2 }}>
                                     <Typography variant="h3" color="primary" align="center">
                                         Spectral Analysis
                                     </Typography>
                                 </Paper>
                             </Grid>
                             <Grid item xs={12} md={8} lg={8}>
-                                <Paper sx={{ p: 2, height: 'auto' }}>
+                                <Paper elevation={4} sx={{ p: 2, height: 'auto' }}>
                                     {zData ?
                                         (<Spectrogram
                                             xData={xData}
@@ -123,7 +123,7 @@ const SpectralAnalysis = () => {
                                 </Paper>
                             </Grid>
                             <Grid item xs={12} md={4} lg={4}>
-                                <Paper sx={{ p: 2, height: 'auto' }}>
+                                <Paper elevation={4} sx={{ p: 2, height: 'auto' }}>
                                     <SpectrogramControls
                                         setAudioFile={updateRawAudioFile}
                                         type={type}
@@ -138,7 +138,7 @@ const SpectralAnalysis = () => {
                                 </Paper>
                             </Grid>
                             <Grid item xs={12} md={8} lg={8}>
-                                <Paper
+                                <Paper elevation={4}
                                     sx={{ p: 2, height: 'auto' }}
                                 >
                                     <SoundPlayer

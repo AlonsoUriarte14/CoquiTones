@@ -80,8 +80,8 @@ const CDN = () => {
                     }}
                 >
                     <Container maxWidth="lg" sx={{ mt: 10, mb: 10 }}>
-                        <Grid item xs={12} md={8} lg={9}>
-                            <Paper
+                        <Grid item xs={8} md={4} lg={5}>
+                            <Paper elevation={4}
                                 sx={{
                                     p: 2,
                                     display: 'flex',
@@ -100,8 +100,8 @@ const CDN = () => {
                     <Container maxWidth sx={{ mt: 10, mb: 10 }}>
                         <Grid container spacing={3}>
                             {ducks.map((duck) => (
-                                <Grid item key={duck.node_id} xs={12} md={6} lg={4}>
-                                    <Paper
+                                <Grid item key={duck.node_id} xs={12} md={6} lg={2}>
+                                    <Paper elevation={4}
                                         sx={{
                                             p: 2,
                                             display: 'flex',

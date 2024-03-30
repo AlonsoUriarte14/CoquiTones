@@ -64,7 +64,11 @@ export default function Spectrogram({ xData, yData, zData, colorscale, xrange, y
                     title: "Frequency (Hz)",
                     range: yrange
                 },
-                template: "plotly_dark",
+                plot_bgcolor: 'rgba(0, 0, 0, 0)', // Set plot background color to transparent for dark mode
+                paper_bgcolor: 'rgba(0, 0, 0, 0)', // Set paper background color to transparent for dark mode
+                font: {
+                    color: 'white', // Set font color to white for dark mode
+                },
                 annotations: [label]
             }}
 
