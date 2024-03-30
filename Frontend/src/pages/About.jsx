@@ -16,9 +16,9 @@ import theme from "../components/shared/Theme"
 import FileUpload from "../components/shared/FileUpload";
 import Navbar from "../components/shared/Navbar";
 
-const studentList = [{name: "Diego A. Santiago Uriarte", image: DiegoPic, bio: "Software Engineer Student" },
-                     {name: "Edwin J. Camuy Medina", image: EdwinPic, bio: 'Software Engineer Student' },
-                     {name: "Rolando Ríos Bonilla", image: RolandoPic, bio: 'Software Engineer Student' }];
+const studentList = [{ name: "Diego A. Santiago Uriarte", image: DiegoPic, bio: "Software Engineer Student" },
+{ name: "Edwin J. Camuy Medina", image: EdwinPic, bio: 'Software Engineer Student' },
+{ name: "Rolando Ríos Bonilla", image: RolandoPic, bio: 'Software Engineer Student' }];
 
 const About = () => {
 
@@ -27,7 +27,7 @@ const About = () => {
             <Navbar />
             <Box sx={{ display: 'flex' }} >
                 <CssBaseline />
-                
+
                 <Box
                     component="main"
                     sx={{
@@ -53,13 +53,13 @@ const About = () => {
                                 <Typography variant="h1" color="primary" align="center">
                                     About Page
                                 </Typography>
-                                
-                                <hr/>
 
-                                <Typography variant="h5" color="black" align="center">
+                                <hr />
+
+                                <Typography variant="h5" color="white" align="center">
                                     Mission Statement
                                 </Typography >
-                                <Typography variant="p" color="black" align="left">
+                                <Typography variant="p" color="white" align="left">
 
                                     One of the many beautiful things in Puerto Rico is its nature,
                                     with the coquí frog at the forefront as a cultural symbol of Puerto Rico.
@@ -72,27 +72,28 @@ const About = () => {
                                     structure to bolster the technological aspects of preservation.
                                 </Typography>
 
-                                <Typography variant='h5' color="black" align="center">
+                                <Typography variant='h5' color="white" align="center">
 
                                     Who We Are
                                 </Typography>
 
-                                <Typography variant='p' color="black">
+                                <Typography variant='p' color="white">
 
                                     We are a trio of students from the University of Puerto Rico Mayaguez engaged in our Capstone Project.
                                     Drawing upon our collective academic journey, we are leveraging our knowledge and acquiring new skills essential for the project's success.
                                     [MORE NEEDED]
                                 </Typography>
                                 <Box sx={{
-                                    pt: 4, 
-                                    display: 'flex', 
+                                    pt: 4,
+                                    display: 'flex',
                                     flexDirection: 'row',
                                     justifyContent: 'space-between',
-                                    gap: 4, width: '100'}}>
+                                    gap: 4, width: '100'
+                                }}>
 
                                     {studentList.map((item, index) => (
-                                        <div key={index} style={{ textAlign: 'center'}}>
-                                            <img src={item.image} alt={item.name} style={{width: '100px', height: '100px', borderRadius: '50%'}}/>
+                                        <div key={index} style={{ textAlign: 'center' }}>
+                                            <img src={item.image} alt={item.name} style={{ width: '100px', height: '100px', borderRadius: '50%' }} />
                                             <Typography>{item.name}</Typography>
                                             <Typography gutterBottom='true'>{item.bio}</Typography>
                                         </div>
@@ -100,34 +101,34 @@ const About = () => {
 
                                 </Box>
 
-                                <Typography variant="h5" color="black" align="center">
+                                <Typography variant="h5" color="white" align="center">
 
                                     How we Collaborated
                                 </Typography>
 
-                                <Typography variant="p" color="black">
+                                <Typography variant="p" color="white">
 
                                     Facing various challenges such as manual audio analysis of large volumes of data, ongoing device maintenance, and inconsistent data storage, Proyecto Coqui sought solutions. CoquiTones brought it to them through the implementation of technological advances, bringing efficiency across all stages of the preservation processes undertaken by Proyecto Coqui.
                                 </Typography>
 
-                                <Typography variant="h5" color="black" align="center">
+                                <Typography variant="h5" color="white" align="center">
 
 
                                     Hardware
                                 </Typography>
-                                <Typography variant="p" color="black" >
+                                <Typography variant="p" color="white" >
 
 
                                     By integrating an IoT network, we have created interconnected nodes equipped with multiple sensors spanning a wider area within the forest. These nodes capture both acoustic and meteorological data at 5-minute intervals within a 30-minute cycle. All collected data is transmitted via LTE communications to a remote server. To minimize device retrieval frequency, we've engineered a robust power supply system with the ability to harness solar energy, extending operational lifespan to a minimum of three weeks.
                                 </Typography>
 
 
-                                <Typography variant="h5" color="black" align="center">
+                                <Typography variant="h5" color="white" align="center">
 
 
                                     Software
                                 </Typography>
-                                <Typography variant="p" color="black">
+                                <Typography variant="p" color="white">
 
 
                                     We structured the collected data utilizing a Database Management System (DBMS) to provide efficient data manipulation capabilities as required, increasing productivity and facilitating the process. We will also employ a Sound Analysis Tool to transform audio files into spectrograms, further enhancing efficiency. Additionally, we are in the process of developing a machine learning model tasked with automating the identification of the coqui species inside said audio files, which will significantly streamline the workflow and improve productivity.

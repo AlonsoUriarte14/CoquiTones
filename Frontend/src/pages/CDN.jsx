@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -62,6 +62,11 @@ const CDN = () => {
     }
 
     const [ducks, setDucks] = useState(initDummyDucks(), [])
+    const calcultaCols = () => {
+        return Math.ceil(Math.sqrt(ducks.length));
+    }
+    const numCols = useMemo(() => calcultaCols(), [ducks])
+
     return (
         <ThemeProvider theme={theme}>
             <Box sx={{ display: 'flex' }} >
@@ -100,7 +105,7 @@ const CDN = () => {
                     <Container maxWidth sx={{ mt: 10, mb: 10 }}>
                         <Grid container spacing={3}>
                             {ducks.map((duck) => (
-                                <Grid item key={duck.node_id} xs={12} md={6} lg={2}>
+                                <Grid item key={duck.node_id} xs={12} md={6} lg={Math.floor(12 / numCols)}>
                                     <Paper elevation={4}
                                         sx={{
                                             p: 2,
