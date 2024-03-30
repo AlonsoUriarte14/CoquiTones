@@ -8,12 +8,14 @@ import Classifier from './pages/Classifier';
 import SpectralAnalysis from './pages/SpectralAnalysis';
 import theme from './components/shared/Theme';
 import { ThemeProvider } from '@mui/material/styles';
+import Home from './pages/Home';
 function App() {
   return (
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<ThemeProvider theme={theme} > <Dashboard /> </ThemeProvider>} />
+          <Route path='/' element={<ThemeProvider theme={theme} > <Home /> </ThemeProvider>} />
+          <Route path='/Dashboard' element={<ThemeProvider theme={theme} > <Dashboard /> </ThemeProvider>} />
           <Route path='/About' element={<ThemeProvider theme={theme} > <About /> </ThemeProvider>} />
           <Route path='/CDN' element={<ThemeProvider theme={theme} > <CDN /> </ThemeProvider>} />
           <Route path='/Classifier' element={<ThemeProvider theme={theme} > <Classifier /> </ThemeProvider>} />
