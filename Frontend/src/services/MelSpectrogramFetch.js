@@ -15,7 +15,7 @@ export default function () {// Listen for messages from the main script
     };
 
 
-    // Function to process the data
+
     function processData(file) {
         console.log("File", file);
         const formData = new FormData();
@@ -23,7 +23,7 @@ export default function () {// Listen for messages from the main script
 
         const url = "http://localhost:8000"
 
-        return fetch(url + "/api/spectrogram/", {
+        return fetch(url + "/api/mel-spectrogram/", {
             method: "POST",
             body: formData,
         })
