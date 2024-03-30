@@ -13,9 +13,9 @@ def sendMelSpectrogram(file):
 
     """
     # this is the number of samples in a window per fft
-    n_fft = 2048
+    n_fft = 4096
     # The amount of samples we are shifting after each fft
-    hop_length = 512
+    hop_length = 1024
 
     signal, sampleRate = librosa.load(file)
     mel_signal = librosa.feature.melspectrogram(
@@ -23,9 +23,7 @@ def sendMelSpectrogram(file):
     )
 
     # spectrogram = np.abs(mel_signal)
-    power_to_db = librosa.power_to_db(
-        mel_signal,
-    )
+    power_to_db = librosa.power_to_db(mel_signal, ref=np.max)
 
     mel = power_to_db.tolist()
     x_coords = None
@@ -50,17 +48,18 @@ def sendBasicSpectrogram(file):
     """
 
     # this is the number of samples in a window per fft
-    n_fft = 2048
+    n_fft = 4096
     # The amount of samples we are shifting after each fft
-    hop_length = 512
+    hop_length = 1024
     signal, sampleRate = librosa.load(file)
 
     ft = np.abs(librosa.stft(signal, n_fft=n_fft, hop_length=hop_length))
-    ft_dB = librosa.amplitude_to_db(ft, ref=np.max).tolist()
+    ft_dB = librosa.amplitude_to_db(ft, ref=np.max)
     x_coords = None
     y_coords = None
     x_coords = librosa.display.__mesh_coords("time", x_coords, ft_dB.shape[1]).tolist()
     y_coords = librosa.display.__mesh_coords("log", y_coords, ft_dB.shape[0]).tolist()
 
+    ft_dB = ft_dB.tolist()
     output = {"x": x_coords, "y": y_coords, "z": ft_dB}
     return json.dumps(output)

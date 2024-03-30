@@ -38,13 +38,13 @@ export default function SpectrogramControls({ setAudioFile, type, setType, color
             <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Chart Type</InputLabel>
                 <Select
-                    defaultValue={"heatmap"}
+                    defaultValue={"basic-spectrogram"}
                     value={type}
                     label="Chart Type"
                     onChange={(event) => setType(event.target.value)}
                 >
                     <MenuItem value={"mel-spectrogram"}>Mel Spectrogram</MenuItem>
-                    <MenuItem value={"basic-spectrogram"}>Contour</MenuItem>
+                    <MenuItem value={"basic-spectrogram"}>Basic Spectrogram</MenuItem>
                 </Select>
             </FormControl>
 

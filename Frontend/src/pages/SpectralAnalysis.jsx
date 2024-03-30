@@ -12,7 +12,7 @@ import theme from "../components/shared/Theme"
 import SoundPlayer from "../components/SoundAnalysisTools/SoundPlayer";
 import Spectrogram from "../components/SoundAnalysisTools/Spectrogram";
 import SpectrogramControls from "../components/SoundAnalysisTools/SpectrogramControls";
-import { handleMelLoad } from "../components/SoundAnalysisTools/SpectrogramDataReader"
+import { handleMelLoad, handleBasicLoad } from "../components/SoundAnalysisTools/SpectrogramDataReader"
 
 
 const SpectralAnalysis = () => {
@@ -28,7 +28,7 @@ const SpectralAnalysis = () => {
     const updateTime = (newTime) => {
         setCurrentTime(newTime)
     }
-    const [type, setType] = useState("heatmap")
+    const [type, setType] = useState("basic-spectrogram")
     const updateType = (newType) => {
         setType(newType)
     }
@@ -36,7 +36,7 @@ const SpectralAnalysis = () => {
     const updateColorscale = (newColor) => {
         setColorscale(newColor)
     }
-    const [xrange, setXrange] = useState([0, 300])
+    const [xrange, setXrange] = useState([0, 60])
     const updateXrange = (newXrange) => {
         setXrange(newXrange)
     }
@@ -50,9 +50,17 @@ const SpectralAnalysis = () => {
     useEffect(() => {
 
         const getData = async () => {
-            if (rawAudioFile) {
+            if (rawAudioFile && type) {
 
-                const data = await handleMelLoad(rawAudioFile)
+                let data;
+                if (type === "mel-spectrogram") {
+
+                    data = await handleMelLoad(rawAudioFile)
+                }
+
+                else {
+                    data = await handleBasicLoad(rawAudioFile)
+                }
                 setXData(data['x'])
                 setYData(data['y'])
                 setZData(data['z'])
@@ -60,7 +68,7 @@ const SpectralAnalysis = () => {
         }
 
         getData()
-    }, [rawAudioFile])
+    }, [rawAudioFile, type])
 
 
     return (
@@ -96,11 +104,11 @@ const SpectralAnalysis = () => {
                                             xData={xData}
                                             yData={yData}
                                             zData={zData}
-                                            type={type}
                                             colorscale={colorscale}
                                             xrange={xrange}
                                             yrange={yrange}
                                             currentTime={currentTime}
+                                            fileName={rawAudioFile.name}
                                         />
                                     }
                                 </Paper>

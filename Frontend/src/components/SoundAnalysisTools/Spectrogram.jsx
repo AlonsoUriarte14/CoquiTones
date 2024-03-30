@@ -5,11 +5,13 @@ import React from 'react';
 
 
 
-export default function Spectrogram({ xData, yData, zData, type, colorscale, xrange, yrange, currentTime }) {
+export default function Spectrogram({ xData, yData, zData, colorscale, xrange, yrange, currentTime, fileName }) {
 
     // todo calculate zmin and zmax from data
     // 
     // Define label for the vertical line
+
+
     const label = {
         text: `Current Time: ${(currentTime).toFixed(2)} s`, // Customize label text as needed
         x: currentTime,
@@ -26,13 +28,14 @@ export default function Spectrogram({ xData, yData, zData, type, colorscale, xra
         <Plot
             data={[
                 {
-                    type: type,
+                    type: "heatmap",
                     x: xData,
                     y: yData,
                     z: zData,
                     colorscale: colorscale,
                     connectgaps: true,
                     ncontours: 500,
+
 
                 },
                 {
@@ -43,7 +46,7 @@ export default function Spectrogram({ xData, yData, zData, type, colorscale, xra
                     line: {
                         color: "red", // Change color as needed
                         width: 1,
-                        opacity: 0.7, // Set opacity to 50%
+                        opacity: 0.7, // Set opacity to 70%
                     },
                 },
             ]}
@@ -51,6 +54,7 @@ export default function Spectrogram({ xData, yData, zData, type, colorscale, xra
             layout={{
                 height: 400,
                 width: 700,
+                title: fileName + " Spectrogram",
                 xaxis: {
                     title: "Time (s)",
                     range: xrange
