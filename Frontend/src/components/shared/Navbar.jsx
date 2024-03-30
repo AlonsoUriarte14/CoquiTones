@@ -37,7 +37,7 @@ const NavLogo = styled(LinkRouter)({
   fontSize: '1.5rem',
   display: 'flex',
   alignItems: 'center',
-  marginLeft: 24,
+  marginLeft: 0,
   fontWeight: 'bold',
   textDecoration: 'none',
 });
@@ -61,7 +61,8 @@ const NavMenu = styled('ul')(({ theme }) => ({
   alignItems: 'center',
   listStyle: 'none',
   textAlign: 'center',
-  marginRight: -22,
+  padding: '0',
+  marginRight: 0,
   [theme.breakpoints.down('sm')]: {
     display: 'none',
   },

@@ -1,7 +1,7 @@
 import React from 'react';
 import Video from '../../components/videos/nightvideo.mp4'
 import { HeroContainer, HeroBg, VideoBg, HeroContent, HeroH1, HeroP } from './HeroStyle';
-import logo from '../../components/images/CoquiTonesLogo2.png';
+import logo from '../images/logo512.png';
 const HeroSection = () => {
   return (
     <HeroContainer id="home">
