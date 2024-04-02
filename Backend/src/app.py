@@ -1,10 +1,10 @@
 from fastapi import FastAPI, File, UploadFile, staticfiles, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, Response
-from dbutil import get_db_connection
-from Spectrogram import sendMelSpectrogram, sendBasicSpectrogram
+from src.dbutil import get_db_connection
+from src.Spectrogram import sendMelSpectrogram, sendBasicSpectrogram
 import psycopg2
-import dao
+import src.dao as dao
 
 app = FastAPI()
 origins = [
@@ -12,6 +12,9 @@ origins = [
     "localhost:8000",
     "http://localhost:3000",
     "localhost:3000",
+    "http://localhost:8080",
+    "localhost:8080",
+    "http://0.0.0.0:8080",
 ]
 app.add_middleware(
     CORSMiddleware,
@@ -23,7 +26,7 @@ app.add_middleware(
 
 app.mount(
     "/static",
-    staticfiles.StaticFiles(directory="../../Frontend/build/static"),
+    staticfiles.StaticFiles(directory="/app/build/static"),
     name="static",
 )
 
@@ -96,5 +99,9 @@ async def basic_spectrogram_get(file: UploadFile = File(...)):
 @app.get("/", response_class=HTMLResponse)
 @app.get("/{path}", response_class=HTMLResponse)
 async def root():
-    with open("../../Frontend/build/index.html", "r") as f:
-        return f.read()
+
+    try:
+        with open("/app/build/index.html", "r") as f:
+            return f.read()
+    except Exception as e:
+        print(e)

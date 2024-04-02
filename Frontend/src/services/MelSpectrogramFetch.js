@@ -21,7 +21,7 @@ export default function () {// Listen for messages from the main script
         const formData = new FormData();
         formData.append('file', file);
 
-        const url = "http://localhost:8000"
+        const url = "http://localhost:8080"
 
         return fetch(url + "/api/mel-spectrogram/", {
             method: "POST",

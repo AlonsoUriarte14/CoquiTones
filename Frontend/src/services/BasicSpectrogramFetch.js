@@ -21,11 +21,14 @@ export default function () {// Listen for messages from the main script
         const formData = new FormData();
         formData.append('file', file);
 
-        const url = "http://localhost:8000"
-
-        return fetch(url + "/api/basic-spectrogram/", {
+        const url = "http://localhost:8080"
+        const endpoint = "/api/basic-spectrogram/"
+        url = url + endpoint
+        console.log(url)
+        return fetch(url, {
             method: "POST",
             body: formData,
+
         })
             .then(response => {
                 if (!response.ok) {
@@ -40,6 +43,7 @@ export default function () {// Listen for messages from the main script
                 return data;
             })
             .catch(error => {
+                console.log(url)
                 console.error('Error:', error);
                 throw error; // Re-throw the error for further handling
             });

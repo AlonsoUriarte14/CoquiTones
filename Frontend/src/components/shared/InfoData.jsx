@@ -21,9 +21,9 @@ export const homeObjTwo = {
     lightBg: true,
     lightText: false,
     lightTextDesc: false,
-    topLine: 'Cluster Duck Network',
-    headline: 'Maintain mobile communication without the reliance of cellular data',
-    description: 'Cluster Duck Protocol facilitates the establishment of an Internet of Things network, enabling the capability of inter-device communication using a modified LoRa Protocol.',
+    topLine: 'Bio-Acoustic Monitoring',
+    headline: 'Deploy and Manage Microcontrollers to Record Acoustic Data Periodically as well as Meteorological Data ',
+    description: 'Deploy these monitors using our using our Open Souce Hardware Design. Cluster Duck Protocol facilitates the establishment of an Internet of Things network, enabling the capability of inter-device communication using a modified LoRa Protocol. ',
     buttonLabel: 'Learn More',
     /*imgStart sets the location of the image in the column. If it is false, the image is to the right. If it is true, the image is to the left*/
     imgStart: true,
