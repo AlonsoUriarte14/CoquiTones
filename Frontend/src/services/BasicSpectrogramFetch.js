@@ -22,10 +22,8 @@ export default function () {// Listen for messages from the main script
         formData.append('file', file);
 
         const url = "http://localhost:8080"
-        const endpoint = "/api/basic-spectrogram/"
-        url = url + endpoint
-        console.log(url)
-        return fetch(url, {
+
+        return fetch(url + "/api/basic-spectrogram/", {
             method: "POST",
             body: formData,
 
@@ -43,7 +41,6 @@ export default function () {// Listen for messages from the main script
                 return data;
             })
             .catch(error => {
-                console.log(url)
                 console.error('Error:', error);
                 throw error; // Re-throw the error for further handling
             });
