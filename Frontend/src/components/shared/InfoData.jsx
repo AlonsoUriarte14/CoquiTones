@@ -7,7 +7,7 @@ export const homeObjOne = {
     headline: 'All Historical Data Presented in a Structured Manner',
     description: 'Using DBMS, the data has been structured in a way that can be presented easily to any user that wants to see historical data.',
     buttonLabel: 'Learn More',
-    /*imgStart sets the location of the image in the column. If it is false, the image is to the right. If it is true, the image is to the left*/ 
+    /*imgStart sets the location of the image in the column. If it is false, the image is to the right. If it is true, the image is to the left*/
     imgStart: false,
     img: require('../../components/images/homedashboard.svg').default,
     alt: 'Dash',
@@ -23,9 +23,9 @@ export const homeObjTwo = {
     lightTextDesc: false,
     topLine: 'Cluster Duck Network',
     headline: 'Maintain mobile communication without the reliance of cellular data',
-    description: 'Cluster Duck Protocol facilitates the transformation into an Internet of Things network, enabling the capability of inter-device communication.',
+    description: 'Cluster Duck Protocol facilitates the establishment of an Internet of Things network, enabling the capability of inter-device communication using a modified LoRa Protocol.',
     buttonLabel: 'Learn More',
-    /*imgStart sets the location of the image in the column. If it is false, the image is to the right. If it is true, the image is to the left*/ 
+    /*imgStart sets the location of the image in the column. If it is false, the image is to the right. If it is true, the image is to the left*/
     imgStart: true,
     img: require('../../components/images/homecdn.svg').default,
     alt: 'Dash',
@@ -43,7 +43,7 @@ export const homeObjThree = {
     headline: 'Identify coqui species using Artificial Intelligence',
     description: 'Using Dataiku as the foundation, a machine language model has been built to optimize the coqui species identification process',
     buttonLabel: 'Learn More',
-    /*imgStart sets the location of the image in the column. If it is false, the image is to the right. If it is true, the image is to the left*/ 
+    /*imgStart sets the location of the image in the column. If it is false, the image is to the right. If it is true, the image is to the left*/
     imgStart: false,
     img: require('../../components/images/homeclassifier.svg').default,
     alt: 'Dash',
@@ -59,9 +59,9 @@ export const homeObjFour = {
     lightTextDesc: false,
     topLine: 'Spectral Analysis',
     headline: 'Facilitate Coqui identification with precision',
-    description: 'With the website built-in Sound Analysis Tool, upload your audio file and identify at a precise level the coqui species in said file.',
+    description: 'With the website built-in Sound Analysis Tool, upload your audio file and identify at a precise level the coqui species using Spectrogram Generation.',
     buttonLabel: 'Learn More',
-    /*imgStart sets the location of the image in the column. If it is false, the image is to the right. If it is true, the image is to the left*/ 
+    /*imgStart sets the location of the image in the column. If it is false, the image is to the right. If it is true, the image is to the left*/
     imgStart: true,
     img: require('../../components/images/homeanalysis.svg').default,
     alt: 'Dash',

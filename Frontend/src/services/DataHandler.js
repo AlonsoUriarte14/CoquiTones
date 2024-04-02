@@ -26,24 +26,40 @@ export default class DataHandler {
 
     get_all() {
         axios.get(`${websiteUrl}/api/${this.endpointType}/all`)
-            .then(res => {
-                return res.data
+
+            .then(data => {
+                console.log("Data", data); // Logging the response before parsing
+                return data;
             })
+            .catch(error => {
+                console.error('Error:', error);
+                throw error; // Re-throw the error for further handling
+            });
     }
 
     get_from_id = (id) => {
         axios.get(`${websiteUrl}/api/${this.endpointType}/${id}`)
-            .then(res => {
-                return res.data
+
+            .then(data => {
+                console.log("Data", data); // Logging the response before parsing
+                return data;
             })
+            .catch(error => {
+                console.error('Error:', error);
+                throw error; // Re-throw the error for further handling
+            });
     }
 
     get_from_timestamp = (timestamp) => {
         axios.get(`${websiteUrl}/api/${this.endpointType}/timestamp?${timestamp}`)
-            .then(res => {
-                return res.data
+
+            .then(data => {
+                console.log("Data", data); // Logging the response before parsing
+                return data;
             })
+            .catch(error => {
+                console.error('Error:', error);
+                throw error; // Re-throw the error for further handling
+            });
     }
-
-
 }

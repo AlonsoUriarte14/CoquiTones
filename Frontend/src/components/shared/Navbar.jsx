@@ -131,7 +131,7 @@ const Navbar = ({ toggle }) => {
             <NavLinks to='classifier'>Classifier</NavLinks>
           </NavItem>
           <NavItem>
-            <NavLinks to='spectralAnalysis'>Spectral Analysis</NavLinks>
+            <NavLinks to='spectralanalysis'>Spectral Analysis</NavLinks>
           </NavItem>
           <NavItem>
             <NavLinks to='about'>About</NavLinks>
