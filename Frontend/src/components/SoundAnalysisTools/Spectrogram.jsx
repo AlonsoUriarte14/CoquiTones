@@ -53,7 +53,7 @@ export default function Spectrogram({ xData, yData, zData, colorscale, xrange, y
 
             layout={{
                 height: 400,
-                width: 700,
+                width: 1100,
                 title: fileName + " Spectrogram",
                 xaxis: {
                     title: "Time (s)",

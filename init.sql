@@ -44,3 +44,10 @@ CREATE TABLE weatherdata (
     wdpressure      REAL,
     wddid_rain      bool
 );
+
+INSERT INTO node (ntype, nlatitude, nlongitude, ndescription)
+VALUES 
+    ('primary', 18.0814, 66.9038, 'database_duck!'),
+    ('secondary', 17.08, 66.9038, 'database_duck!'),
+    ('primary', 18.0814, 66.9038, 'database_duck!'),
+    ('primary', 18.0814, 66.9038, 'database_duck!');

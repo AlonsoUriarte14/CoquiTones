@@ -98,7 +98,7 @@ const SpectralAnalysis = () => {
                                     </Typography>
                                 </Paper>
                             </Grid>
-                            <Grid item xs={12} md={8} lg={8}>
+                            <Grid item xs={12} md={12} lg={12}>
                                 <Paper elevation={4} sx={{ p: 2, height: 'auto' }}>
                                     {zData ?
                                         (<Spectrogram
@@ -118,11 +118,10 @@ const SpectralAnalysis = () => {
                                                     No file Added
                                                 </Typography>
                                         )
-
                                     }
                                 </Paper>
                             </Grid>
-                            <Grid item xs={12} md={4} lg={4}>
+                            <Grid item xs={12} md={6} lg={6}>
                                 <Paper elevation={4} sx={{ p: 2, height: 'auto' }}>
                                     <SpectrogramControls
                                         setAudioFile={updateRawAudioFile}
@@ -137,10 +136,8 @@ const SpectralAnalysis = () => {
                                     />
                                 </Paper>
                             </Grid>
-                            <Grid item xs={12} md={8} lg={8}>
-                                <Paper elevation={4}
-                                    sx={{ p: 2, height: 'auto' }}
-                                >
+                            <Grid item xs={12} md={6} lg={6}>
+                                <Paper elevation={4} sx={{ p: 2, height: 'auto' }}>
                                     <SoundPlayer
                                         file={rawAudioFile}
                                         setCurrentTime={updateTime}
@@ -151,6 +148,7 @@ const SpectralAnalysis = () => {
                                 </Paper>
                             </Grid>
                         </Grid>
+
                     </Container>
                 </Box>
             </Box>

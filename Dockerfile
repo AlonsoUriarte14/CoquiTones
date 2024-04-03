@@ -1,18 +1,5 @@
-# Use the official postgres image
-FROM postgres:latest
+FROM python:latest
 
-# Set environment variables for PostgreSQL
-ENV POSTGRES_DB=postgres
-ENV POSTGRES_USER=postgres
-ENV POSTGRES_PASSWORD=secrettest
-ENV POSTGRES_HOST=host.docker.internal
-ENV POSTGRES_PORT=5432
-
-# Copy SQL file containing statements to execute
-COPY init.sql /docker-entrypoint-initdb.d/
-
-# Install Python dependencies
-RUN apt-get update && apt-get install -y python3-pip
 
 # Set working directory for the app
 WORKDIR /app
@@ -29,7 +16,6 @@ COPY Frontend/build/ /app/build/
 
 # Expose uvicorn port
 EXPOSE 8080
-EXPOSE 5432
 
 # Command to start uvicorn server
 
