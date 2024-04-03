@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -22,47 +22,21 @@ const CDN = () => {
         return `${month}/${date}/${year}`;
     }
 
-    const initDummyDucks = () => {
-        const ducks = [
-            {
-                node_id: 1,
-                node_type: "PAPA",
-                nlatitude: 18.0814,
-                nlongitude: 66.9038,
-                ndescription: "Dummy Duck",
-                lastHeartbeat: getDate()
-            },
 
-            {
-                node_id: 2,
-                node_type: "MAMA",
-                nlatitude: 18.0814,
-                nlongitude: 66.9038,
-                ndescription: "Dummy Duck",
-                lastHeartbeat: getDate()
-            },
-            {
-                node_id: 3,
-                node_type: "MAMA",
-                nlatitude: 18.0814,
-                nlongitude: 66.9038,
-                ndescription: "Dummy Duck",
-                lastHeartbeat: getDate()
-            },
-            {
-                node_id: 4,
-                node_type: "MAMA",
-                nlatitude: 18.0814,
-                nlongitude: 66.9038,
-                ndescription: "Dummy Duck",
-                lastHeartbeat: getDate()
-            },
-        ]
 
-        return ducks;
-    }
+    const [ducks, setDucks] = useState([])
 
-    const [ducks, setDucks] = useState(initDummyDucks(), [])
+    useEffect(() => {
+        const fetchDucks = async () => {
+
+            const dataHandler = new DataHandler("node")
+            const nodes = await dataHandler.get_all()
+            setDucks(nodes)
+        }
+
+        fetchDucks()
+
+    }, [])
     const calcultaCols = () => {
         return Math.ceil(Math.sqrt(ducks.length));
     }
@@ -106,7 +80,7 @@ const CDN = () => {
                     <Container maxWidth sx={{ mt: 10, mb: 10 }}>
                         <Grid container spacing={3}>
                             {ducks.map((duck) => (
-                                <Grid item key={duck.node_id} xs={12} md={6} lg={Math.floor(12 / numCols)}>
+                                <Grid item key={duck.nid} xs={12} md={6} lg={Math.floor(12 / numCols)}>
                                     <Paper elevation={4}
                                         sx={{
                                             p: 2,
@@ -116,10 +90,10 @@ const CDN = () => {
                                         }}
                                     >
                                         <Typography variant="h6" gutterBottom>
-                                            Duck ID: {duck.node_id}
+                                            Duck ID: {duck.nid}
                                         </Typography>
                                         <Typography variant="body1" gutterBottom>
-                                            Type: {duck.node_type}
+                                            Type: {duck.ntype}
                                         </Typography>
                                         <Typography variant="body2" gutterBottom>
                                             Description: {duck.ndescription}
@@ -130,9 +104,7 @@ const CDN = () => {
                                         <Typography variant="body2" gutterBottom>
                                             Longitude: {duck.nlongitude}
                                         </Typography>
-                                        <Typography variant="body2" gutterBottom>
-                                            Last message: {duck.lastHeartbeat}
-                                        </Typography>
+
                                         <Link href="#" variant="button">
                                             View Details
                                         </Link>

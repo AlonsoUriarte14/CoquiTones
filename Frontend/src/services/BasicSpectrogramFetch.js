@@ -1,6 +1,6 @@
 
 
-import websiteUrl from "../Util/constant";
+
 
 
 export default function () {// Listen for messages from the main script
@@ -8,7 +8,8 @@ export default function () {// Listen for messages from the main script
     onmessage = async function (event) {
         // Process the data received from the main script
 
-        const result = await processData(event.data);
+        const { file, type } = event.data;
+        const result = await processData(file, type);
 
         // Send the processed data back to the main script
         postMessage(result);
@@ -16,14 +17,23 @@ export default function () {// Listen for messages from the main script
 
 
 
-    function processData(file) {
+    function processData(file, type) {
         console.log("File", file);
         const formData = new FormData();
         formData.append('file', file);
 
         const url = "http://localhost:8080"
 
-        return fetch(url + "/api/basic-spectrogram/", {
+        let endpoint;
+
+        if (type === "mel") {
+            endpoint = "/api/mel-spectrogram/"
+        }
+
+        else {
+            endpoint = "/api/basic-spectrogram/"
+        }
+        return fetch(url + endpoint, {
             method: "POST",
             body: formData,
 

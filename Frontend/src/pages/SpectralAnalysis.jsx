@@ -13,7 +13,7 @@ import theme from "../components/shared/Theme"
 import SoundPlayer from "../components/SoundAnalysisTools/SoundPlayer";
 import Spectrogram from "../components/SoundAnalysisTools/Spectrogram";
 import SpectrogramControls from "../components/SoundAnalysisTools/SpectrogramControls";
-import { handleMelLoad, handleBasicLoad } from "../components/SoundAnalysisTools/SpectrogramDataReader"
+import { handleLoad } from "../components/SoundAnalysisTools/SpectrogramDataReader"
 
 
 const SpectralAnalysis = () => {
@@ -56,11 +56,11 @@ const SpectralAnalysis = () => {
                 let data;
                 if (type === "mel-spectrogram") {
 
-                    data = await handleMelLoad(rawAudioFile)
+                    data = await handleLoad(rawAudioFile, "mel")
                 }
 
                 else {
-                    data = await handleBasicLoad(rawAudioFile)
+                    data = await handleLoad(rawAudioFile, "basic")
                 }
                 setXData(data['x'])
                 setYData(data['y'])
