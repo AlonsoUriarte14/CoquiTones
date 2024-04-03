@@ -1,6 +1,8 @@
 
 import axios from 'axios';
-import { websiteUrl } from '../Util/constant';
+
+
+webisteUrl = "http://localhost:8080"
 
 
 class ValidationError extends Error {
