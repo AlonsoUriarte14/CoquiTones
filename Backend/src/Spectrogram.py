@@ -13,9 +13,9 @@ def sendMelSpectrogram(file):
 
     """
     # this is the number of samples in a window per fft
-    n_fft = 4096
+    n_fft = 2048
     # The amount of samples we are shifting after each fft
-    hop_length = 1024
+    hop_length = 512
 
     signal, sampleRate = librosa.load(file)
     mel_signal = librosa.feature.melspectrogram(
@@ -50,9 +50,9 @@ def sendBasicSpectrogram(file):
     """
 
     # this is the number of samples in a window per fft
-    n_fft = 4096
+    n_fft = 2048
     # The amount of samples we are shifting after each fft
-    hop_length = 1024
+    hop_length = 512
     signal, sampleRate = librosa.load(file)
 
     ft = np.abs(librosa.stft(signal, n_fft=n_fft, hop_length=hop_length))
