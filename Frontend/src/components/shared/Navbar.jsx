@@ -158,9 +158,22 @@ const Navbar = ({ toggle, isHome }) => {
 
             :
             // if not home page
+            // TODO: Change these buttons to new ones with proper styling 
             <NavMenu>
               <NavBtn>
+                <NavBtnLink to="/Dashboard" >Dashboard</NavBtnLink>
+              </NavBtn>
+              <NavBtn>
                 <NavBtnLink to="/CDN" >CDN</NavBtnLink>
+              </NavBtn>
+              <NavBtn>
+                <NavBtnLink to="/Classifier" >Classifier</NavBtnLink>
+              </NavBtn>
+              <NavBtn>
+                <NavBtnLink to="/SpectralAnalysis" >Spectral Analysis</NavBtnLink>
+              </NavBtn>
+              <NavBtn>
+                <NavBtnLink to="/About" >About</NavBtnLink>
               </NavBtn>
             </NavMenu>
 

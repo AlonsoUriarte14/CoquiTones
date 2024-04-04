@@ -8,7 +8,6 @@ import { homeObjOne, homeObjTwo, homeObjThree, homeObjFour } from '../components
 const Home = () => {
 
   const [isOpen, setIsOpen] = useState(false)
-  const [isHome, setIsHome] = useState(true)
   const toggle = () => {
     setIsOpen(!isOpen)
   }
@@ -16,12 +15,12 @@ const Home = () => {
   return (
     <>
       <Sidebar isOpen={isOpen} toggle={toggle} />
-      <Navbar toggle={toggle} isHome={isHome} />
+      <Navbar toggle={toggle} isHome={true} />
       <HeroSection />
-      <InfoSection {...homeObjOne} setIsHome={setIsHome} />
-      <InfoSection {...homeObjTwo} setIsHome={setIsHome} />
-      <InfoSection {...homeObjThree} setIsHome={setIsHome} />
-      <InfoSection {...homeObjFour} setIsHome={setIsHome} />
+      <InfoSection {...homeObjOne} />
+      <InfoSection {...homeObjTwo} />
+      <InfoSection {...homeObjThree} />
+      <InfoSection {...homeObjFour} />
       <Footer />
     </>
   )
