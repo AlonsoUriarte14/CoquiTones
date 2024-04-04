@@ -24,7 +24,7 @@ export const homeObjTwo = {
     lightTextDesc: false,
     topLine: 'Cluster Duck Network',
     headline: 'Maintain mobile communication without the reliance of cellular data',
-    description: 'Cluster Duck Protocol facilitates the transformation into an Internet of Things network, enabling the capability of inter-device communication.',
+    description: 'Cluster Duck Protocol facilitates the establishment of an Internet of Things network, enabling the capability of inter-device communication using a modified LoRa Protocol.',
     buttonLabel: 'Learn More',
     buttonRoute: '/CDN',
     /*imgStart sets the location of the image in the column. If it is false, the image is to the right. If it is true, the image is to the left*/ 
@@ -62,7 +62,7 @@ export const homeObjFour = {
     lightTextDesc: false,
     topLine: 'Spectral Analysis',
     headline: 'Facilitate Coqui identification with precision',
-    description: 'With the website built-in Sound Analysis Tool, upload your audio file and identify at a precise level the coqui species in said file.',
+    description: 'With the website built-in Sound Analysis Tool, upload your audio file and identify at a precise level the coqui species using Spectrogram Generation.',
     buttonLabel: 'Learn More',
     buttonRoute: '/SpectralAnalysis',
     /*imgStart sets the location of the image in the column. If it is false, the image is to the right. If it is true, the image is to the left*/ 

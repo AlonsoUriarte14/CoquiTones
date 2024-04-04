@@ -11,6 +11,7 @@ import Link from '@mui/material/Link';
 
 import BarAndNav from "../components/shared/BarAndNav";
 import theme from "../components/shared/Theme"
+import DataHandler from "../services/DataHandler";
 const CDN = () => {
 
     const getDate = () => {
