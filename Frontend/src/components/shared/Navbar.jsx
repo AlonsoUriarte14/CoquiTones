@@ -137,7 +137,7 @@ const Navbar = ({ toggle, isHome }) => {
         {
           isHome ?
 
-
+            // if home
             <NavMenu>
               <NavItem>
                 <NavLinks to='dashboard' smooth={true} duration={500} spy={true} exact='true' offset={-80}>Dashboard</NavLinks>
@@ -155,12 +155,13 @@ const Navbar = ({ toggle, isHome }) => {
                 <NavLinks href='/about'>About</NavLinks>
               </NavItem>
             </NavMenu>
+
             :
+            // if not home page
             <NavMenu>
               <NavBtn>
                 <NavBtnLink to="/CDN" >CDN</NavBtnLink>
               </NavBtn>
-
             </NavMenu>
 
 
