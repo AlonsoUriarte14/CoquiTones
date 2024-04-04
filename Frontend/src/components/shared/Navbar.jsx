@@ -136,26 +136,26 @@ const Navbar = ({ toggle, isHome }) => {
         </MobileIcon>
         {
           isHome ?
-            <div>
 
-              <NavMenu>
-                <NavItem>
-                  <NavLinks to='dashboard' smooth={true} duration={500} spy={true} exact='true' offset={-80}>Dashboard</NavLinks>
-                </NavItem>
-                <NavItem>
-                  <NavLinks to='cdn' smooth={true} duration={500} spy={true} exact='true' offset={-80}>CDN</NavLinks>
-                </NavItem>
-                <NavItem>
-                  <NavLinks to='classifier' smooth={true} duration={500} spy={true} exact='true' offset={-80}>Classifier</NavLinks>
-                </NavItem>
-                <NavItem>
-                  <NavLinks to='spectralanalysis' smooth={true} duration={500} spy={true} exact='true' offset={-80}>Spectral Analysis</NavLinks>
-                </NavItem>
-                <NavItem>
-                  <NavLinks href='/about'>About</NavLinks>
-                </NavItem>
-              </NavMenu>
-            </div> :
+
+            <NavMenu>
+              <NavItem>
+                <NavLinks to='dashboard' smooth={true} duration={500} spy={true} exact='true' offset={-80}>Dashboard</NavLinks>
+              </NavItem>
+              <NavItem>
+                <NavLinks to='cdn' smooth={true} duration={500} spy={true} exact='true' offset={-80}>CDN</NavLinks>
+              </NavItem>
+              <NavItem>
+                <NavLinks to='classifier' smooth={true} duration={500} spy={true} exact='true' offset={-80}>Classifier</NavLinks>
+              </NavItem>
+              <NavItem>
+                <NavLinks to='spectralanalysis' smooth={true} duration={500} spy={true} exact='true' offset={-80}>Spectral Analysis</NavLinks>
+              </NavItem>
+              <NavItem>
+                <NavLinks href='/about'>About</NavLinks>
+              </NavItem>
+            </NavMenu>
+            :
             <NavMenu>
               <NavBtn>
                 <NavBtnLink to="/CDN" >CDN</NavBtnLink>
