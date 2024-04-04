@@ -147,7 +147,7 @@ const Navbar = ({ toggle }) => {
             <NavLinks to='spectralanalysis' smooth={true} duration={500} spy={true} exact='true' offset={-80}>Spectral Analysis</NavLinks>
           </NavItem>
           <NavItem>
-            <NavLinks href={'/about'}>About</NavLinks>
+            <NavLinks href='/about'>About</NavLinks>
           </NavItem>
         </NavMenu>
         <NavBtn>

@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 
-webisteUrl = "http://localhost:8080"
+const websiteUrl = "http://localhost:8080"
 
 
 class ValidationError extends Error {
