@@ -12,7 +12,7 @@ export const SidebarContainer = styled('aside')(({ isOpen }) => ({
   background: '#0d0d0d',
   display: 'grid',
   alignItems: 'center',
-  top: isOpen ? 0 : '-100%',
+  top: isOpen ? '0' : '-100%',
   left: 0,
   transition: '0.3s ease-in-out',
   opacity: isOpen ? '100%' : '0',
@@ -58,7 +58,7 @@ export const SidebarLink = styled(LinkScroll)({
   cursor: 'pointer',
   textDecoration: 'none',
   '&:hover': {
-    color: '#657153',
+    color: '#ffc857',
     transition: '0.2s ease-in-out',
   },
 });
@@ -70,7 +70,7 @@ export const SideBtnWrap = styled('div')({
 
 export const SidebarRoute = styled(LinkRouter)({
   borderRadius: '50px',
-  background: '#657153',
+  background: '#ffc857',
   whiteSpace: 'nowrap',
   padding: '16px 64px',
   color: '#010606',

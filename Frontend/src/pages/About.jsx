@@ -25,7 +25,7 @@ const About = () => {
             <CssBaseline />
             <Navbar />
             <Container maxWidth="lg" sx={{ mt: 10, mb: 10 }}>
-                <Grid container spacing={4}>
+                <Grid container spacing={4} sx={{justifyContent: 'center'}}>
                     <Grid item xs={12} md={8} lg={9}>
                         <Paper sx={{ p: 4 }}>
                             <Paper >
