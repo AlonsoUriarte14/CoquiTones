@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import { FaBars } from 'react-icons/fa';
 import { Link as LinkRouter } from 'react-router-dom';
@@ -116,11 +116,12 @@ const NavBtnLink = styled(LinkRouter)({
   },
 });
 
-const Navbar = ({ toggle }) => {
+const Navbar = ({ toggle, isHome }) => {
 
   const toggleHome = () => {
     scroll.scrollToTop();
   };
+
 
   const toggleFooter = () => {
     scroll.scrollToBottom();
@@ -129,32 +130,46 @@ const Navbar = ({ toggle }) => {
   return (
     <Nav>
       <NavbarContainer>
-        <NavLogo to='/' onClick = {toggleHome}>CoquiTones</NavLogo>
+        <NavLogo to='/' onClick={toggleHome}>CoquiTones</NavLogo>
         <MobileIcon onClick={toggle}>
           <FaBars />
         </MobileIcon>
-        <NavMenu>
-          <NavItem>
-            <NavLinks to='dashboard' smooth={true} duration={500} spy={true} exact='true' offset={-80}>Dashboard</NavLinks>
-          </NavItem>
-          <NavItem>
-            <NavLinks to='cdn' smooth={true} duration={500} spy={true} exact='true' offset={-80}>CDN</NavLinks>
-          </NavItem>
-          <NavItem>
-            <NavLinks to='classifier' smooth={true} duration={500} spy={true} exact='true' offset={-80}>Classifier</NavLinks>
-          </NavItem>
-          <NavItem>
-            <NavLinks to='spectralanalysis' smooth={true} duration={500} spy={true} exact='true' offset={-80}>Spectral Analysis</NavLinks>
-          </NavItem>
-          <NavItem>
-            <NavLinks href='/about'>About</NavLinks>
-          </NavItem>
-        </NavMenu>
+        {
+          isHome ?
+            <div>
+
+              <NavMenu>
+                <NavItem>
+                  <NavLinks to='dashboard' smooth={true} duration={500} spy={true} exact='true' offset={-80}>Dashboard</NavLinks>
+                </NavItem>
+                <NavItem>
+                  <NavLinks to='cdn' smooth={true} duration={500} spy={true} exact='true' offset={-80}>CDN</NavLinks>
+                </NavItem>
+                <NavItem>
+                  <NavLinks to='classifier' smooth={true} duration={500} spy={true} exact='true' offset={-80}>Classifier</NavLinks>
+                </NavItem>
+                <NavItem>
+                  <NavLinks to='spectralanalysis' smooth={true} duration={500} spy={true} exact='true' offset={-80}>Spectral Analysis</NavLinks>
+                </NavItem>
+                <NavItem>
+                  <NavLinks href='/about'>About</NavLinks>
+                </NavItem>
+              </NavMenu>
+            </div> :
+            <NavMenu>
+              <NavBtn>
+                <NavBtnLink to="/CDN" >CDN</NavBtnLink>
+              </NavBtn>
+
+            </NavMenu>
+
+
+        }
         <NavBtn>
           <NavBtnLink to="/signin" >Sign In</NavBtnLink>
         </NavBtn>
       </NavbarContainer>
-    </Nav>
+    </Nav >
   );
 }
 
