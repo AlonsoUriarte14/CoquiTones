@@ -1,1 +1,1 @@
-backend: gunicorn -b 0.0.0.0:$PORT Backend.src.app:app
+backend: uvicorn -b 0.0.0.0:$PORT Backend.src.app:app
