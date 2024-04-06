@@ -2,7 +2,7 @@ from fastapi import FastAPI, File, UploadFile, staticfiles, Depends, HTTPExcepti
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, Response
 from dbutil import get_db_connection
-from Spectrogram import sendSpectrogram
+from Spectrogram import sendMelSpectrogram, sendBasicSpectrogram
 import psycopg2
 import dao
 
@@ -81,9 +81,15 @@ async def audio_get(afid: int, db=Depends(get_db_connection)):
     return Response(content=data, media_type="audio/mpeg")
 
 
-@app.post(path="/api/spectrogram/", response_class=Response)
-async def spectrogram_get(file: UploadFile = File(...)):
-    specData = sendSpectrogram(file.file)
+@app.post(path="/api/mel-spectrogram/", response_class=Response)
+async def mel_spectrogram_get(file: UploadFile = File(...)):
+    specData = sendMelSpectrogram(file.file)
+    return specData
+
+
+@app.post(path="/api/basic-spectrogram/", response_class=Response)
+async def basic_spectrogram_get(file: UploadFile = File(...)):
+    specData = sendBasicSpectrogram(file.file)
     return specData
 
 

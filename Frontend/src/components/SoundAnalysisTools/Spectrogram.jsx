@@ -5,11 +5,13 @@ import React from 'react';
 
 
 
-export default function Spectrogram({ xData, yData, zData, type, colorscale, xrange, yrange, currentTime }) {
+export default function Spectrogram({ xData, yData, zData, colorscale, xrange, yrange, currentTime, fileName }) {
 
     // todo calculate zmin and zmax from data
     // 
     // Define label for the vertical line
+
+
     const label = {
         text: `Current Time: ${(currentTime).toFixed(2)} s`, // Customize label text as needed
         x: currentTime,
@@ -26,13 +28,14 @@ export default function Spectrogram({ xData, yData, zData, type, colorscale, xra
         <Plot
             data={[
                 {
-                    type: type,
+                    type: "heatmap",
                     x: xData,
                     y: yData,
                     z: zData,
                     colorscale: colorscale,
                     connectgaps: true,
                     ncontours: 500,
+                    hovertemplate: '<b>Time</b>: %{x} s<br><b>Frequency</b>: %{y} Hz<br><b>Amplitude</b>: %{z} dB',
 
                 },
                 {
@@ -43,7 +46,7 @@ export default function Spectrogram({ xData, yData, zData, type, colorscale, xra
                     line: {
                         color: "red", // Change color as needed
                         width: 1,
-                        opacity: 0.7, // Set opacity to 50%
+                        opacity: 0.7, // Set opacity to 70%
                     },
                 },
             ]}
@@ -51,6 +54,7 @@ export default function Spectrogram({ xData, yData, zData, type, colorscale, xra
             layout={{
                 height: 400,
                 width: 700,
+                title: fileName + " Spectrogram",
                 xaxis: {
                     title: "Time (s)",
                     range: xrange
@@ -60,7 +64,11 @@ export default function Spectrogram({ xData, yData, zData, type, colorscale, xra
                     title: "Frequency (Hz)",
                     range: yrange
                 },
-
+                plot_bgcolor: 'rgba(0, 0, 0, 0)', // Set plot background color to transparent for dark mode
+                paper_bgcolor: 'rgba(0, 0, 0, 0)', // Set paper background color to transparent for dark mode
+                font: {
+                    color: 'white', // Set font color to white for dark mode
+                },
                 annotations: [label]
             }}
 

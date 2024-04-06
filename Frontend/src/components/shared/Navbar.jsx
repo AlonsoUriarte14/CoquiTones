@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import { FaBars } from 'react-icons/fa';
 import { Link as LinkRouter } from 'react-router-dom';
 import { Link as LinkScroll } from 'react-scroll';
+import { animateScroll as scroll } from 'react-scroll';
+import { scroller as NavScroll } from 'react-scroll';
 
 const Nav = styled('nav')(({ theme }) => ({
   background: '#191716',
   height: 80,
-  marginTop: -40,
+  marginTop: -80,
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -27,7 +29,7 @@ const NavbarContainer = styled('div')({
   zIndex: 1,
   width: '100%',
   padding: '0 24px',
-  maxWidth: 1100,
+  maxWidth: 2000,
 });
 
 const NavLogo = styled(LinkRouter)({
@@ -37,7 +39,7 @@ const NavLogo = styled(LinkRouter)({
   fontSize: '1.5rem',
   display: 'flex',
   alignItems: 'center',
-  marginLeft: 24,
+  marginLeft: 0,
   fontWeight: 'bold',
   textDecoration: 'none',
 });
@@ -58,10 +60,12 @@ const MobileIcon = styled('div')(({ theme }) => ({
 
 const NavMenu = styled('ul')(({ theme }) => ({
   display: 'flex',
+  justifySelf: 'center',
   alignItems: 'center',
   listStyle: 'none',
   textAlign: 'center',
-  marginRight: -22,
+  padding: '0',
+  marginRight: 0,
   [theme.breakpoints.down('sm')]: {
     display: 'none',
   },
@@ -75,12 +79,13 @@ const NavLinks = styled(LinkScroll)({
   color: '#fff',
   display: 'flex',
   alignItems: 'center',
+  justifyContent: 'center',
   textDecoration: 'none',
   padding: '0 1rem',
   height: '100%',
   cursor: 'pointer',
   '&.active': {
-    borderBottom: '3px solid #657153',
+    borderBottom: '3px solid #ffc857',
   },
 });
 
@@ -94,10 +99,10 @@ const NavBtn = styled('nav')(({ theme }) => ({
 
 const NavBtnLink = styled(LinkRouter)({
   borderRadius: 50,
-  background: '#657153',
+  background: '#ffc857',
   whiteSpace: 'nowrap',
   padding: '10px 22px',
-  color: '#010606',
+  color: '#191716',
   fontSize: 16,
   outline: 'none',
   border: 'none',
@@ -111,37 +116,74 @@ const NavBtnLink = styled(LinkRouter)({
   },
 });
 
-const Navbar = ({ toggle }) => {
+const Navbar = ({ toggle, isHome }) => {
+
+  const toggleHome = () => {
+    scroll.scrollToTop();
+  };
+
+
+  const toggleFooter = () => {
+    scroll.scrollToBottom();
+  }
+
   return (
     <Nav>
       <NavbarContainer>
-        <NavLogo to='/'>CoquiTones</NavLogo>
+        <NavLogo to='/' onClick={toggleHome}>CoquiTones</NavLogo>
         <MobileIcon onClick={toggle}>
           <FaBars />
         </MobileIcon>
-        <NavMenu>
-          <NavItem>
-            <NavLinks to='dashboard'>Dashboard</NavLinks>
-          </NavItem>
-          <NavItem>
-            <NavLinks to='cdn'>CDN</NavLinks>
-          </NavItem>
-          <NavItem>
-            <NavLinks to='classifier'>Classifier</NavLinks>
-          </NavItem>
-          <NavItem>
-            <NavLinks to='spectralAnalysis'>Spectral Analysis</NavLinks>
-          </NavItem>
-          <NavItem>
-            <NavLinks to='about'>About</NavLinks>
-          </NavItem>
-        </NavMenu>
+        {
+          isHome ?
+
+            // if home
+            <NavMenu>
+              <NavItem>
+                <NavLinks to='dashboard' smooth={true} duration={500} spy={true} exact='true' offset={-80}>Dashboard</NavLinks>
+              </NavItem>
+              <NavItem>
+                <NavLinks to='cdn' smooth={true} duration={500} spy={true} exact='true' offset={-80}>CDN</NavLinks>
+              </NavItem>
+              <NavItem>
+                <NavLinks to='classifier' smooth={true} duration={500} spy={true} exact='true' offset={-80}>Classifier</NavLinks>
+              </NavItem>
+              <NavItem>
+                <NavLinks to='spectralanalysis' smooth={true} duration={500} spy={true} exact='true' offset={-80}>Spectral Analysis</NavLinks>
+              </NavItem>
+              <NavItem>
+                <NavLinks href='/about'>About</NavLinks>
+              </NavItem>
+            </NavMenu>
+
+            :
+            // if not home page
+            // TODO: Change these buttons to new ones with proper styling 
+            <NavMenu>
+              <NavBtn>
+                <NavBtnLink to="/Dashboard" >Dashboard</NavBtnLink>
+              </NavBtn>
+              <NavBtn>
+                <NavBtnLink to="/CDN" >CDN</NavBtnLink>
+              </NavBtn>
+              <NavBtn>
+                <NavBtnLink to="/Classifier" >Classifier</NavBtnLink>
+              </NavBtn>
+              <NavBtn>
+                <NavBtnLink to="/SpectralAnalysis" >Spectral Analysis</NavBtnLink>
+              </NavBtn>
+              <NavBtn>
+                <NavBtnLink to="/About" >About</NavBtnLink>
+              </NavBtn>
+            </NavMenu>
+
+
+        }
         <NavBtn>
-          <NavBtnLink to="/signin">Sign In</NavBtnLink>
-          <NavBtnLink to="/dashboard">Dashboard</NavBtnLink>
+          <NavBtnLink to="/signin" >Sign In</NavBtnLink>
         </NavBtn>
       </NavbarContainer>
-    </Nav>
+    </Nav >
   );
 }
 
