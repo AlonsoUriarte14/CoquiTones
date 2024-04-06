@@ -5,16 +5,17 @@ from src.dbutil import get_db_connection
 from src.Spectrogram import sendMelSpectrogram, sendBasicSpectrogram
 import psycopg2
 import src.dao as dao
+import os
+
 
 app = FastAPI()
 origins = [
-    "http://localhost:8000",
-    "localhost:8000",
     "http://localhost:3000",
     "localhost:3000",
     "http://localhost:8080",
     "localhost:8080",
     "http://0.0.0.0:8080",
+    os.getenv("WEB_URL") + os.pathsep + os.getenv("PORT"),
 ]
 app.add_middleware(
     CORSMiddleware,
