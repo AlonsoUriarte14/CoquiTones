@@ -1,12 +1,37 @@
 import psycopg2
 from fastapi import HTTPException
 import json
+import os
 
 config_file_path = "src/testdbconfig.json"
 
 
 # Connect to the PostgreSQL database
 def connect_to_database():
+
+    if os.getenv("DATABASE_URL"):
+
+        try:
+            from urllib.parse import (
+                urlparse,
+            )  # for python 3+ use: from urllib.parse import urlparse
+
+            result = urlparse(os.getenv("DATABASE_URL"))
+            username = result.username
+            password = result.password
+            database = result.path[1:]
+            hostname = result.hostname
+            port = result.port
+            connection = psycopg2.connect(
+                database=database,
+                user=username,
+                password=password,
+                host=hostname,
+                port=port,
+            )
+        except psycopg2.Error as e:
+            print("Error connecting to database:", e)
+            return None
     with open(config_file_path, "r") as f:
         db_config = json.loads(f.read())
 
