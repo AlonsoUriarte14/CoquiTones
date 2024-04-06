@@ -15,7 +15,7 @@ origins = [
     "http://localhost:8080",
     "localhost:8080",
     "http://0.0.0.0:8080",
-    os.getenv("WEB_URL") + os.pathsep + os.getenv("PORT"),
+    os.getenv("WEB_URL"),
 ]
 app.add_middleware(
     CORSMiddleware,
