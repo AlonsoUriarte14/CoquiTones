@@ -75,5 +75,6 @@ export default function Spectrogram({ xData, yData, zData, colorscale, xrange, y
 
         />
 
+        
     )
 }

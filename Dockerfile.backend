@@ -21,5 +21,4 @@ EXPOSE 8080
 
 CMD ["uvicorn", "--reload", "src.app:app", "--host", "0.0.0.0", "--port", "8080"]
 
-#run with:  docker build -t my_postgres_image .
-# and then: docker run --name CoquiTones -it -p 8080:8080 -p 5432:5432 my_postgres_image 
+#docker compose up
