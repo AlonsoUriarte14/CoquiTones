@@ -2,7 +2,7 @@ import React from 'react';
 import { styled } from '@mui/system';
 
 export const HeroContainer = styled('div')({
-    background: '#0c0c0c',
+    background: '#191716',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -17,7 +17,7 @@ export const HeroContainer = styled('div')({
         left: '0',
         right: '0',
         bottom: '0',
-        // background: 'linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%), linear-gradient(180deg, rgba(0,0,0,0.2) 0%, transparent 100%)',
+        background: 'linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%), linear-gradient(180deg, rgba(0,0,0,0.2) 0%, transparent 100%)',
         zIndex: '2',
     },
 });

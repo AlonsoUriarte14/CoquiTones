@@ -43,7 +43,7 @@ export default function Dashboard() {
 
 	return (
 		<ThemeProvider theme={theme}>
-			<Navbar />
+			<Navbar isHome={false} />
 			<Box sx={{ display: 'flex' }}>
 				<CssBaseline />
 				<Box

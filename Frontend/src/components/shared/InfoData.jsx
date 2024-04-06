@@ -7,7 +7,8 @@ export const homeObjOne = {
     headline: 'All Historical Data Presented in a Structured Manner',
     description: 'Using DBMS, the data has been structured in a way that can be presented easily to any user that wants to see historical data.',
     buttonLabel: 'Learn More',
-    /*imgStart sets the location of the image in the column. If it is false, the image is to the right. If it is true, the image is to the left*/
+    buttonRoute: '/Dashboard',
+    /*imgStart sets the location of the image in the column. If it is false, the image is to the right. If it is true, the image is to the left*/ 
     imgStart: false,
     img: require('../../components/images/homedashboard.svg').default,
     alt: 'Dash',
@@ -25,7 +26,8 @@ export const homeObjTwo = {
     headline: 'Deploy and Manage Microcontrollers to Record Acoustic Data Periodically as well as Meteorological Data ',
     description: 'Deploy these monitors using our using our Open Souce Hardware Design. Cluster Duck Protocol facilitates the establishment of an Internet of Things network, enabling the capability of inter-device communication using a modified LoRa Protocol. ',
     buttonLabel: 'Learn More',
-    /*imgStart sets the location of the image in the column. If it is false, the image is to the right. If it is true, the image is to the left*/
+    buttonRoute: '/CDN',
+    /*imgStart sets the location of the image in the column. If it is false, the image is to the right. If it is true, the image is to the left*/ 
     imgStart: true,
     img: require('../../components/images/homecdn.svg').default,
     alt: 'Dash',
@@ -43,7 +45,8 @@ export const homeObjThree = {
     headline: 'Identify coqui species using Artificial Intelligence',
     description: 'Using Dataiku as the foundation, a machine language model has been built to optimize the coqui species identification process',
     buttonLabel: 'Learn More',
-    /*imgStart sets the location of the image in the column. If it is false, the image is to the right. If it is true, the image is to the left*/
+    buttonRoute: '/Classifier',
+    /*imgStart sets the location of the image in the column. If it is false, the image is to the right. If it is true, the image is to the left*/ 
     imgStart: false,
     img: require('../../components/images/homeclassifier.svg').default,
     alt: 'Dash',
@@ -61,7 +64,8 @@ export const homeObjFour = {
     headline: 'Facilitate Coqui identification with precision',
     description: 'With the website built-in Sound Analysis Tool, upload your audio file and identify at a precise level the coqui species using Spectrogram Generation.',
     buttonLabel: 'Learn More',
-    /*imgStart sets the location of the image in the column. If it is false, the image is to the right. If it is true, the image is to the left*/
+    buttonRoute: '/SpectralAnalysis',
+    /*imgStart sets the location of the image in the column. If it is false, the image is to the right. If it is true, the image is to the left*/ 
     imgStart: true,
     img: require('../../components/images/homeanalysis.svg').default,
     alt: 'Dash',
