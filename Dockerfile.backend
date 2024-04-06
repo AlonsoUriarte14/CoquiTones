@@ -18,6 +18,7 @@ COPY Frontend/build/ /app/build/
 
 # Command to start uvicorn server
 
-CMD ["uvicorn", "--reload", "src.app:app", "--host", "0.0.0.0"]
+#uncomment for local development
+# CMD ["uvicorn", "--reload", "src.app:app", "--host", "0.0.0.0"]
 
 #docker compose up
