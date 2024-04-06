@@ -14,8 +14,7 @@ COPY Backend/src ./src
 # Copy static files
 COPY Frontend/build/ /app/build/
 
-# Expose uvicorn port
-EXPOSE 8080
+
 
 # Command to start uvicorn server
 
