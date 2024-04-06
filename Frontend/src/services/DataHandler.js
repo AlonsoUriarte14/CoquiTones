@@ -20,7 +20,7 @@ export default class DataHandler {
 
     async get_all() {
         try {
-            const response = await fetch(`${web_url}/api/${this.endpointType}/all`);
+            const response = await fetch(`${this.web_url}/api/${this.endpointType}/all`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -35,7 +35,7 @@ export default class DataHandler {
 
     async get_from_id(id) {
         try {
-            const response = await fetch(`${web_url}/api/${this.endpointType}/${id}`);
+            const response = await fetch(`${this.web_url}/api/${this.endpointType}/${id}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -50,7 +50,7 @@ export default class DataHandler {
 
     async get_from_timestamp(timestamp) {
         try {
-            const response = await fetch(`${web_url}/api/${this.endpointType}/timestamp?${timestamp}`);
+            const response = await fetch(`${this.web_url}/api/${this.endpointType}/timestamp?${timestamp}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
