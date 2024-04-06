@@ -2,7 +2,7 @@
 
 
 
-const API_ENDPOINT = process.env.WEB_URL || 'http://localhost:3000/api';
+const API_ENDPOINT = process.env.WEB_URL || 'http://localhost:8080';
 
 export default function () {// Listen for messages from the main script
 
