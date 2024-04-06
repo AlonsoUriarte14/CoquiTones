@@ -1,4 +1,3 @@
-const web_url = process.env.WEB_URL || 'http://localhost:8080';
 
 class ValidationError extends Error {
     constructor(message) {
@@ -9,6 +8,7 @@ class ValidationError extends Error {
 
 export default class DataHandler {
     allowedEndpointTypes = ["node", "timestamp", "report", "weather", "audio"];
+    web_url = process.env.WEB_URL || 'http://localhost:8080';
 
     constructor(endpointType) {
         if (this.allowedEndpointTypes.includes(endpointType)) {
