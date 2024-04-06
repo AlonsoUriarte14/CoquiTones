@@ -2,7 +2,7 @@
 
 
 
-const API_ENDPOINT = process.env.WEB_URL || 'http://localhost:8080';
+const web_url = process.env.WEB_URL || 'http://localhost:8080';
 
 export default function () {// Listen for messages from the main script
 
@@ -33,7 +33,7 @@ export default function () {// Listen for messages from the main script
         else {
             endpoint = "/api/basic-spectrogram/"
         }
-        return fetch(url + endpoint, {
+        return fetch(web_url + endpoint, {
             method: "POST",
             body: formData,
 
