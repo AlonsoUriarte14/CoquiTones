@@ -2,6 +2,7 @@
 
 
 
+const API_ENDPOINT = process.env.API_ENDPOINT || 'http://localhost:3000/api';
 
 export default function () {// Listen for messages from the main script
 
@@ -22,7 +23,6 @@ export default function () {// Listen for messages from the main script
         const formData = new FormData();
         formData.append('file', file);
 
-        const url = "http://localhost:8080"
 
         let endpoint;
 
