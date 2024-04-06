@@ -7,16 +7,35 @@ Microphone::Microphone()
 
 void Microphone::setup()
 {
-    
-    if (!SD.begin(PIN_NUM_CS))
+    SPI.begin(PIN_NUM_CLK, PIN_NUM_MISO, PIN_NUM_MOSI, PIN_NUM_CS);
+    bool sdBegin = SD.begin(PIN_NUM_CS);
+    while (!sdBegin)
     {
         Serial.println("SD card Initializing failed");
         Serial.println("1. is a card inserted?");
         Serial.println("2. is your wiring correct?");
         Serial.println("3. did you change the chipSelect pin to match your shield or module?");
         Serial.println("Note: press reset button on the board and reopen this Serial Monitor after fixing your issue!");
-        while (true)
-            ;
+
+        uint8_t cardType = SD.cardType();
+
+        if(cardType == CARD_NONE){
+            Serial.println("No SD card attached");
+            return;
+        }
+
+        Serial.print("SD Card Type: ");
+        if(cardType == CARD_MMC){
+            Serial.println("MMC");
+        } else if(cardType == CARD_SD){
+            Serial.println("SDSC");
+        } else if(cardType == CARD_SDHC){
+            Serial.println("SDHC");
+        } else {
+            Serial.println("UNKNOWN");
+        }
+        delay(1000);
+        sdBegin = SD.begin(PIN_NUM_CS);
     }
 
     ESP_LOGI(TAG, "Creating microphone");
