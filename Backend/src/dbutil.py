@@ -29,18 +29,22 @@ def connect_to_database():
                 host=hostname,
                 port=port,
             )
-        except psycopg2.Error as e:
-            print("Error connecting to database:", e)
-            return None
-    with open(config_file_path, "r") as f:
-        db_config = json.loads(f.read())
-
-        try:
-            connection = psycopg2.connect(**db_config)
             return connection
         except psycopg2.Error as e:
             print("Error connecting to database:", e)
             return None
+
+    else:
+        print("defaulting to local config for db connection")
+        with open(config_file_path, "r") as f:
+            db_config = json.loads(f.read())
+
+            try:
+                connection = psycopg2.connect(**db_config)
+                return connection
+            except psycopg2.Error as e:
+                print("Error connecting to database:", e)
+                return None
 
 
 # Injectable dependency

@@ -33,6 +33,8 @@ export default function () {// Listen for messages from the main script
         else {
             endpoint = "/api/basic-spectrogram/"
         }
+
+        console.log("fetching from ", web_url)
         return fetch(web_url + endpoint, {
             method: "POST",
             body: formData,
