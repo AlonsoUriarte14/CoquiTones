@@ -22,6 +22,7 @@ export default function () {// Listen for messages from the main script
         const formData = new FormData();
         formData.append('file', file);
 
+        const web_url = process.env.WEB_URL || 'http://localhost:8080';
         console.log("fetching from ", web_url)
 
         let endpoint;
@@ -33,7 +34,6 @@ export default function () {// Listen for messages from the main script
         else {
             endpoint = "/api/basic-spectrogram/"
         }
-        const web_url = process.env.WEB_URL || 'http://localhost:8080';
 
         return fetch(web_url + endpoint, {
             method: "POST",
