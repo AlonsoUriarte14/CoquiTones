@@ -27,7 +27,7 @@ app.add_middleware(
 
 app.mount(
     "/static",
-    staticfiles.StaticFiles(directory="/app/build/static"),
+    staticfiles.StaticFiles(directory="../../Frontend/build/static"),
     name="static",
 )
 
@@ -102,7 +102,7 @@ async def basic_spectrogram_get(file: UploadFile = File(...)):
 async def root():
 
     try:
-        with open("/app/build/index.html", "r") as f:
+        with open("../../Frontend/build/index.html", "r") as f:
             return f.read()
     except Exception as e:
         print(e)
