@@ -1,0 +1,7 @@
+setup:
+  addons:
+    - plan: heroku-postgresql
+      as: DATABASE
+
+run:
+  web: ./setup.sh
