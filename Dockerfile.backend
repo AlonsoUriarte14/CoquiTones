@@ -12,7 +12,6 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 COPY Backend/src ./src
 
 
-CMD ["cd", "Frontend", "&&", "npm", "run", "build"]
 
 # Copy static files
 COPY Frontend/build/ /app/build/
