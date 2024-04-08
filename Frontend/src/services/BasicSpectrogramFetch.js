@@ -26,16 +26,18 @@ export default function () {// Listen for messages from the main script
         console.log("fetching from ", web_url)
 
         let endpoint;
+        if (type === "mel") {
+            endpoint = "/api/mel-spectrogram/"
+        }
+
+        else {
+            endpoint = "/api/basic-spectrogram/"
+        }
+
+
         const success = false;
 
         while (!success) {
-            if (type === "mel") {
-                endpoint = "/api/mel-spectrogram/"
-            }
-
-            else {
-                endpoint = "/api/basic-spectrogram/"
-            }
 
             return fetch(web_url + endpoint, {
                 method: "POST",
