@@ -5,9 +5,6 @@ setup:
 build:
   docker:
     web: ./Dockerfile.backend
-    environment:
-      WEB_URL: https://coquitones-53173bfcf5de.herokuapp.com
-
 run:
   web: uvicorn src.app:app --host 0.0.0.0 --port $PORT 
 
