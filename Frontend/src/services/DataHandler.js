@@ -8,7 +8,7 @@ class ValidationError extends Error {
 
 export default class DataHandler {
     allowedEndpointTypes = ["node", "timestamp", "report", "weather", "audio"];
-    web_url = "https://coquitones-53173bfcf5de.herokuapp.com"
+    web_url = process.env.WEB_URL || 'http://localhost:8080';
 
     constructor(endpointType) {
         if (this.allowedEndpointTypes.includes(endpointType)) {

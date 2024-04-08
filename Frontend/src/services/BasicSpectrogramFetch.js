@@ -22,10 +22,11 @@ export default function () {// Listen for messages from the main script
         const formData = new FormData();
         formData.append('file', file);
         console.log(process.env)
-        let web_url = "https://coquitones-53173bfcf5de.herokuapp.com";
+        const web_url = process.env.WEB_URL || 'http://localhost:8080';
         console.log("fetching from ", web_url)
 
         let endpoint;
+
         if (type === "mel") {
             endpoint = "/api/mel-spectrogram/"
         }
@@ -34,36 +35,27 @@ export default function () {// Listen for messages from the main script
             endpoint = "/api/basic-spectrogram/"
         }
 
+        return fetch(web_url + endpoint, {
+            method: "POST",
+            body: formData,
 
-        const success = false;
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
 
-        while (!success) {
-
-            return fetch(web_url + endpoint, {
-                method: "POST",
-                body: formData,
-
+                console.log(response)
+                return response.json()
             })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-
-                    console.log(response)
-                    return response.json()
-                })
-                .then(data => {
-                    console.log("Data", data); // Logging the response before parsing
-                    success = true
-                    return data;
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    web_url = "https://localhost:8080"
-                    throw error; // Re-throw the error for further handling
-                });
-
-        }
+            .then(data => {
+                console.log("Data", data); // Logging the response before parsing
+                return data;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                throw error; // Re-throw the error for further handling
+            });
 
     }
 }
