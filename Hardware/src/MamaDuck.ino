@@ -41,45 +41,48 @@ void setup()
 	// will get rejected
 	Serial.begin(115200);
 	Serial.println("Wait ");
-	delay(5000)	;
+	delay(5000);
 	mic = new Microphone();
-	Serial.println("Microphone Created");
+	W
+		Serial.println("Microphone Created");
 	sens = new WeatherData(bmeSDA, bmeSCL, rainPin);
 	Serial.println("Weather Data Object Created");
 	sens->printAllValues();
 	std::string deviceId("MAMA0001");
 	std::vector<byte> devId;
 	devId.insert(devId.end(), deviceId.begin(), deviceId.end());
-	if (duck.setupWithDefaults(devId) != DUCK_ERR_NONE) {
-    Serial.println("[MAMA] Failed to setup MamaDuck");
-    return;
-  }
+	if (duck.setupWithDefaults(devId) != DUCK_ERR_NONE)
+	{
+		Serial.println("[MAMA] Failed to setup MamaDuck");
+		return;
+	}
 
-
-  	setupOK = true;
+	setupOK = true;
 	// Initialize the timer. The timer thread runs separately from the main loop
 	// and will trigger sending a counter message.
 	timer.every(INTERVAL_MS, runSensor);
 	Serial.println("[MAMA] Setup OK!");
 }
 
+std::vector<byte> stringToByteVector(const String &str)
+{
+	std::vector<byte> byteVec;
+	byteVec.reserve(str.length());
 
-std::vector<byte> stringToByteVector(const String& str) {
-    std::vector<byte> byteVec;
-    byteVec.reserve(str.length());
+	for (unsigned int i = 0; i < str.length(); ++i)
+	{
+		byteVec.push_back(static_cast<byte>(str[i]));
+	}
 
-    for (unsigned int i = 0; i < str.length(); ++i) {
-        byteVec.push_back(static_cast<byte>(str[i]));
-    }
-
-    return byteVec;
+	return byteVec;
 }
 
 void loop()
 {
-	if (!setupOK) {
-    	return; 
-  	}
+	if (!setupOK)
+	{
+		return;
+	}
 	timer.tick();
 	// Use the default run(). The Mama duck is designed to also forward data it receives
 	// from other ducks, across the network. It has a basic routing mechanism built-in
@@ -100,8 +103,6 @@ bool runSensor(void *)
 	String message = "Temperature: " + temp + "*C\n" + "Pressure : " + pres + "hPa\n" + "Humidity: " + humid + "RH%\n" + "Raining: " + israining + "\n";
 	int length = message.length();
 
-
-
 	Serial.print("[MAMA] sensor data: ");
 	Serial.println(message);
 
@@ -117,16 +118,19 @@ bool runSensor(void *)
 	return result;
 }
 
-bool sendData(std::vector<byte> message) {
-  bool sentOk = false;
-  
-  int err = duck.sendData(topics::status, message);
-  if (err == DUCK_ERR_NONE) {
-     counter++;
-     sentOk = true;
-  }
-  if (!sentOk) {
-    Serial.println("[MAMA] Failed to send data. error = " + String(err));
-  }
-  return sentOk;
+bool sendData(std::vector<byte> message)
+{
+	bool sentOk = false;
+
+	int err = duck.sendData(topics::status, message);
+	if (err == DUCK_ERR_NONE)
+	{
+		counter++;
+		sentOk = true;
+	}
+	if (!sentOk)
+	{
+		Serial.println("[MAMA] Failed to send data. error = " + String(err));
+	}
+	return sentOk;
 }
