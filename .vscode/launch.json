@@ -10,8 +10,12 @@
             "request": "launch",
             "module": "uvicorn",
             "args": [
+                "--app-dir",
+                "Backend/src",
                 "Backend.src.app:app",
-                "--reload"
+                "--reload",
+                "--port",
+                "8080"
             ],
             "jinja": true
         }
