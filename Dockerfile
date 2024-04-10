@@ -1,6 +1,6 @@
 FROM node:14
 
-RUN apt-get update && apt-get install -y python3 && sudo apt-get install python-pip
+RUN apt-get update && apt-get install -y python3 &&  apt-get install python-pip
 # Set working directory for the app
 WORKDIR /app
 
