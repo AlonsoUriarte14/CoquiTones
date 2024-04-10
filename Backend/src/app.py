@@ -1,10 +1,10 @@
 from fastapi import FastAPI, File, UploadFile, staticfiles, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, Response
-from src.dbutil import get_db_connection
-from src.Spectrogram import sendMelSpectrogram, sendBasicSpectrogram
+from dbutil import get_db_connection
+from Spectrogram import sendMelSpectrogram, sendBasicSpectrogram
 import psycopg2
-import src.dao as dao
+import dao as dao
 import os
 
 
