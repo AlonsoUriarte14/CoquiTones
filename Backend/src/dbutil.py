@@ -22,6 +22,11 @@ def connect_to_database():
             database = result.path[1:]
             hostname = result.hostname
             port = result.port
+
+            print(
+                "using database environement variables",
+                username,
+            )
             connection = psycopg2.connect(
                 database=database,
                 user=username,
