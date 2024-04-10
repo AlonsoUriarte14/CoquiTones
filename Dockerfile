@@ -1,4 +1,4 @@
-FROM node:22-alpine
+FROM node:21
 
 RUN apt-get update || : && apt-get install python -y
 # Set working directory for the app
