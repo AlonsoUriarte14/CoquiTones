@@ -1,6 +1,6 @@
-FROM node:21-bookworm
+FROM node:14
 
-RUN apt-get update && apt-get install python -y
+RUN apt-get update && apt-get install -y python3
 # Set working directory for the app
 WORKDIR /app
 
