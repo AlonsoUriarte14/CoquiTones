@@ -1,6 +1,6 @@
-FROM python:latest
+FROM node:22-alpine
 
-
+RUN apt-get update || : && apt-get install python -y
 # Set working directory for the app
 WORKDIR /app
 
@@ -11,10 +11,11 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 # Copy application files
 COPY Backend/src ./src
 
+# copy forntend
+COPY Frontend/ ./Frontend
 
-
-# Copy static files
-COPY Frontend/build/ /app/build/
+#build frontend to static files
+RUN cd Frontend && npm run build
 
 
 
