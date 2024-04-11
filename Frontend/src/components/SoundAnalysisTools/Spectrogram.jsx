@@ -1,5 +1,5 @@
 import Plot from 'react-plotly.js';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 
 
@@ -10,20 +10,29 @@ export default function Spectrogram({ xData, yData, zData, colorscale, xrange, y
     // todo calculate zmin and zmax from data
     // 
     // Define label for the vertical line
+    const [lineX, setLineX] = useState(null);
+    const [lineY, setLineY] = useState(null);
+    const [label, setLabel] = useState(null);
 
+    useEffect(() => {
+        const label = {
+            text: `Current Time: ${(currentTime).toFixed(2)} s`, // Customize label text as needed
+            x: currentTime,
+            y: Math.max(...yrange),
+            showarrow: true,
+            arrowhead: 0,
+            ax: 0,
+            ay: -30,
+        };
+        // Create x and y coordinates for the vertical line
+        const verticalLineX = [currentTime, currentTime];
+        const verticalLineY = [Math.min(...yrange), Math.max(...yrange)];
 
-    const label = {
-        text: `Current Time: ${(currentTime).toFixed(2)} s`, // Customize label text as needed
-        x: currentTime,
-        y: Math.max(...yrange),
-        showarrow: true,
-        arrowhead: 0,
-        ax: 0,
-        ay: -30,
-    };
-    // Create x and y coordinates for the vertical line
-    const verticalLineX = [currentTime, currentTime];
-    const verticalLineY = [Math.min(...yrange), Math.max(...yrange)];
+        setLineX(verticalLineX)
+        setLineY(verticalLineY)
+        setLabel(label)
+
+    }, [currentTime])
     return (
         <Plot
             data={[
@@ -41,8 +50,8 @@ export default function Spectrogram({ xData, yData, zData, colorscale, xrange, y
                 {
                     type: "scatter",
                     mode: "lines",
-                    x: verticalLineX,
-                    y: verticalLineY,
+                    x: lineX,
+                    y: lineY,
                     line: {
                         color: "red", // Change color as needed
                         width: 1,
@@ -53,7 +62,7 @@ export default function Spectrogram({ xData, yData, zData, colorscale, xrange, y
 
             layout={{
                 height: 400,
-                width: 700,
+                width: 1100,
                 title: fileName + " Spectrogram",
                 xaxis: {
                     title: "Time (s)",
@@ -74,6 +83,7 @@ export default function Spectrogram({ xData, yData, zData, colorscale, xrange, y
 
 
         />
+
 
     )
 }
