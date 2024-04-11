@@ -1,4 +1,5 @@
 import soundfile as sf
+import numpy as np
 import librosa
 import os
 
@@ -33,10 +34,5 @@ def split_audio(file_path, outputDir, segmentLengthInSeconds=5):
         counter += 1
         samples_wrote += buffer
 
-
-if __name__ == "__main__":
-
-    split_audio(
-        "C:/Users/dasus/Documents/clases/FINAL SEMESTER/Capstone Spring 2024/repo/proyecto_coqui/Frontend/src/dummyData/coqui.WAV",
-        "Sliced Audios Babyy",
-    )
+def spectrogram (file):
+    
