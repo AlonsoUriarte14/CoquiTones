@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import { useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -16,6 +16,7 @@ import RecentEntries from '../components/dashboard/Orders';
 import Navbar from '../components/shared/Navbar';
 
 import theme from '../components/shared/Theme'
+import Sidebar from '../components/shared/Sidebar';
 function Copyright(props) {
 	return (
 		<Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -40,10 +41,15 @@ function Copyright(props) {
 
 export default function Dashboard() {
 
+	const [isOpen, setIsOpen] = useState(false)
+	const toggle = () => {
+    	setIsOpen(!isOpen)
+  }
 
 	return (
 		<ThemeProvider theme={theme}>
-			<Navbar isHome={false} />
+			<Sidebar isOpen={isOpen} toggle={toggle}/>
+			<Navbar toggle={toggle}/>
 			<Box sx={{ display: 'flex' }}>
 				<CssBaseline />
 				<Box

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -11,6 +11,7 @@ import EdwinPic from '../components/images/EdwinCamuyPFP.png'
 import RolandoPic from '../components/images/RolandoRiosPFP.jpeg'
 import Navbar from "../components/shared/Navbar";
 import theme from "../components/shared/Theme";
+import Sidebar from "../components/shared/Sidebar";
 
 const studentList = [
     { name: "Diego A. Santiago Uriarte", image: DiegoPic, bio: "Software Engineer Student" },
@@ -20,10 +21,16 @@ const studentList = [
 
 const About = () => {
 
+    
+    const [isOpen, setIsOpen] = useState(false)
+    const toggle = () => {
+        setIsOpen(!isOpen)
+    }
     return (
         <ThemeProvider theme={theme}>
+            <Sidebar isOpen={isOpen} toggle={toggle}/>
+            <Navbar toggle={toggle}/>
             <CssBaseline />
-            <Navbar />
             <Container maxWidth="lg" sx={{ mt: 10, mb: 10 }}>
                 <Grid container spacing={4} sx={{justifyContent: 'center'}}>
                     <Grid item xs={12} md={8} lg={9}>
