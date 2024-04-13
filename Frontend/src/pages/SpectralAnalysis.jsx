@@ -13,7 +13,7 @@ import theme from "../components/shared/Theme"
 import SoundPlayer from "../components/SoundAnalysisTools/SoundPlayer";
 import Spectrogram from "../components/SoundAnalysisTools/Spectrogram";
 import SpectrogramControls from "../components/SoundAnalysisTools/SpectrogramControls";
-import { handleMelLoad, handleBasicLoad } from "../components/SoundAnalysisTools/SpectrogramDataReader"
+import { handleLoad } from "../components/SoundAnalysisTools/SpectrogramDataReader"
 
 
 const SpectralAnalysis = () => {
@@ -56,11 +56,11 @@ const SpectralAnalysis = () => {
                 let data;
                 if (type === "mel-spectrogram") {
 
-                    data = await handleMelLoad(rawAudioFile)
+                    data = await handleLoad(rawAudioFile, "mel")
                 }
 
                 else {
-                    data = await handleBasicLoad(rawAudioFile)
+                    data = await handleLoad(rawAudioFile, "basic")
                 }
                 setXData(data['x'])
                 setYData(data['y'])
@@ -98,7 +98,7 @@ const SpectralAnalysis = () => {
                                     </Typography>
                                 </Paper>
                             </Grid>
-                            <Grid item xs={12} md={8} lg={8}>
+                            <Grid item xs={12} md={12} lg={12}>
                                 <Paper elevation={4} sx={{ p: 2, height: 'auto' }}>
                                     {zData ?
                                         (<Spectrogram
@@ -118,11 +118,10 @@ const SpectralAnalysis = () => {
                                                     No file Added
                                                 </Typography>
                                         )
-
                                     }
                                 </Paper>
                             </Grid>
-                            <Grid item xs={12} md={4} lg={4}>
+                            <Grid item xs={12} md={6} lg={6}>
                                 <Paper elevation={4} sx={{ p: 2, height: 'auto' }}>
                                     <SpectrogramControls
                                         setAudioFile={updateRawAudioFile}
@@ -137,10 +136,8 @@ const SpectralAnalysis = () => {
                                     />
                                 </Paper>
                             </Grid>
-                            <Grid item xs={12} md={8} lg={8}>
-                                <Paper elevation={4}
-                                    sx={{ p: 2, height: 'auto' }}
-                                >
+                            <Grid item xs={12} md={6} lg={6}>
+                                <Paper elevation={4} sx={{ p: 2, height: 'auto' }}>
                                     <SoundPlayer
                                         file={rawAudioFile}
                                         setCurrentTime={updateTime}
@@ -151,6 +148,7 @@ const SpectralAnalysis = () => {
                                 </Paper>
                             </Grid>
                         </Grid>
+
                     </Container>
                 </Box>
             </Box>

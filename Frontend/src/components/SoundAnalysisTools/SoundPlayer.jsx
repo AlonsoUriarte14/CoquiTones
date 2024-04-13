@@ -89,7 +89,7 @@ export default function SoundPlayer({ file, setCurrentTime, yrange, xrange, curr
 
     return (
         <ThemeProvider theme={theme}>
-            {audioUrl && <Button
+            {audioUrl && !playing && <Button
                 variant="condensed"
                 onClick={() => handleClick()}
             >

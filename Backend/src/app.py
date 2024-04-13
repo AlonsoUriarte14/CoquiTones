@@ -4,14 +4,18 @@ from fastapi.responses import HTMLResponse, Response
 from dbutil import get_db_connection
 from Spectrogram import sendMelSpectrogram, sendBasicSpectrogram
 import psycopg2
-import dao
+import dao as dao
+import os
+
 
 app = FastAPI()
 origins = [
-    "http://localhost:8000",
-    "localhost:8000",
     "http://localhost:3000",
     "localhost:3000",
+    "http://localhost:8080",
+    "localhost:8080",
+    "http://0.0.0.0:8080",
+    os.getenv("WEB_URL"),
 ]
 app.add_middleware(
     CORSMiddleware,
@@ -23,7 +27,7 @@ app.add_middleware(
 
 app.mount(
     "/static",
-    staticfiles.StaticFiles(directory="../../Frontend/build/static"),
+    staticfiles.StaticFiles(directory="./Frontend/build/static"),
     name="static",
 )
 
@@ -96,5 +100,9 @@ async def basic_spectrogram_get(file: UploadFile = File(...)):
 @app.get("/", response_class=HTMLResponse)
 @app.get("/{path}", response_class=HTMLResponse)
 async def root():
-    with open("../../Frontend/build/index.html", "r") as f:
-        return f.read()
+
+    try:
+        with open("./Frontend/build/index.html", "r") as f:
+            return f.read()
+    except Exception as e:
+        print(e)
