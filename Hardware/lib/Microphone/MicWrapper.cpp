@@ -7,8 +7,10 @@ Microphone::Microphone()
 
 void Microphone::setup()
 {
-    SPI.begin(PIN_NUM_CLK, PIN_NUM_MISO, PIN_NUM_MOSI, PIN_NUM_CS);
-    bool sdBegin = SD.begin(PIN_NUM_CS);
+
+    SPIClass spi1(HSPI);
+    spi1.begin(PIN_NUM_CLK, PIN_NUM_MISO, PIN_NUM_MOSI, PIN_NUM_CS);
+    bool sdBegin = SD.begin(PIN_NUM_CS,  spi1);
     while (!sdBegin)
     {
         Serial.println("SD card Initializing failed");
@@ -21,7 +23,7 @@ void Microphone::setup()
 
         if(cardType == CARD_NONE){
             Serial.println("No SD card attached");
-            return;
+            break;
         }
 
         Serial.print("SD Card Type: ");
@@ -35,9 +37,10 @@ void Microphone::setup()
             Serial.println("UNKNOWN");
         }
         delay(1000);
-        sdBegin = SD.begin(PIN_NUM_CS);
+        sdBegin = SD.begin(PIN_NUM_CS, spi1);
     }
-
+    delay(1000);
+    Serial.println("SD CARD CREATED!!!");
     ESP_LOGI(TAG, "Creating microphone");
 #ifdef USE_I2S_MIC_INPUT
     this->input = new I2SMEMSSampler(I2S_NUM_0, i2s_mic_pins, i2s_mic_Config);

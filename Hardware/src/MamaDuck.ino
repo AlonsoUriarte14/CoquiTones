@@ -41,12 +41,15 @@ void setup()
 	// will get rejected
 	Serial.begin(115200);
 	Serial.println("Wait ");
-	delay(5000)	;
+	delay(3000)	;
+	sens = new WeatherData(bmeSDA, bmeSCL, rainPin);
+	Serial.println("Temp Data");
+	Serial.println(sens->getTemperature());
+	
 	mic = new Microphone();
 	Serial.println("Microphone Created");
-	sens = new WeatherData(bmeSDA, bmeSCL, rainPin);
 	Serial.println("Weather Data Object Created");
-	sens->printAllValues();
+	Serial.println("Temperature Test: "+  String(sens->getTemperature()));
 	std::string deviceId("MAMA0001");
 	std::vector<byte> devId;
 	devId.insert(devId.end(), deviceId.begin(), deviceId.end());
@@ -97,7 +100,8 @@ bool runSensor(void *)
 	String humid = String(sens->getHumidity());
 	String israining = sens->isRaining() ? "Yes" : "No";
 
-	String message = "Temperature: " + temp + "*C\n" + "Pressure : " + pres + "hPa\n" + "Humidity: " + humid + "RH%\n" + "Raining: " + israining + "\n";
+	//String message = "Temperature: " + temp + "*C\n" + "Pressure : " + pres + "hPa\n" + "Humidity: " + humid + "RH%\n" + "Raining: " + israining + "\n";
+	String message = String(mic->takeMeasurement());
 	int length = message.length();
 
 
