@@ -2,7 +2,7 @@
 
 static const char *TAG = "WAV";
 
-WAVFileWriter::WAVFileWriter(File *fp, int sample_rate)
+WAVFileWriter::WAVFileWriter(FsFile *fp, int sample_rate)
 {
   m_fp = fp;
   m_header.sample_rate = sample_rate;
@@ -18,7 +18,6 @@ void WAVFileWriter::write(int16_t *samples, int count)
   m_fp->write(sampleBytes, sizeof(int16_t) * count);
   m_file_size += sizeof(int16_t) * count;
 }
-
 void WAVFileWriter::finish()
 {
   // now fill in the header with the correct information and write it again

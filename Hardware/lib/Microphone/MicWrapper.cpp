@@ -1,5 +1,53 @@
 #include <MicWrapper.h>
 
+class MySpiClass : public SdSpiBaseClass {
+ public:
+  // Activate SPI hardware with correct speed and mode.
+  void activate() { SPI.beginTransaction(m_spiSettings); }
+  // Initialize the SPI bus.
+  void begin(SdSpiConfig config) {
+    (void)config;
+    SPI.begin(PIN_NUM_CLK, PIN_NUM_MISO, PIN_NUM_MOSI, -1);
+  }
+  // Deactivate SPI hardware.
+  void deactivate() { SPI.endTransaction(); }
+  // Receive a byte.
+  uint8_t receive() { return SPI.transfer(0XFF); }
+  // Receive multiple bytes.
+  // Replace this function if your board has multiple byte receive.
+  uint8_t receive(uint8_t* buf, size_t count) {
+    for (size_t i = 0; i < count; i++) {
+      buf[i] = SPI.transfer(0XFF);
+    }
+    return 0;
+  }
+  // Send a byte.
+  void send(uint8_t data) { SPI.transfer(data); }
+  // Send multiple bytes.
+  // Replace this function if your board has multiple byte send.
+  void send(const uint8_t* buf, size_t count) {
+    for (size_t i = 0; i < count; i++) {
+      SPI.transfer(buf[i]);
+    }
+  }
+  // Save SPISettings for new max SCK frequency
+  void setSckSpeed(uint32_t maxSck) {
+    m_spiSettings = SPISettings(maxSck, MSBFIRST, SPI_MODE0);
+  }
+
+ private:
+  SPISettings m_spiSettings;
+} mySpi;
+
+#if ENABLE_DEDICATED_SPI
+#define SD_CONFIG SdSpiConfig(PIN_NUM_CS, DEDICATED_SPI, SD_SCK_MHZ(50), &mySpi)
+#else  // ENABLE_DEDICATED_SPI
+#define SD_CONFIG SdSpiConfig(SD_CS_PIN, SHARED_SPI, SD_SCK_MHZ(50), &mySpi)
+#endif  // ENABLE_DEDICATED_SPI
+
+
+
+
 Microphone::Microphone()
 {
     this->setup();
@@ -8,9 +56,10 @@ Microphone::Microphone()
 void Microphone::setup()
 {
 
-    SPIClass spi1(HSPI);
-    spi1.begin(PIN_NUM_CLK, PIN_NUM_MISO, PIN_NUM_MOSI, PIN_NUM_CS);
-    bool sdBegin = SD.begin(PIN_NUM_CS,  spi1);
+    pinMode(PIN_NUM_CS, OUTPUT );
+    digitalWrite(PIN_NUM_CS, LOW);
+
+    bool sdBegin = this->SD.cardBegin(SD_CONFIG);
     while (!sdBegin)
     {
         Serial.println("SD card Initializing failed");
@@ -18,27 +67,24 @@ void Microphone::setup()
         Serial.println("2. is your wiring correct?");
         Serial.println("3. did you change the chipSelect pin to match your shield or module?");
         Serial.println("Note: press reset button on the board and reopen this Serial Monitor after fixing your issue!");
-
-        uint8_t cardType = SD.cardType();
-
-        if(cardType == CARD_NONE){
-            Serial.println("No SD card attached");
-            break;
-        }
-
+        delay(1000);
+        sdBegin = this->SD.cardBegin(SD_CONFIG);
+        // Optionally, you can print card type
+        uint8_t cardType = this->SD.card()->type();
         Serial.print("SD Card Type: ");
-        if(cardType == CARD_MMC){
-            Serial.println("MMC");
-        } else if(cardType == CARD_SD){
-            Serial.println("SDSC");
-        } else if(cardType == CARD_SDHC){
+        if (cardType == SD_CARD_TYPE_SD1) {
+            Serial.println("SD1");
+        } else if (cardType == SD_CARD_TYPE_SD2) {
+            Serial.println("SD2");
+        } else if (cardType == SD_CARD_TYPE_SDHC) {
             Serial.println("SDHC");
         } else {
-            Serial.println("UNKNOWN");
+            Serial.println("Unknown");
         }
-        delay(1000);
-        sdBegin = SD.begin(PIN_NUM_CS, spi1);
     }
+
+
+
     delay(1000);
     Serial.println("SD CARD CREATED!!!");
     ESP_LOGI(TAG, "Creating microphone");
@@ -57,7 +103,7 @@ const char *Microphone::recordToFile(const char *fname)
     input->start();
     // open the file on the sdcard
 
-    File fp = SD.open(fname, FILE_WRITE);
+    FsFile fp = this->SD.open(fname, O_WRONLY | O_CREAT);
     // create a new wave file writer
     WAVFileWriter *writer = new WAVFileWriter(&fp, input->sample_rate());
 

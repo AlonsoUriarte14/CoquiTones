@@ -2,8 +2,8 @@
 #define MicWrapper
 
 #include <SPI.h>
-#include <SD.h>
-#include <FS.h>
+#include <SdFat.h>
+#include "sdios.h"
 #include <Arduino.h>
 #include <stdio.h>
 #include "SPIFFS.h"
@@ -11,8 +11,8 @@
 #include <./lib/audio_input/src/I2SMEMSSampler.h>
 #include <./lib/wav_file/src/WAVFileReader.h>
 #include <./lib/wav_file/src/WAVFileWriter.h>
+#include <./lib/sd_card/src/SDCard.h>
 #include <config.h>
-
 
 
 // chip select pin for sd card: might have to change
@@ -48,6 +48,9 @@ private:
     ~Microphone();
     void setup();
     I2SSampler *input;
+    SdFs SD;
 };
+
+
 
 #endif

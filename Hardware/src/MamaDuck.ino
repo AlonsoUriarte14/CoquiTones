@@ -7,9 +7,10 @@
 #include <arduino-timer.h>
 #include <CDP.h>
 #include <MemoryFree.h>
+#include <FS.h>
 #include <../lib/Microphone/MicWrapper.h>
 #include <../lib/Weather/WeatherData.h>
-
+#include <../lib/Microphone/lib/sd_card/src/SDCard.h>
 #ifdef SERIAL_PORT_USBVIRTUAL
 #define Serial SERIAL_PORT_USBVIRTUAL
 #endif
@@ -43,8 +44,9 @@ void setup()
 	Serial.println("Wait ");
 	delay(3000)	;
 	sens = new WeatherData(bmeSDA, bmeSCL, rainPin);
-	Serial.println("Temp Data");
+	Serial.print("Temp Data: ");
 	Serial.println(sens->getTemperature());
+
 	
 	mic = new Microphone();
 	Serial.println("Microphone Created");
