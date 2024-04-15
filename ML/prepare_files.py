@@ -3,8 +3,6 @@ import os
 import itertools
 import shutil
 import json
-import librosa
-import soundfile as sf
 
 
 def suffix_iter():
@@ -30,37 +28,6 @@ def extract_folder_to_dir(from_folder: str, to_folder: str, suffix: str):
         shutil.move(
             os.path.join(to_folder, file_name), os.path.join(to_folder, new_file_name)
         )
-
-
-def split_audio(file_path, outputDir, segmentLengthInSeconds=5):
-    # First load the file
-    audio, sr = librosa.load(file_path)
-
-    # Get number of samples for segmentLengthInSeconds seconds;
-    buffer = segmentLengthInSeconds * sr
-    samples_total = len(audio)
-
-    samples_wrote = 0
-    counter = 1
-    while samples_wrote < samples_total:
-
-        # check if the buffer is not exceeding total samples
-        if buffer > (samples_total - samples_wrote):
-            buffer = samples_total - samples_wrote
-
-        block = audio[samples_wrote : (samples_wrote + buffer)]
-
-        if not os.path.exists(outputDir):
-            os.makedirs(outputDir)
-
-        out_filename = os.path.join(
-            outputDir + os.path.sep + "split_" + str(counter) + "_" + "test.wav"
-        )
-
-        # Write n second segment
-        sf.write(out_filename, block, sr)
-        counter += 1
-        samples_wrote += buffer
 
 
 def main() -> None:
