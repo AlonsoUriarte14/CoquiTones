@@ -60,17 +60,17 @@ void Microphone::setup()
     digitalWrite(PIN_NUM_CS, LOW);
 
     bool sdBegin = this->SD.cardBegin(SD_CONFIG);
-    while (!sdBegin)
+    if (!sdBegin)
     {
         Serial.println("SD card Initializing failed");
         Serial.println("1. is a card inserted?");
         Serial.println("2. is your wiring correct?");
         Serial.println("3. did you change the chipSelect pin to match your shield or module?");
         Serial.println("Note: press reset button on the board and reopen this Serial Monitor after fixing your issue!");
-        delay(1000);
-        sdBegin = this->SD.cardBegin(SD_CONFIG);
-        // Optionally, you can print card type
-        uint8_t cardType = this->SD.card()->type();
+
+    }
+
+    uint8_t cardType = this->SD.card()->type();
         Serial.print("SD Card Type: ");
         if (cardType == SD_CARD_TYPE_SD1) {
             Serial.println("SD1");
@@ -81,7 +81,6 @@ void Microphone::setup()
         } else {
             Serial.println("Unknown");
         }
-    }
 
 
 
@@ -99,11 +98,13 @@ const char *Microphone::recordToFile(const char *fname)
 {
 
     int16_t *samples = (int16_t *)malloc(sizeof(int16_t) * 1024);
-    ESP_LOGI(TAG, "Start talking, mf...");
+    Serial.println("Start Talking, mf...");
     input->start();
     // open the file on the sdcard
 
-    FsFile fp = this->SD.open(fname, O_WRONLY | O_CREAT);
+    Serial.print("Writing to ");
+    Serial.print(fname);
+    FsFile fp = this->SD.open(fname, O_CREAT | O_RDWR);
     // create a new wave file writer
     WAVFileWriter *writer = new WAVFileWriter(&fp, input->sample_rate());
 
@@ -134,6 +135,7 @@ const char *Microphone::recordToFile(const char *fname)
     delete writer;
     free(samples);
 
+    Serial.print("Finished Recording, mf... ");
     return fname;
 }
 
@@ -148,4 +150,18 @@ int Microphone::takeMeasurement()
     ESP_LOGI(TAG, "Wrote %d samples in %lld microseconds", samples_read, end - start);
 
     return samples_read;
+}
+
+void Microphone::readFile(const char *fname) {
+    FsFile file = this->SD.open(fname);
+    
+        // Read some of the data back, an null terminate it to make it a valid str
+    char read_data[65];
+    size_t bytes_read = file.read(read_data, 64);
+    read_data[bytes_read] = '\0';
+
+    Serial.print("Read ");
+    Serial.print(bytes_read);
+    Serial.print(" bytes, which are as follows: \n\n");
+    Serial.println(read_data);
 }

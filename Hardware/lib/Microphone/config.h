@@ -7,7 +7,7 @@
 
 // sample rate for the system
 #define SAMPLE_RATE 44000 // HZ
-#define AUDIO_DURATION 60 // SECONDS
+#define AUDIO_DURATION 10 // SECONDS
 
 // save to SPIFFS instead of SD Card?
 // #define USE_SPIFFS 1

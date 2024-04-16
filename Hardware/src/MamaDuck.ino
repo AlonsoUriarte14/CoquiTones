@@ -51,6 +51,9 @@ void setup()
 	mic = new Microphone();
 	Serial.println("Microphone Created");
 	Serial.println("Weather Data Object Created");
+
+	mic->recordToFile("test.wav");
+	mic->readFile("test.wav");
 	Serial.println("Temperature Test: "+  String(sens->getTemperature()));
 	std::string deviceId("MAMA0001");
 	std::vector<byte> devId;

@@ -44,6 +44,8 @@ public:
      */
     int takeMeasurement();
 
+    void readFile(const char  *fname);
+
 private:
     ~Microphone();
     void setup();
