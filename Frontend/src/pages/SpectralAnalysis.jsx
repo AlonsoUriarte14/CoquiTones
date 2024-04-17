@@ -13,7 +13,7 @@ import theme from "../components/shared/Theme"
 import SoundPlayer from "../components/SoundAnalysisTools/SoundPlayer";
 import Spectrogram from "../components/SoundAnalysisTools/Spectrogram";
 import SpectrogramControls from "../components/SoundAnalysisTools/SpectrogramControls";
-import { handleMelLoad, handleBasicLoad } from "../components/SoundAnalysisTools/SpectrogramDataReader"
+import { handleLoad } from "../components/SoundAnalysisTools/SpectrogramDataReader"
 import Navbar from "../components/shared/Navbar";
 
 
@@ -81,8 +81,8 @@ const SpectralAnalysis = () => {
 
     return (
         <ThemeProvider theme={theme}>
-        <Sidebar isOpen={isOpen} toggle={toggle}/>
-        <Navbar toggle={toggle}/>
+            <Sidebar isOpen={isOpen} toggle={toggle} />
+            <Navbar toggle={toggle} />
             <Box sx={{ display: 'flex' }}>
                 <CssBaseline />
                 <Box
