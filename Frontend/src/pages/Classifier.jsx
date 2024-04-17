@@ -20,6 +20,8 @@ import TableRow from '@mui/material/TableRow';
 import BarAndNav from "../components/shared/BarAndNav";
 import theme from "../components/shared/Theme"
 import FileUpload from "../components/shared/FileUpload";
+import Sidebar from "../components/shared/Sidebar";
+import Navbar from "../components/shared/Navbar";
 const Classifier = () => {
 
     const initDummyReport = () => {
@@ -32,6 +34,10 @@ const Classifier = () => {
 
     }
 
+    const [isOpen, setIsOpen] = useState(false)
+    const toggle = () => {
+        setIsOpen(!isOpen)
+  }
 
 
     const [report, setReport] = useState(initDummyReport())
@@ -90,9 +96,10 @@ const Classifier = () => {
     const [rawAudioFile, setRawAudioFile] = useState(null)
     return (
         <ThemeProvider theme={theme}>
+            <Sidebar isOpen={isOpen} toggle={toggle}/>
+            <Navbar toggle={toggle}/>
             <Box sx={{ display: 'flex' }} >
                 <CssBaseline />
-                <BarAndNav />
                 <Box
                     component="main"
                     sx={{

@@ -8,8 +8,8 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
-
-import BarAndNav from "../components/shared/BarAndNav";
+import Navbar from "../components/shared/Navbar";
+import Sidebar from "../components/shared/Sidebar";
 import theme from "../components/shared/Theme"
 import DataHandler from "../services/DataHandler";
 const CDN = () => {
@@ -42,11 +42,17 @@ const CDN = () => {
     }
     const numCols = useMemo(() => calcultaCols(), [ducks])
 
+    const [isOpen, setIsOpen] = useState(false)
+    const toggle = () => {
+        setIsOpen(!isOpen)
+    }
+
     return (
         <ThemeProvider theme={theme}>
+            <Sidebar isOpen={isOpen} toggle={toggle}/>
+            <Navbar toggle={toggle}/>
             <Box sx={{ display: 'flex' }} >
                 <CssBaseline />
-                <BarAndNav />
                 <Box
                     component="main"
                     sx={{
