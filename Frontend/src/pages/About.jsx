@@ -12,6 +12,7 @@ import RolandoPic from '../components/images/RolandoRiosPFP.jpeg'
 import Navbar from "../components/shared/Navbar";
 import theme from "../components/shared/Theme";
 import Sidebar from "../components/shared/Sidebar";
+import AboutUsSection from "../components/shared/AboutUsSection";
 
 const studentList = [
     { name: "Diego A. Santiago Uriarte", image: DiegoPic, bio: "Software Engineer Student" },
