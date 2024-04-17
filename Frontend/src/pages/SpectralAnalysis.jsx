@@ -8,15 +8,22 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import LinearProgress from '@mui/material/LinearProgress';
 
-import BarAndNav from "../components/shared/BarAndNav";
+import Sidebar from '../components/shared/Sidebar';
 import theme from "../components/shared/Theme"
 import SoundPlayer from "../components/SoundAnalysisTools/SoundPlayer";
 import Spectrogram from "../components/SoundAnalysisTools/Spectrogram";
 import SpectrogramControls from "../components/SoundAnalysisTools/SpectrogramControls";
-import { handleLoad } from "../components/SoundAnalysisTools/SpectrogramDataReader"
+import { handleMelLoad, handleBasicLoad } from "../components/SoundAnalysisTools/SpectrogramDataReader"
+import Navbar from "../components/shared/Navbar";
 
 
 const SpectralAnalysis = () => {
+
+    const [isOpen, setIsOpen] = useState(false)
+    const toggle = () => {
+        setIsOpen(!isOpen)
+    }
+
     const [rawAudioFile, setRawAudioFile] = useState(null)
     const updateRawAudioFile = (newAudioFile) => {
         setRawAudioFile(newAudioFile)
@@ -74,9 +81,10 @@ const SpectralAnalysis = () => {
 
     return (
         <ThemeProvider theme={theme}>
+        <Sidebar isOpen={isOpen} toggle={toggle}/>
+        <Navbar toggle={toggle}/>
             <Box sx={{ display: 'flex' }}>
                 <CssBaseline />
-                <BarAndNav />
                 <Box
                     component="main"
                     sx={{
