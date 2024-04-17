@@ -3,7 +3,7 @@ from fastapi import HTTPException
 import json
 import os
 
-config_file_path = "testdbconfig.json"
+config_file_path = "Backend/src/testdbconfig.json"
 
 
 # Connect to the PostgreSQL database
