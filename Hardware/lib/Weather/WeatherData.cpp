@@ -21,7 +21,8 @@ WeatherData::WeatherData(int bmeSDA, int bmeSCL, int rainPin)
 
 float WeatherData::getTemperature()
 {
-	return this->bme.readTemperature();
+	//(Celsius * 1.8) + 32 = Farenheit
+	return (this->bme.readTemperature() * 1.8) + 32;
 }
 
 float WeatherData::getPressure()

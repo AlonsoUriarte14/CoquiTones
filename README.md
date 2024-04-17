@@ -1,4 +1,4 @@
-# CoquiTones
+# [CoquiTones](https://coquitones-53173bfcf5de.herokuapp.com/)
 Full Stack Application for Bio-Acoustic Montoring of Amphibian Species
 ## Features 
 
@@ -9,16 +9,16 @@ By having multiple of these nodes, Data is collected simultaneously from various
 
 This Web Application includes an interface for keeping tabs on the network nodes. 
 
-### Machine Learning Model
-  To automate the detection of a target species (Eleutherodactylus spp.) from the acoustic data, a machine learning model will be created. This machine learning model can be trained on 
-the previously gathered data that is already made readily available by the researchers at Proyecto Coqui. The goal is to provide researchers with a tool that can automate the work that is currently being done manually using sound analysis tools such as raven pro [insert reference] which require expensive licenses. This model will take in the raw acoustic data as input and output (if present) in what timestamp of the audio file the target species is detected. 
+### Classifier
+  To automate the detection of a target species (Eleutherodactylus spp.) from the acoustic data, a machine learning model was created. This machine learning model was trained on 
+the previously gathered data that is already made readily available by the researchers at [Proyecto Coqui](https://proyectocoqui.com/). The goal is to provide researchers with a tool that can automate the work that is currently being done manually using sound analysis tools such as raven pro and RainforestCx which require expensive licenses. This model will take in the raw acoustic data as input and output (if present) in what relative timestamp of the audio file the target species is detected. 
 
-### Sound Analysis Tool
+### Spectral Analysis Page
 In order to offer a manual solution for finding the target species from audio, a Sound Analysis Tool is proposed. This Sound Analysis Tool (SAT) will offer the following features:
 
 - Convert the raw audio files into spectrograms which provide meaningful information needed in order to detect target species. 
-- SAT will be able to perform data manipulation such as Fourier Transforms to further analyze the data.
-- SAT will also provide meaningful descriptive data from the audio file such as pitch, sample rate, threshold, amplitude, signal strength etc.
+- Spectral Analysis Page offers customization: choose between Spectrogram, or Mel Spectrogram as well as customizing the colorscale for the spectrogram.
+- SAT will also provide meaningful descriptive data from the audio file such as pitch, sample rate, amplitude,  etc.
 
 ### Database Management
 

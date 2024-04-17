@@ -7,7 +7,7 @@
 
 // sample rate for the system
 #define SAMPLE_RATE 44000 // HZ
-#define AUDIO_DURATION 60 // SECONDS
+#define AUDIO_DURATION 10 // SECONDS
 
 // save to SPIFFS instead of SD Card?
 // #define USE_SPIFFS 1
@@ -22,6 +22,7 @@
 // Generally they will default to LEFT - but you may need to attach the L/R pin to GND
 #define I2S_MIC_CHANNEL I2S_CHANNEL_FMT_ONLY_LEFT
 // #define I2S_MIC_CHANNEL I2S_CHANNEL_FMT_ONLY_RIGHT
+
 // sck pin
 #define I2S_MIC_SERIAL_CLOCK GPIO_NUM_26
 // world select (ws pin)
@@ -33,9 +34,9 @@
 #define ADC_MIC_CHANNEL ADC1_CHANNEL_7
 
 #define PIN_NUM_CS GPIO_NUM_36
-#define PIN_NUM_CLK GPIO_NUM_35
+#define PIN_NUM_CLK GPIO_NUM_5
 #define PIN_NUM_MOSI GPIO_NUM_34
-#define PIN_NUM_MISO GPIO_NUM_33
+#define PIN_NUM_MISO GPIO_NUM_19
 
 // i2s config for using the internal ADC
 extern i2s_config_t i2s_adc_config;

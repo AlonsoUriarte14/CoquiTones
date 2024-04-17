@@ -3,11 +3,11 @@
 
 static const char *TAG = "WAV";
 
-WAVFileReader::WAVFileReader(FILE *fp)
+WAVFileReader::WAVFileReader(FsFile *file) // Change the constructor parameter to FsFile*
 {
-    m_fp = fp;
+    m_fp = file; // Change m_fp to m_file
     // read the WAV header
-    fread((void *)&m_wav_header, sizeof(wav_header_t), 1, m_fp);
+    m_fp->read((uint8_t *)&m_wav_header, sizeof(wav_header_t)); // Use FsFile's read method instead of fread
     // sanity check the bit depth
     if (m_wav_header.bit_depth != 16)
     {
@@ -23,6 +23,6 @@ WAVFileReader::WAVFileReader(FILE *fp)
 
 int WAVFileReader::read(int16_t *samples, int count)
 {
-    size_t read = fread(samples, sizeof(int16_t), count, m_fp);
-    return read;
+    size_t read = m_fp->read((uint8_t *)samples, sizeof(int16_t) * count); // Use FsFile's read method instead of fread
+    return read / sizeof(int16_t);                                         // Return the number of samples read, not the number of bytes
 }
