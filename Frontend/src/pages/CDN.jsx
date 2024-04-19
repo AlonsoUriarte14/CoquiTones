@@ -119,13 +119,13 @@ const CDN = () => {
                                 </Grid>
                             ))}
                         </Grid>
-                        <Grid item xs={12} md={6} lg={Math.floor(12 / numCols)}>
+                        <Grid item xs={12} md={12} lg={12}>
                             <Paper elevation={4}
                                 sx={{
                                     p: 2,
                                     display: 'flex',
                                     flexDirection: 'column',
-                                    height: '100%',
+                                    height: '75vh',
                                 }}
                             >
                                 <div style={{ height: '100%' }}> {/* Ensure map container fills parent's height */}
