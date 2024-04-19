@@ -26,7 +26,7 @@ const MapEmbed = ({ ducks }) => {
                     width: '100%',
                     height: '100%'
                 }}
-                mapStyle="mapbox://styles/mapbox/streets-v11"
+                mapStyle="mapbox://styles/mapbox/navigation-night-v1"
             >
                 {markers.map((duckMarker) => (duckMarker))}
                 <GeolocateControl
