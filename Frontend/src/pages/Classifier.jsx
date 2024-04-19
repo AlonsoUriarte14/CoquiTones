@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Link from '@mui/material/Link';
+
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -17,7 +16,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
 
-import BarAndNav from "../components/shared/BarAndNav";
 import theme from "../components/shared/Theme"
 import FileUpload from "../components/shared/FileUpload";
 import Sidebar from "../components/shared/Sidebar";
@@ -37,7 +35,7 @@ const Classifier = () => {
     const [isOpen, setIsOpen] = useState(false)
     const toggle = () => {
         setIsOpen(!isOpen)
-  }
+    }
 
 
     const [report, setReport] = useState(initDummyReport())
@@ -96,8 +94,8 @@ const Classifier = () => {
     const [rawAudioFile, setRawAudioFile] = useState(null)
     return (
         <ThemeProvider theme={theme}>
-            <Sidebar isOpen={isOpen} toggle={toggle}/>
-            <Navbar toggle={toggle}/>
+            <Sidebar isOpen={isOpen} toggle={toggle} />
+            <Navbar toggle={toggle} />
             <Box sx={{ display: 'flex' }} >
                 <CssBaseline />
                 <Box
