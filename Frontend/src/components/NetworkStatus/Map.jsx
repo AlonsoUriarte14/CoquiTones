@@ -1,19 +1,25 @@
-import React, { useMemo } from "react";
-import MapGL, { GeolocateControl, Marker } from "react-map-gl";
+import React, { useMemo, useState } from "react";
+import MapGL, { GeolocateControl, Marker, Popup, NavigationControl, ScaleControl, FullscreenControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-// Marker Component
-const DuckMarker = ({ duck }) => (
-    <Marker
-        key={duck.nid}
-        longitude={-duck.nlongitude}
-        latitude={duck.nlatitude}
-        anchor="bottom"
-    />
-);
+
 
 const MapEmbed = ({ ducks }) => {
     // Use useMemo to compute markers
-    const markers = useMemo(() => ducks.map(duck => <DuckMarker duck={duck} />), [ducks]);
+    const [popupInfo, setPopupInfo] = useState(null)
+    const markers = useMemo(() => ducks.map((duck) => (
+        < Marker
+            key={duck.nid}
+            longitude={- duck.nlongitude
+            }
+            latitude={duck.nlatitude}
+            anchor="bottom"
+            onClick={e => {
+                // If we let the click event propagates to the map, it will immediately close the popup
+                // with `closeOnClick: true`
+                e.originalEvent.stopPropagation();
+                setPopupInfo(duck);
+            }}
+        />), [ducks]));
 
     return (
         <div style={{ width: '100%', height: '100%' }}>
@@ -28,11 +34,30 @@ const MapEmbed = ({ ducks }) => {
                 }}
                 mapStyle="mapbox://styles/mapbox/navigation-night-v1"
             >
-                {markers.map((duckMarker) => (duckMarker))}
                 <GeolocateControl
                     positionOptions={{ enableHighAccuracy: true }}
                     trackUserLocation={true}
                 />
+                <FullscreenControl position="top-left" />
+                <NavigationControl position="top-left" />
+                <ScaleControl />
+                {markers.map((duckMarker) => (duckMarker))}
+
+                {popupInfo && (
+                    <Popup
+                        anchor="top"
+                        longitude={-(popupInfo.nlongitude)}
+                        latitude={(popupInfo.nlatitude)}
+                        onClose={() => setPopupInfo(null)}
+                    >
+                        <div style={{ color: 'black' }}>
+                            Node ID: {popupInfo.nid}
+                            <br />
+                            Node Description: {popupInfo.ndescription}
+                        </div>
+
+                    </Popup>
+                )}
             </MapGL>
         </div>
     );
