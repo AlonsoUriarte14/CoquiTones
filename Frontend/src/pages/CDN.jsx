@@ -12,6 +12,7 @@ import Navbar from "../components/shared/Navbar";
 import Sidebar from "../components/shared/Sidebar";
 import theme from "../components/shared/Theme"
 import DataHandler from "../services/DataHandler";
+import MapEmbed from "../components/NetworkStatus/Map";
 const CDN = () => {
 
     const getDate = () => {
@@ -49,8 +50,8 @@ const CDN = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <Sidebar isOpen={isOpen} toggle={toggle}/>
-            <Navbar toggle={toggle}/>
+            <Sidebar isOpen={isOpen} toggle={toggle} />
+            <Navbar toggle={toggle} />
             <Box sx={{ display: 'flex' }} >
                 <CssBaseline />
                 <Box
@@ -118,6 +119,21 @@ const CDN = () => {
                                 </Grid>
                             ))}
                         </Grid>
+                        <Grid item xs={12} md={6} lg={Math.floor(12 / numCols)}>
+                            <Paper elevation={4}
+                                sx={{
+                                    p: 2,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    height: '100%',
+                                }}
+                            >
+                                <div style={{ height: '100%' }}> {/* Ensure map container fills parent's height */}
+                                    <MapEmbed ducks={ducks} />
+                                </div>
+                            </Paper>
+                        </Grid>
+
                     </Container>
                 </Box>
             </Box>
