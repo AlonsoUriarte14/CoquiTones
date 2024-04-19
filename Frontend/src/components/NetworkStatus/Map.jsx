@@ -9,7 +9,7 @@ const MapEmbed = ({ ducks }) => {
     const markers = useMemo(() => ducks.map((duck) => (
         < Marker
             key={duck.nid}
-            longitude={- duck.nlongitude
+            longitude={duck.nlongitude
             }
             latitude={duck.nlatitude}
             anchor="bottom"
@@ -46,7 +46,7 @@ const MapEmbed = ({ ducks }) => {
                 {popupInfo && (
                     <Popup
                         anchor="top"
-                        longitude={-(popupInfo.nlongitude)}
+                        longitude={(popupInfo.nlongitude)}
                         latitude={(popupInfo.nlatitude)}
                         onClose={() => setPopupInfo(null)}
                     >
