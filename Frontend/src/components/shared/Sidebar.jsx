@@ -110,32 +110,32 @@ export const SidebarRoute = styled(LinkRouter)({
 const Sidebar = ({ isOpen, toggle, isHome }) => {
   return (
     <SidebarContainer isOpen={isOpen} onClick={toggle}>
-        <Icon onClick={toggle}>
-            <CloseIcon />
-        </Icon>
-        { isHome ?
-            <SidebarWrapper>
-              <SidebarMenu>
-                <SidebarLinkS to="dashboard" onClick={toggle}>Dashboard</SidebarLinkS>
-                <SidebarLinkS to="cdn" onClick={toggle}>CDN</SidebarLinkS>
-                <SidebarLinkS to="classifier" onClick={toggle}>Classifier</SidebarLinkS>
-                <SidebarLinkS to="spectralanalysis" onClick={toggle}>Spectral Analysis</SidebarLinkS>
-                <SidebarLinkR to="/About" onClick={toggle}>About</SidebarLinkR>
-              </SidebarMenu>
-            </SidebarWrapper>
-      
-            :
+      <Icon onClick={toggle}>
+        <CloseIcon />
+      </Icon>
+      {isHome ?
+        <SidebarWrapper>
+          <SidebarMenu>
+            <SidebarLinkS to="dashboard" onClick={toggle}>Dashboard</SidebarLinkS>
+            <SidebarLinkS to="NetworkMonitor" onClick={toggle}>IoT Network</SidebarLinkS>
+            <SidebarLinkS to="classifier" onClick={toggle}>Classifier</SidebarLinkS>
+            <SidebarLinkS to="spectralanalysis" onClick={toggle}>Spectral Analysis</SidebarLinkS>
+            <SidebarLinkR to="/About" onClick={toggle}>About</SidebarLinkR>
+          </SidebarMenu>
+        </SidebarWrapper>
 
-            <SidebarWrapper>
-              <SidebarMenu>
-                <SidebarLinkR to="/Dashboard" onClick={toggle}>Dashboard</SidebarLinkR>
-                <SidebarLinkR to="/CDN" onClick={toggle}>CDN</SidebarLinkR>
-                <SidebarLinkR to="/Classifier" onClick={toggle}>Classifier</SidebarLinkR>
-                <SidebarLinkR to="/SpectralAnalysis" onClick={toggle}>Spectral Analysis</SidebarLinkR>
-                <SidebarLinkR to="/About" onClick={toggle}>About</SidebarLinkR>
-              </SidebarMenu>
-            </SidebarWrapper>
-      
+        :
+
+        <SidebarWrapper>
+          <SidebarMenu>
+            <SidebarLinkR to="/Dashboard" onClick={toggle}>Dashboard</SidebarLinkR>
+            <SidebarLinkR to="/NetworkMonitor" onClick={toggle}>IoT Network</SidebarLinkR>
+            <SidebarLinkR to="/Classifier" onClick={toggle}>Classifier</SidebarLinkR>
+            <SidebarLinkR to="/SpectralAnalysis" onClick={toggle}>Spectral Analysis</SidebarLinkR>
+            <SidebarLinkR to="/About" onClick={toggle}>About</SidebarLinkR>
+          </SidebarMenu>
+        </SidebarWrapper>
+
       }
     </SidebarContainer>
   )

@@ -18,15 +18,15 @@ export const homeObjOne = {
 };
 
 export const homeObjTwo = {
-    id: 'cdn',
+    id: 'NetworkMonitor',
     lightBg: true,
     lightText: false,
     lightTextDesc: false,
     topLine: 'Bio-Acoustic Monitoring',
     headline: 'Deploy and Manage IoT Network to collect data',
-    description: 'Deploy these monitors using our using our Open Souce Hardware Design. Collect Acoustic and meteorological data. Cluster Duck Protocol facilitates the establishment of an Internet of Things network, enabling the capability of inter-device communication using a modified LoRa Protocol. ',
+    description: 'Deploy these monitors using our Open Souce Hardware Design. Collect Acoustic and meteorological data. Cluster Duck Protocol facilitates the establishment of an Internet of Things network, enabling the capability of inter-device communication using a modified LoRa Protocol. ',
     buttonLabel: 'Go To Page',
-    buttonRoute: '/CDN',
+    buttonRoute: '/NetworkMonitor',
     /*imgStart sets the location of the image in the column. If it is false, the image is to the right. If it is true, the image is to the left*/
     imgStart: true,
     img: require('../../components/images/homecdn.svg').default,

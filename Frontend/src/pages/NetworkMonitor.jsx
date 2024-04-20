@@ -12,8 +12,8 @@ import Navbar from "../components/shared/Navbar";
 import Sidebar from "../components/shared/Sidebar";
 import theme from "../components/shared/Theme"
 import DataHandler from "../services/DataHandler";
-import MapEmbed from "../components/NetworkStatus/Map";
-const CDN = () => {
+import MapEmbed from "../components/NetworkMonitor/Map";
+const NetworkMonitor = () => {
 
     const getDate = () => {
         const today = new Date();
@@ -141,4 +141,4 @@ const CDN = () => {
     )
 }
 
-export default CDN;
+export default NetworkMonitor;
