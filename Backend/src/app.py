@@ -1,4 +1,4 @@
-from fastapi import FastAPI, File, UploadFile, staticfiles, Depends, HTTPException
+from fastapi import FastAPI, File, UploadFile, staticfiles, Depends, HTTPException, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, Response
 from dbutil import get_db_connection
@@ -95,6 +95,11 @@ async def mel_spectrogram_get(file: UploadFile = File(...)):
 async def basic_spectrogram_get(file: UploadFile = File(...)):
     specData = sendBasicSpectrogram(file.file)
     return specData
+
+
+@app.post(path="/api/node/post", response_class=Response)
+async def node_post(nodeFields: Form):
+    pass
 
 
 @app.get("/", response_class=HTMLResponse)
