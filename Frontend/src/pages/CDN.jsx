@@ -12,6 +12,9 @@ import Navbar from "../components/shared/Navbar";
 import Sidebar from "../components/shared/Sidebar";
 import theme from "../components/shared/Theme"
 import DataHandler from "../services/DataHandler";
+import NewNodeDialog from "../components/shared/NewNodeDialog";
+import Footer from "../components/shared/Footer";
+import HeroSectionCDN from "../components/shared/HeroSectionCDN";
 const CDN = () => {
 
     const getDate = () => {
@@ -51,6 +54,7 @@ const CDN = () => {
         <ThemeProvider theme={theme}>
             <Sidebar isOpen={isOpen} toggle={toggle}/>
             <Navbar toggle={toggle}/>
+            <HeroSectionCDN/>
             <Box sx={{ display: 'flex' }} >
                 <CssBaseline />
                 <Box
@@ -65,7 +69,7 @@ const CDN = () => {
                         overflow: 'auto',
                     }}
                 >
-                    <Container maxWidth="lg" sx={{ mt: 10, mb: 10 }}>
+                    {/* <Container maxWidth="lg" sx={{ mt: 10, mb: 10 }}>
                         <Grid item xs={8} md={4} lg={5}>
                             <Paper elevation={4}
                                 sx={{
@@ -81,9 +85,10 @@ const CDN = () => {
 
                             </Paper >
                         </Grid>
-                    </Container >
+                    </Container > */}
 
                     <Container maxWidth sx={{ mt: 10, mb: 10 }}>
+                        <NewNodeDialog style={{display: 'flex', justifyContent: 'flex-end'}} />
                         <Grid container spacing={3}>
                             {ducks.map((duck) => (
                                 <Grid item key={duck.nid} xs={12} md={6} lg={Math.floor(12 / numCols)}>
@@ -121,6 +126,7 @@ const CDN = () => {
                     </Container>
                 </Box>
             </Box>
+            <Footer/>
         </ThemeProvider>
     )
 }

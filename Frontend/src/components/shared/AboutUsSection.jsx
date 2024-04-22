@@ -1,8 +1,8 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
-import DiegoPFP from "../images/DiegoAlonsoPFP.jpeg";
+import DiegoPFP from "../images/DiegoProfessionalPFP.jpg";
 import EdwinPFP from "../images/EdwinCamuyPFP.png";
-import RolandoPFP from "../images/RolandoRiosPFP.jpeg";
+import RolandoPFP from "../images/RolandoProfessionalPFP.jpg";
 
 export const AboutUsContainer = styled('div')(({ theme }) => ({
     height: '800px',
@@ -10,18 +10,20 @@ export const AboutUsContainer = styled('div')(({ theme }) => ({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop:'-80px',
     background: '#191716',
     [theme.breakpoints.down('md')]: {
         height: '1100px',
     },
     [theme.breakpoints.down('sm')]: {
         height: '1300px',
+        marginTop:'0px'
     }
 
 }));
 
 export const AboutUsWrapper = styled('div')(({ theme }) => ({
-    maxWidth: '1000px',
+    maxWidth: '2000px',
     margin: '0 auto',
     display: 'grid',
     gridTemplateColumns: '1fr 1fr 1fr',
@@ -56,15 +58,15 @@ export const AboutUsCard = styled('div')({
 });
 
 export const AboutUsPFP = styled('img')({
-    height: '160px',
-    width: '160px',
+    height: '200px',
+    width: '200px',
     marginBottom: '10px',
     borderRadius: '50%'
 });
 
 export const AboutUsH1 = styled('h1')(({ theme }) => ({
     fontSize: '2.5rem',
-    color: '#fff',
+    color: '#ffc857',
     marginBottom: '64px',
 
     [theme.breakpoints.down('sm')]: {
@@ -73,12 +75,13 @@ export const AboutUsH1 = styled('h1')(({ theme }) => ({
 }));
 
 export const AboutUsH2 = styled('h2')({
-    fontSize: '1rem',
+    fontSize: '1.75rem',
+    color: '#a44200',
     marginBottom: '10px',
 })
 
 export const AboutUsP = styled('p')({
-    fontSize: '1rem',
+    fontSize: '1.25rem',
     textAlign: 'center',
 })
 

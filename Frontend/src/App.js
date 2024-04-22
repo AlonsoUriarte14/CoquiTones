@@ -9,6 +9,8 @@ import SpectralAnalysis from './pages/SpectralAnalysis';
 import theme from './components/shared/Theme';
 import { ThemeProvider } from '@mui/material/styles';
 import Home from './pages/Home';
+import PageNotFound from './pages/Page404';
+
 function App() {
   return (
     <div>
@@ -20,6 +22,7 @@ function App() {
           <Route path='/CDN' element={<ThemeProvider theme={theme} > <CDN /> </ThemeProvider>} />
           <Route path='/Classifier' element={<ThemeProvider theme={theme} > <Classifier /> </ThemeProvider>} />
           <Route path='/SpectralAnalysis' element={<ThemeProvider theme={theme} > <SpectralAnalysis /> </ThemeProvider>} />
+          <Route path='*' element={<ThemeProvider theme={theme} > <PageNotFound /> </ThemeProvider>} />
         </Routes>
       </BrowserRouter>
 

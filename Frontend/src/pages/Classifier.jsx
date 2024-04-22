@@ -22,6 +22,8 @@ import theme from "../components/shared/Theme"
 import FileUpload from "../components/shared/FileUpload";
 import Sidebar from "../components/shared/Sidebar";
 import Navbar from "../components/shared/Navbar";
+import Footer from "../components/shared/Footer";
+import HeroSectionClassifier from "../components/shared/HeroSectionClassifier";
 const Classifier = () => {
 
     const initDummyReport = () => {
@@ -98,6 +100,7 @@ const Classifier = () => {
         <ThemeProvider theme={theme}>
             <Sidebar isOpen={isOpen} toggle={toggle}/>
             <Navbar toggle={toggle}/>
+            <HeroSectionClassifier/>
             <Box sx={{ display: 'flex' }} >
                 <CssBaseline />
                 <Box
@@ -122,9 +125,9 @@ const Classifier = () => {
                                     height: 240,
                                 }}
                             >
-                                <Typography variant="h3" color="primary" align="center">
+                                {/* <Typography variant="h3" color="primary" align="center">
                                     Machine Learning Analysis
-                                </Typography>
+                                </Typography> */}
 
                                 <FileUpload setAudioFile={setRawAudioFile} />
                             </Paper >
@@ -150,6 +153,7 @@ const Classifier = () => {
                     </Container >
                 </Box>
             </Box>
+            <Footer/>
         </ThemeProvider>
     )
 }

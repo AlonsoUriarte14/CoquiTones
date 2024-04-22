@@ -40,6 +40,13 @@ export const VideoBg = styled('video')({
     background: '#232a34',
 });
 
+export const ImageBg = styled('img')({
+    width: '100%',
+    height:'100%',
+    objectFit:'cover',
+    background:'transparent'
+})
+
 export const HeroContent = styled('div')({
     zIndex: '3',
     maxWidth: '1200px',
