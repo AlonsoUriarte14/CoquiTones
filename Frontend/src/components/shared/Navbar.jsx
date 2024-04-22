@@ -157,7 +157,7 @@ const Navbar = ({ toggle, isHome }) => {
                 <NavLinkS to='dashboard' smooth={true} duration={500} spy={true} exact='true' offset={-80}>Dashboard</NavLinkS>
               </NavItem>
               <NavItem>
-                <NavLinkS to='cdn' smooth={true} duration={500} spy={true} exact='true' offset={-80}>CDN</NavLinkS>
+                <NavLinkS to='NetworkMonitor' smooth={true} duration={500} spy={true} exact='true' offset={-80}>IoT Network</NavLinkS>
               </NavItem>
               <NavItem>
                 <NavLinkS to='classifier' smooth={true} duration={500} spy={true} exact='true' offset={-80}>Classifier</NavLinkS>
@@ -178,10 +178,10 @@ const Navbar = ({ toggle, isHome }) => {
                 <NavLinkR to='/Dashboard'>Dashboard</NavLinkR>
               </NavItem>
               <NavItem>
-                <NavLinkR to='/CDN'>CDN</NavLinkR>
+                <NavLinkR to='/NetworkMonitor'>IoT Network</NavLinkR>
               </NavItem>
               <NavItem>
-               <NavLinkR to='/Classifier'>Classifier</NavLinkR>
+                <NavLinkR to='/Classifier'>Classifier</NavLinkR>
               </NavItem>
               <NavItem>
                 <NavLinkR to='/SpectralAnalysis'>Spectral Analysis</NavLinkR>

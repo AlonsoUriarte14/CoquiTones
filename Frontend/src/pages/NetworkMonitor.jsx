@@ -15,7 +15,8 @@ import DataHandler from "../services/DataHandler";
 import NewNodeDialog from "../components/shared/NewNodeDialog";
 import Footer from "../components/shared/Footer";
 import HeroSectionCDN from "../components/shared/HeroSectionCDN";
-const CDN = () => {
+import MapEmbed from "../components/NetworkMonitor/Map";
+const NetworkMonitor = () => {
 
     const getDate = () => {
         const today = new Date();
@@ -123,6 +124,21 @@ const CDN = () => {
                                 </Grid>
                             ))}
                         </Grid>
+                        <Grid item xs={12} md={12} lg={12}>
+                            <Paper elevation={4}
+                                sx={{
+                                    p: 2,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    height: '75vh',
+                                }}
+                            >
+                                <div style={{ height: '100%' }}> {/* Ensure map container fills parent's height */}
+                                    <MapEmbed ducks={ducks} />
+                                </div>
+                            </Paper>
+                        </Grid>
+
                     </Container>
                 </Box>
             </Box>
@@ -131,4 +147,4 @@ const CDN = () => {
     )
 }
 
-export default CDN;
+export default NetworkMonitor;
