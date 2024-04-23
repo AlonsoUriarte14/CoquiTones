@@ -15,6 +15,7 @@ import Spectrogram from "../components/SoundAnalysisTools/Spectrogram";
 import SpectrogramControls from "../components/SoundAnalysisTools/SpectrogramControls";
 import { handleLoad } from "../components/SoundAnalysisTools/SpectrogramDataReader"
 import Navbar from "../components/shared/Navbar";
+import Footer from "../components/shared/Footer";
 
 
 const SpectralAnalysis = () => {
@@ -160,6 +161,7 @@ const SpectralAnalysis = () => {
                     </Container>
                 </Box>
             </Box>
+            <Footer/>
         </ThemeProvider >
     )
 }
