@@ -14,22 +14,9 @@ import Chart from '../components/dashboard/Chart';
 import Heartbeats from '../components/dashboard/Deposits';
 import RecentEntries from '../components/dashboard/Orders';
 import Navbar from '../components/shared/Navbar';
-
+import Footer from '../components/shared/Footer';
 import theme from '../components/shared/Theme'
 import Sidebar from '../components/shared/Sidebar';
-function Copyright(props) {
-	return (
-		<Typography variant="body2" color="text.secondary" align="center" {...props}>
-			{'Copyright © '}
-			<Link color="inherit" href="https://github.com/AlonsoUriarte14/CoquiTones.git">
-				CoquiTones
-			</Link>{' '}
-			{new Date().getFullYear()}
-			{'.'}
-		</Typography>
-	);
-}
-
 
 
 
@@ -100,10 +87,10 @@ export default function Dashboard() {
 								</Paper>
 							</Grid>
 						</Grid>
-						<Copyright sx={{ pt: 4 }} />
 					</Container>
 				</Box>
 			</Box>
+			<Footer/>
 		</ThemeProvider>
 	);
 }

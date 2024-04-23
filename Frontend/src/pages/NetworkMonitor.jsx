@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { ThemeProvider } from '@mui/material/styles';
+import { NodeContainer, NodeWrapper, NodeCard, NodeTitle, NodeInfo } from "../components/shared/NodeStyle";
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,6 +13,9 @@ import Navbar from "../components/shared/Navbar";
 import Sidebar from "../components/shared/Sidebar";
 import theme from "../components/shared/Theme"
 import DataHandler from "../services/DataHandler";
+import NewNodeDialog from "../components/shared/NewNodeDialog";
+import Footer from "../components/shared/Footer";
+import HeroSectionCDN from "../components/shared/HeroSectionCDN";
 import MapEmbed from "../components/NetworkMonitor/Map";
 const NetworkMonitor = () => {
 
@@ -50,9 +54,37 @@ const NetworkMonitor = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <Sidebar isOpen={isOpen} toggle={toggle} />
-            <Navbar toggle={toggle} />
-            <Box sx={{ display: 'flex' }} >
+            <Sidebar isOpen={isOpen} toggle={toggle}/>
+            <Navbar toggle={toggle}/>
+            <HeroSectionCDN/>
+            <NodeContainer>
+                <NewNodeDialog style={{display: 'flex', justifyContent: 'flex-end'}}/>
+                <NodeWrapper>
+                    {ducks.map((duck) =>
+                <NodeCard item key={duck.nid}>
+                    <NodeTitle>
+                        Duck ID: {duck.nid}
+                    </NodeTitle>
+                    <NodeInfo>
+                        Type: {duck.ntype}
+                    </NodeInfo>
+                    <NodeInfo>
+                       Description: {duck.ndescription}
+                    </NodeInfo>
+                    <NodeInfo>
+                        Latitude: {duck.nlatitude}
+                    </NodeInfo>
+                    <NodeInfo>
+                        Longitude: {duck.nlongitude}
+                    </NodeInfo>
+                    <Link href='#' variant='button' style={{marginTop:'16px'}}>
+                        View Details
+                    </Link>
+
+                </NodeCard>)}
+                </NodeWrapper>
+            </NodeContainer>
+            {/* <Box sx={{ display: 'flex' }} >
                 <CssBaseline />
                 <Box
                     component="main"
@@ -85,6 +117,7 @@ const NetworkMonitor = () => {
                     </Container >
 
                     <Container maxWidth sx={{ mt: 10, mb: 10 }}>
+                        <NewNodeDialog style={{display: 'flex', justifyContent: 'flex-end'}} />
                         <Grid container spacing={3}>
                             {ducks.map((duck) => (
                                 <Grid item key={duck.nid} xs={12} md={6} lg={Math.floor(12 / numCols)}>
@@ -118,7 +151,7 @@ const NetworkMonitor = () => {
                                     </Paper>
                                 </Grid>
                             ))}
-                        </Grid>
+                        </Grid> */}
                         <Grid item xs={12} md={12} lg={12}>
                             <Paper elevation={4}
                                 sx={{
@@ -134,9 +167,10 @@ const NetworkMonitor = () => {
                             </Paper>
                         </Grid>
 
-                    </Container>
+                    {/* </Container>
                 </Box>
             </Box>
+            <Footer/> */}
         </ThemeProvider>
     )
 }
