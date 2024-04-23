@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { ThemeProvider } from '@mui/material/styles';
+import { NodeContainer, NodeWrapper, NodeCard, NodeTitle, NodeInfo } from "../components/shared/NodeStyle";
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -56,7 +57,34 @@ const NetworkMonitor = () => {
             <Sidebar isOpen={isOpen} toggle={toggle}/>
             <Navbar toggle={toggle}/>
             <HeroSectionCDN/>
-            <Box sx={{ display: 'flex' }} >
+            <NodeContainer>
+                <NewNodeDialog style={{display: 'flex', justifyContent: 'flex-end'}}/>
+                <NodeWrapper>
+                    {ducks.map((duck) =>
+                <NodeCard item key={duck.nid}>
+                    <NodeTitle>
+                        Duck ID: {duck.nid}
+                    </NodeTitle>
+                    <NodeInfo>
+                        Type: {duck.ntype}
+                    </NodeInfo>
+                    <NodeInfo>
+                       Description: {duck.ndescription}
+                    </NodeInfo>
+                    <NodeInfo>
+                        Latitude: {duck.nlatitude}
+                    </NodeInfo>
+                    <NodeInfo>
+                        Longitude: {duck.nlongitude}
+                    </NodeInfo>
+                    <Link href='#' variant='button' style={{marginTop:'16px'}}>
+                        View Details
+                    </Link>
+
+                </NodeCard>)}
+                </NodeWrapper>
+            </NodeContainer>
+            {/* <Box sx={{ display: 'flex' }} >
                 <CssBaseline />
                 <Box
                     component="main"
@@ -70,7 +98,7 @@ const NetworkMonitor = () => {
                         overflow: 'auto',
                     }}
                 >
-                    {/* <Container maxWidth="lg" sx={{ mt: 10, mb: 10 }}>
+                    <Container maxWidth="lg" sx={{ mt: 10, mb: 10 }}>
                         <Grid item xs={8} md={4} lg={5}>
                             <Paper elevation={4}
                                 sx={{
@@ -86,7 +114,7 @@ const NetworkMonitor = () => {
 
                             </Paper >
                         </Grid>
-                    </Container > */}
+                    </Container >
 
                     <Container maxWidth sx={{ mt: 10, mb: 10 }}>
                         <NewNodeDialog style={{display: 'flex', justifyContent: 'flex-end'}} />
@@ -123,7 +151,7 @@ const NetworkMonitor = () => {
                                     </Paper>
                                 </Grid>
                             ))}
-                        </Grid>
+                        </Grid> */}
                         <Grid item xs={12} md={12} lg={12}>
                             <Paper elevation={4}
                                 sx={{
@@ -139,10 +167,10 @@ const NetworkMonitor = () => {
                             </Paper>
                         </Grid>
 
-                    </Container>
+                    {/* </Container>
                 </Box>
             </Box>
-            <Footer/>
+            <Footer/> */}
         </ThemeProvider>
     )
 }

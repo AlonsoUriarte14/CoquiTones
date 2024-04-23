@@ -54,7 +54,7 @@ const MobileIcon = styled('div')(({ theme }) => ({
     transform: 'translate(-100%, 60%)',
     fontSize: '1.8rem',
     cursor: 'pointer',
-    color: '#657153',
+    color: '#ffc857',
   },
 }));
 

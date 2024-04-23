@@ -37,9 +37,9 @@ export default function NewNodeDialog() {
   };
 
   return (
-    <div style={{display:'flex', justifyContent:'flex-end', height:'40px'}}>
+    <div style={{display:'flex', height:'40px'}}>
       <IconButton aria-label="add" onClick={handleClickOpen} style={{fontSize:'24px'}}>
-        <AddIcon color='primary' style={{height:'40px', width:'32px'}} />
+        <AddIcon color='primary' style={{height:'40px', width:'36px'}} />
       </IconButton>
       <Dialog open={open} onClose={handleClose} PaperProps={{ component: 'form', onSubmit: handleSubmit }}>
         <DialogTitle>New Node</DialogTitle>

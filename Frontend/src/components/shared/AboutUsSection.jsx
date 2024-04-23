@@ -98,7 +98,7 @@ const AboutUsSection = () => {
             <AboutUsCard>
                 <AboutUsPFP src={EdwinPFP}/>
                 <AboutUsH2>Edwin J. Camuy Medina</AboutUsH2>
-                <AboutUsP>5th year Software Engineering Undergraduate interested in creating new unorthodox things</AboutUsP>
+                <AboutUsP>4th year Software Engineering Undergraduate interested in creating new unorthodox things</AboutUsP>
             </AboutUsCard>
             <AboutUsCard>
                 <AboutUsPFP src={RolandoPFP}/>
