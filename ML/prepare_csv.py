@@ -3,6 +3,8 @@ import os
 import sys
 import csv
 import pandas as pd
+import concurrent.futures
+import functools
 
 
 def import_suffix_map(path: str) -> dict[str, str]:
@@ -55,21 +57,23 @@ def main() -> None:
 
     data_dir = sys.argv[1]
     averagesData = readAveragesData(
-        os.path.join(data_dir, "FrequencyRange_by_species_and_site_Averages.csv")
+        os.path.join(
+            data_dir, "FrequencyRange_by_species_and_site_Averages.csv")
     )
 
     data = []
 
-    # Iterate through each subfolder
-    for siteDataSet in os.listdir(data_dir):
-        folder_path = os.path.join(data_dir, siteDataSet, siteDataSet)
+    def handle_site_dataset(data_dir):
+        folder_path = os.path.join(data_dir, siteDataSet)
         if os.path.isdir(folder_path):
             siteId = int(siteDataSet[4:6])
-            SiteData = [item for item in averagesData if int(item["SiteID"]) == siteId]
+            SiteData = [item for item in averagesData if int(
+                item["SiteID"]) == siteId]
 
             for file_name in os.listdir(folder_path):
                 if file_name.endswith(".wav"):
-                    file_path = os.path.abspath(os.path.join(folder_path, file_name))
+                    file_path = os.path.abspath(
+                        os.path.join(folder_path, file_name))
                     for classification in SiteData:
                         data.append(
                             [
@@ -77,6 +81,16 @@ def main() -> None:
                                 classification["Species"],
                             ]
                         )
+
+    # Iterate through each subfolder
+    futures: list[concurrent.futures.Future] = []
+    for siteDataSet in os.listdir(data_dir):
+        with concurrent.futures.ThreadPoolExecutor() as Pool:
+            futures.append(Pool.submit(
+                functools.partial(handle_site_dataset, data_dir)))
+
+    for future in futures:
+        _ = future.result()
 
     # Create DataFrame
     df = pd.DataFrame(
@@ -87,7 +101,7 @@ def main() -> None:
         ],
     )
 
-    df.to_csv("./ML/RAW.csv", index=False)
+    df.to_csv("./ML/raw_dataset.csv", index=False)
 
 
 if __name__ == "__main__":
