@@ -12,8 +12,8 @@
 #include <./lib/wav_file/src/WAVFileReader.h>
 #include <./lib/wav_file/src/WAVFileWriter.h>
 #include <./lib/sd_card/src/SDCard.h>
+#include <../shared/spiConfig.h>
 #include <config.h>
-
 
 // chip select pin for sd card: might have to change
 class Microphone
@@ -44,7 +44,7 @@ public:
      */
     int takeMeasurement();
 
-    void readFile(const char  *fname);
+    void readFile(const char *fname);
 
 private:
     ~Microphone();
@@ -52,7 +52,5 @@ private:
     I2SSampler *input;
     SdFs SD;
 };
-
-
 
 #endif

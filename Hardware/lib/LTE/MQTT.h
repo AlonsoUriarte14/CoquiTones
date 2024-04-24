@@ -4,6 +4,7 @@
 #include <BotleticsSIM7000.h>
 #include <HardwareSerial.h>
 #include <SdFat.h>
+#include <../shared/spiConfig.h>
 /************************* MQTT PARAMETERS *********************************/
 #define MQTT_SERVER "broker.hivemq.com"
 #define MQTT_PORT 1883
@@ -14,7 +15,7 @@
 #define GPS_TOPIC "location"
 #define WEATHER_TOPIC "weather"
 #define AUDIO_TOPIC "audio"
-
+#define END "end"
 // For botletics SIM70X0 shield
 #define PWRKEY 6
 #define RST 7
@@ -23,6 +24,7 @@
 #define TX 10 // Microcontroller RX
 #define RX 11 // Microcontroller TX
 #define APN "fast.t-mobile.com"
+
 HardwareSerial modemSS(1);
 
 class LTE_Wrapper
@@ -37,7 +39,7 @@ private:
     unsigned long timer = 0;
     bool firstTime = true;
     uint8_t type;
-    float latitude, longitude, speed_kph, heading, altitude, second;
+    float latitude, longitude;
     uint8_t month, day, hour, minute;
     uint16_t year;
     char imei[16] = {0}; // Use this for device ID
@@ -45,5 +47,6 @@ private:
     bool handleAudioPublish(const char *filename);
     bool netStatus();
     void moduleSetup();
+    SdFs SD;
 };
 #endif

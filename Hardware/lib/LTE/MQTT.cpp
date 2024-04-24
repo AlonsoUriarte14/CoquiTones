@@ -7,6 +7,7 @@ LTE_Wrapper::LTE_Wrapper()
 
     modem.powerOn(PWRKEY); // Power on the module
     moduleSetup();         // Establishes first-time serial comm and prints IMEI
+    this->setup();
     // Set modem to full functionality
     modem.setFunctionality(1); // AT+CFUN=1
     modem.setNetworkSettings(F(APN));
@@ -14,6 +15,7 @@ LTE_Wrapper::LTE_Wrapper()
 
 bool LTE_Wrapper::setup()
 {
+
     while (!modem.enableGPS(true))
     {
         Serial.println(F("Failed to turn on GPS, retrying..."));
@@ -41,6 +43,29 @@ bool LTE_Wrapper::setup()
     else
     {
         Serial.println(F("Data already enabled!"));
+    }
+
+    while (!this->SD.cardBegin(SD_CONFIG))
+    {
+        uint8_t cardType = this->SD.card()->type();
+        Serial.print("SD Card Type: ");
+        if (cardType == SD_CARD_TYPE_SD1)
+        {
+            Serial.println("SD1");
+        }
+        else if (cardType == SD_CARD_TYPE_SD2)
+        {
+            Serial.println("SD2");
+        }
+        else if (cardType == SD_CARD_TYPE_SDHC)
+        {
+            Serial.println("SDXC");
+            Serial.println("This is the one")
+        }
+        else
+        {
+            Serial.println("Unknown");
+        }
     }
 }
 
@@ -71,6 +96,51 @@ bool LTE_Wrapper::publish(const char *topic, const char *content)
     {
         return this->handleAudioPublish(content)
     }
+
+    bool published = modem.MQTT_publish(topic, content, strlen(content), 1, 0);
+    return published;
+}
+
+bool LTE_Wrapper::handleAudioPublish(const char *filename)
+{
+    // Open the audio file on the SD card
+    File audioFile = this->SD.open(filename);
+
+    // Check if the file opened successfully
+    if (!audioFile)
+    {
+        Serial.println(F("Failed to open audio file!"));
+        return false;
+    }
+
+    // Publish the audio content to the audio topic
+    Serial.println(F("Publishing audio..."));
+    const size_t chunkSize = 128;
+    char buffer[chunkSize + 1];
+    size_t bytesRead = 0;
+    size_t totalBytesRead = 0;
+
+    while (audioFile.available())
+    {
+        bytesRead = audioFile.readBytes(buffer, chunkSize);
+        totalBytesRead += bytesRead;
+        buffer[bytesRead] = '\0'; // Null-terminate the audio data
+
+        // Publish the chunk to the audio topic
+        bool published = modem.MQTT_publish(AUDIO_TOPIC, buffer, bytesRead, 1, 0);
+
+        if (!published)
+        {
+            Serial.println(F("Failed to publish audio!"));
+            audioFile.close();
+            return false;
+        }
+    }
+
+    audioFile.close();
+    Serial.println(F("Audio publishing completed."));
+    modem.MQTT_publish(AUDIO_TOPIC, END, strlen(END), 1, 0);
+    return true;
 }
 
 bool LTE_Wrapper::netStatus()
