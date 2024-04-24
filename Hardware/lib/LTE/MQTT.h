@@ -35,18 +35,9 @@ public:
     Botletics_modem_LTE modem = Botletics_modem_LTE();
 
 private:
-    uint8_t counter = 0;
-    unsigned long timer = 0;
-    bool firstTime = true;
-    uint8_t type;
-    float latitude, longitude;
-    uint8_t month, day, hour, minute;
-    uint16_t year;
-    char imei[16] = {0}; // Use this for device ID
-
     bool handleAudioPublish(const char *filename);
     bool netStatus();
-    void moduleSetup();
+    bool setup();
     SdFs SD;
 };
 #endif
