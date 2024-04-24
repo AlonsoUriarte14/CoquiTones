@@ -110,6 +110,7 @@ int Microphone::takeMeasurement()
 
 void Microphone::readFile(const char *fname)
 {
+    // test file creation
     FsFile file = this->SD.open(fname);
 
     // Read some of the data back, an null terminate it to make it a valid str
