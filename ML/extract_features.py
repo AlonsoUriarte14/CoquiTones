@@ -8,7 +8,7 @@ import librosa
 from concurrent.futures import ThreadPoolExecutor
 
 input_dataset = recipe.get_input(object_type='DATASET')
-output_dataset = "Train_prepared"
+output_dataset = recipe.get_output(object_type='DATASET')
 
 # Read recipe inputs
 samples_df = input_dataset.get_dataframe()
